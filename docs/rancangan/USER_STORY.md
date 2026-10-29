@@ -12,4 +12,4 @@
 | US-08 | Sebagai petugas, saya ingin memakai aplikasi di web dan ponsel. | Layar sempit memakai NavigationBar; lebar memakai NavigationRail; seluruh menu bisa dibuka. |
 | US-09 | Sebagai petugas, saya ingin keluar agar sesi tidak tetap aktif. | SignOut dipanggil di Firebase; mode demo menghapus sesi lokal; pengguna kembali ke Login. |
 
-Kriteria tersebut menjadi rencana uji. Status lulus hanya diberikan setelah pengujian dijalankan dan bukti aktual dicatat.
+Kriteria di atas menjadi dasar pengujian. Status saat ini: US-01 sampai US-08 jalur mode demo sudah diuji otomatis (24 test lulus); jalur Firebase pada US-01 dan US-09 bagian Firebase belum diuji karena project belum dikonfigurasi.

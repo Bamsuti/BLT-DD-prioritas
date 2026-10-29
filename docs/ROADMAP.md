@@ -1,35 +1,36 @@
 # Roadmap BLT-DD Prioritas
 
-Status berikut membedakan file/kode yang disiapkan dengan verifikasi runtime.
+Status dibedakan antara artefak yang sudah diverifikasi dan pekerjaan yang masih terbuka.
 
-## Selesai sebagai artefak repository
-- [x] README serta dokumen kebutuhan, persona, story, flow, wireframe, database, Firebase, pengujian, presentasi dan roadmap.
-- [x] Model tujuh kriteria dengan bobot demo total 100%.
-- [x] Kode lima halaman inti, form dan navigasi responsif.
-- [x] Mode demo terpisah dari Firebase.
-- [x] Kode Auth email/password dan CRUD Firestore yang bersyarat konfigurasi.
-- [x] Draft rules berdasarkan autentikasi dan role.
+## Selesai dan terverifikasi
 
-## Sedang dikerjakan / perlu verifikasi
-- [ ] Jalankan flutter pub get, flutter analyze, flutter test, dan aplikasi nyata dengan Flutter SDK.
-- [ ] Perbaiki kesalahan compile/runtime yang ditemukan.
-- [ ] Hasilkan scaffold Android/Web dengan flutter create --platforms=android,web . dan tinjau file generator.
-- [ ] Ambil screenshot runtime, lalu tautkan pada README.
-- [ ] Lengkapi matriks uji dengan hasil aktual.
+- [x] Model tujuh kriteria, bobot demo total 100%, dan rumus SAW.
+- [x] Lima halaman: Login, Beranda, Data Calon, Penilaian, Hasil Prioritas.
+- [x] CRUD calon dengan dialog form tujuh kriteria, validasi, dan konfirmasi hapus.
+- [x] Navigasi responsif (`NavigationRail` ≥ 760 px, `NavigationBar` < 760 px).
+- [x] Mode demo terpisah dari Firebase dengan label yang jelas.
+- [x] `flutter analyze` bersih dan 24 test otomatis lulus.
+- [x] Build Web berhasil; 14 screenshot runtime desktop/mobile.
+- [x] Scaffold Android (Gradle Kotlin DSL) dan izin INTERNET.
+- [x] Dokumentasi rancangan, Firebase, pengujian, presentasi, dan roadmap.
+- [x] Draft rules berbasis autentikasi + role tanpa akses publik.
 
-## Belum dimulai
-- [ ] Test CRUD, duplikasi ID, konfirmasi hapus, ranking, responsive layout, dan koneksi gagal yang lebih lengkap.
-- [ ] Uji integrasi Firestore melalui emulator atau akun uji.
-- [ ] Menyimpan snapshot hasil per periode dan versi bobot jika dibutuhkan.
-- [ ] Audit trail jika kebutuhan pengguna telah disepakati.
+## Berikutnya (butuh konfigurasi/keputusan)
 
-## Memerlukan konfigurasi/keputusan pengguna
-- [ ] Buat/pilih Firebase project dan isi opsi client lokal.
-- [ ] Aktifkan Email/Password, buat akun uji, dan set role melalui jalur tepercaya.
-- [ ] Review dan uji rules sebelum deployment.
-- [ ] Validasi persona/kebutuhan dengan petugas sasaran.
-- [ ] Finalisasi subkriteria, skala, arah benefit/cost, bobot, dan formula.
-- [ ] Putuskan model data dan snapshot hasil.
-- [ ] Deploy Firebase Hosting setelah build dan pengujian lulus.
+- [ ] Buat project Firebase dan isi konfigurasi client melalui `--dart-define`.
+- [ ] Aktifkan Email/Password, buat akun uji, dan set dokumen `users/{uid}.role`.
+- [ ] Uji Auth + CRUD Firestore dan tinjau hasilnya di Console.
+- [ ] Uji `firestore.rules` di Firebase Emulator Suite (user tanpa role, role petugas, tulis `users`).
+- [ ] Build dan uji APK pada perangkat/emulator Android.
+- [ ] Deploy Firebase Hosting dan uji URL publik.
+- [ ] Verifikasi hasil GitHub Actions setelah push.
 
-Tidak ada klaim wawancara, tes lulus, Firebase aktif, screenshot runtime, atau deployment tanpa bukti.
+## Pengembangan lanjutan
+
+- [ ] Simpan snapshot `hasil_prioritas` per periode dan versi bobot.
+- [ ] Tambahkan audit trail perubahan nilai.
+- [ ] Validasi persona, istilah, subkriteria, arah benefit/cost, dan bobot bersama dosen/petugas.
+- [ ] Tambahkan pengujian aksesibilitas dan performa.
+- [ ] Ekspor laporan (PDF/Excel) bila dibutuhkan.
+
+Tidak ada klaim Firebase aktif, Hosting ter-deploy, atau build Android berhasil sampai pekerjaan tersebut benar-benar dijalankan dan dicatat.

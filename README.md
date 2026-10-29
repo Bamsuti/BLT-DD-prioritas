@@ -1,8 +1,8 @@
 # BLT-DD Prioritas — Flutter Cross-Platform
 
-Prototipe akademik untuk mengelola data simulasi calon penerima BLT-DD, menilai tujuh kriteria, dan meninjau urutan prioritas. Satu basis kode Flutter dirancang untuk Web dan Android.
+Prototipe akademik untuk mencatat data simulasi calon penerima BLT-DD, menilai tujuh kriteria kerentanan, lalu meninjau urutan prioritas. Satu basis kode Flutter dijalankan sebagai aplikasi Web dan Android.
 
-> **Status penting:** kode Firebase tersedia dan hanya diaktifkan jika opsi konfigurasi tersedia serta inisialisasi sukses. Tanpa konfigurasi, aplikasi berjalan dalam mode demo dengan penyimpanan memori sementara. Akun demo bukan Firebase Authentication. Nama calon dan nilai adalah data sintetis; bobot dan skor tidak resmi dan tidak boleh digunakan sebagai keputusan bantuan nyata.
+> **Status jujur:** aplikasi berjalan dalam **mode demo** (data di memori) dan sudah diuji otomatis dengan `flutter analyze` + `flutter test`. Integrasi Firebase Authentication dan Cloud Firestore tersedia di kode, tetapi **belum dihubungkan ke project Firebase nyata dan belum diuji**. Firebase Hosting belum di-deploy. Android belum dibangun karena Android SDK tidak tersedia di lingkungan pengerjaan. Semua nama calon dan nilai adalah data sintetis; skor bukan keputusan resmi penerima bantuan.
 
 ## Identitas proyek
 
@@ -15,109 +15,252 @@ Prototipe akademik untuk mengelola data simulasi calon penerima BLT-DD, menilai 
 | Mata kuliah | Mobile and Web Application Development |
 | Periode | Ganjil 2026/2027 |
 | Repository | https://github.com/Bamsuti/BLT-DD-prioritas |
+| Versi aplikasi | 1.0.0+1 |
 
 ## Masalah dan tujuan
-Pendataan calon, pembaruan data, perbandingan nilai, serta peninjauan peringkat dapat sulit ditelusuri ketika dikelola dalam spreadsheet terpisah. Prototipe ini menggabungkan login, daftar calon, penilaian tujuh kriteria, dan hasil prioritas. Pengguna utama diasumsikan petugas pengelola data BLT-DD; persona belum diklaim tervalidasi melalui wawancara.
 
-## Fitur kode
-- Login dengan validasi email/password, indikator proses, pesan gagal, dan logout.
-- Mode demo eksplisit dengan akun lokal sintetis.
-- Beranda dengan ringkasan jumlah calon dan kriteria yang dihitung dari data termuat.
-- CRUD calon dengan konfirmasi hapus.
-- ID simulasi wajib dan pemeriksaan duplikat terhadap daftar yang dimuat.
-- Form dengan tujuh kriteria, dropdown skala 1–5, dan validasi.
-- Skor SAW demo dihitung dari nilai serta bobot model, kemudian diurutkan.
-- NavigationBar untuk layar sempit dan NavigationRail untuk layar lebar.
-- Integrasi bersyarat Firebase Authentication dan CRUD Cloud Firestore.
-- Draft Firestore Security Rules berbasis autentikasi dan peran.
+Pendataan calon, pembaruan nilai, dan peninjauan peringkat sulit ditelusuri bila dikelola dalam beberapa spreadsheet terpisah. Prototipe ini menyatukan login petugas, pengelolaan data calon, penilaian tujuh kriteria, dan hasil prioritas dalam satu aplikasi responsif.
 
-## Tujuh kriteria dari presentasi UTS
-1. Penghasilan keluarga.
-2. Jumlah tanggungan.
-3. Kondisi dinding.
-4. Kondisi lantai.
-5. Akses air bersih.
-6. Sumber penerangan.
-7. Tabungan keluarga.
+Ruang lingkup dibatasi pada:
 
-Bobot demo: 20%, 15%, 15%, 15%, 10%, 10%, 15% (total 100%). Nilai tinggi untuk sementara diartikan sebagai kerentanan lebih tinggi, sehingga seluruh kriteria diperlakukan sebagai benefit pada rumus demo. Bobot, skala, subkriteria, dan arah benefit/cost belum divalidasi dengan dosen/pengguna atau ketentuan resmi.
+- pengelolaan data simulasi dan perhitungan skor demo;
+- tidak menangani pencairan dana atau integrasi sistem pemerintah;
+- tidak memakai data warga nyata;
+- tidak menggantikan verifikasi lapangan maupun musyawarah desa.
 
-Rumus demo: Vᵢ = Σ(wⱼ × rᵢⱼ), rᵢⱼ = xᵢⱼ / nilai maksimum kriteria. Hasil hanya bahan demonstrasi teknis dan tidak menggantikan verifikasi maupun musyawarah.
+## Fitur yang tersedia
 
-## User flow
-Mulai → Login → Beranda → Data Calon Penerima / Penilaian & Prioritas / Hasil Prioritas → Selesai. Login gagal menampilkan validasi/pesan lalu tetap di halaman Login. Lihat docs/rancangan/USER_FLOW.md untuk rincian.
+| Fitur | Keterangan | Status |
+|---|---|---|
+| Login petugas | Validasi email/kata sandi, indikator proses, pesan gagal, logout | Berfungsi di mode demo, diuji otomatis |
+| Mode demo eksplisit | Akun lokal sintetis, label "Mode demo" pada layar | Berfungsi, diuji otomatis |
+| Beranda | Jumlah calon, jumlah kriteria, jumlah hasil dihitung dari data termuat; pintasan navigasi | Berfungsi |
+| Data calon (CRUD) | Tambah, lihat, ubah, hapus dengan dialog konfirmasi | Berfungsi di mode demo, diuji otomatis |
+| Validasi form | ID simulasi, nama, dusun wajib; ID duplikat ditolak; tujuh nilai kriteria | Berfungsi, diuji otomatis |
+| Penilaian | Tujuh kriteria + bobot demo + tombol isi nilai | Berfungsi |
+| Hasil prioritas | Skor 0–100, urut menurun, penjelasan rumus, disclaimer | Berfungsi |
+| Navigasi responsif | `NavigationBar` (< 760 px) dan `NavigationRail` (≥ 760 px) | Berfungsi, diuji otomatis |
+| Firebase Auth + Firestore | Kode siap, aktif hanya bila konfigurasi `--dart-define` lengkap dan inisialisasi sukses | Belum diuji dengan project nyata |
 
-## Struktur utama
-- lib/main.dart — halaman, navigasi, formulir
-- lib/models/candidate.dart — model, tujuh kriteria, kalkulasi skor demo
-- lib/services/app_backend.dart — mode demo dan layanan Firebase
-- lib/config/firebase_config.dart — opsi konfigurasi client via dart-define
-- test/widget_test.dart — widget test dan test model
-- docs/rancangan/ — kebutuhan, persona, user story, alur, wireframe, database
-- docs/firebase/ — panduan konfigurasi
-- docs/screenshots/ — wireframe SVG, bukan screenshot runtime
-- docs/PENGUJIAN.md, docs/PRESENTASI_UTS.md, docs/ROADMAP.md
-- firestore.rules — aturan akses awal
-- web/index.html — entry HTML Web
+## Tujuh kriteria dan bobot demo
 
-Scaffold platform Android/Web (termasuk file Gradle/wrapper yang dihasilkan Flutter) perlu dibuat dan diperiksa menggunakan Flutter SDK lokal jika belum ada. Flutter SDK tidak tersedia dalam sesi pembaruan ini, sehingga file platform generator tidak direka manual.
+| Kode | Kriteria | Bobot |
+|---|---|---|
+| C1 | Penghasilan keluarga | 20% |
+| C2 | Jumlah tanggungan | 15% |
+| C3 | Kondisi dinding | 15% |
+| C4 | Kondisi lantai | 15% |
+| C5 | Akses air bersih | 10% |
+| C6 | Sumber penerangan | 10% |
+| C7 | Tabungan keluarga | 15% |
+| | **Total** | **100%** |
 
-## Menjalankan mode demo
-Prasyarat: Flutter SDK yang mendukung Dart 3.3+, Git, dan Chrome. Dari root proyek:
-1. Jika platform folder belum tersedia, jalankan: flutter create --platforms=android,web .
-2. Jalankan: flutter pub get
-3. Jalankan: flutter analyze
-4. Jalankan: flutter test
-5. Jalankan: flutter run -d chrome
-Untuk Android, siapkan Android SDK kemudian jalankan flutter run.
+Skala nilai 1–5, di mana **nilai lebih tinggi berarti kondisi lebih rentan**. Karena itu seluruh kriteria diperlakukan sebagai *benefit* pada perhitungan demo.
 
-Akun simulasi lokal:
-- Email: demo@blt-dd.local
-- Kata sandi: demo123
+Rumus SAW demo:
 
-Akun ini hanya untuk mode demo lokal. Ketika konfigurasi Firebase lengkap dan inisialisasi berhasil, login menggunakan Firebase Authentication dan akun demo lokal tidak berlaku. Jangan membuat akun Firebase nyata dengan kata sandi contoh.
+```
+rᵢⱼ = xᵢⱼ / 5
+Vᵢ  = Σ (wⱼ × rᵢⱼ)          untuk tujuh kriteria
+Skor = Vᵢ × 100
+```
+
+Contoh: SIM-001 memiliki nilai C1–C7 = 5, 4, 4, 4, 3, 4, 5.
+
+```
+V = (0,20×1,0) + (0,15×0,8) + (0,15×0,8) + (0,15×0,8)
+  + (0,10×0,6) + (0,10×0,8) + (0,15×1,0) = 0,85
+Skor akhir = 85,0
+```
+
+Bobot, skala, dan arah benefit/cost masih asumsi demo dan belum divalidasi dengan dosen atau ketentuan resmi BLT-DD.
+
+## Screenshot runtime
+
+Screenshot diambil dari **build Web yang benar-benar dijalankan** (Flutter Web + Chrome headless), bukan mockup. Data yang tampil adalah data simulasi bawaan aplikasi.
+
+| Halaman | Desktop (1280×800) | Mobile (390×844) |
+|---|---|---|
+| Login | ![Login desktop](docs/screenshots/runtime/01-login-desktop.png) | ![Login mobile](docs/screenshots/runtime/01-login-mobile.png) |
+| Beranda | ![Beranda desktop](docs/screenshots/runtime/02-beranda-desktop.png) | ![Beranda mobile](docs/screenshots/runtime/02-beranda-mobile.png) |
+| Data calon | ![Data calon desktop](docs/screenshots/runtime/03-data-calon-desktop.png) | ![Data calon mobile](docs/screenshots/runtime/03-data-calon-mobile.png) |
+| Penilaian & prioritas | ![Penilaian desktop](docs/screenshots/runtime/04-penilaian-desktop.png) | ![Penilaian mobile](docs/screenshots/runtime/04-penilaian-mobile.png) |
+| Hasil prioritas | ![Hasil desktop](docs/screenshots/runtime/05-hasil-desktop.png) | ![Hasil mobile](docs/screenshots/runtime/05-hasil-mobile.png) |
+| Form tambah calon | ![Form desktop](docs/screenshots/runtime/06-form-tambah-desktop.png) | ![Form mobile](docs/screenshots/runtime/06-form-tambah-mobile.png) |
+| Validasi form | ![Validasi desktop](docs/screenshots/runtime/07-form-validasi-desktop.png) | ![Validasi mobile](docs/screenshots/runtime/07-form-validasi-mobile.png) |
+
+Wireframe rancangan awal tetap disimpan sebagai SVG di `docs/screenshots/` dan bukan bukti runtime.
+
+## Arsitektur dan struktur proyek
+
+```
+lib/
+├── main.dart                  # bootstrap + gerbang login/mode dokumentasi
+├── config/firebase_config.dart# opsi Firebase dari --dart-define
+├── core/theme.dart            # warna, tema Material 3
+├── data/data_simulasi.dart    # lima calon sintetis SIM-001..SIM-005
+├── models/candidate_model.dart# Criterion, Candidate, rumus SAW, ranking
+├── pages/
+│   ├── login_page.dart
+│   ├── app_shell.dart         # AppBar, navigasi responsif, CRUD, logout
+│   ├── beranda_page.dart
+│   ├── data_calon_page.dart   # daftar + dialog form tujuh kriteria
+│   ├── penilaian_page.dart
+│   └── hasil_prioritas_page.dart
+├── services/app_backend.dart  # mode demo + Firebase Auth/Firestore
+└── widgets/app_widgets.dart   # SummaryCard, SectionCard, InfoBanner, dll.
+test/widget_test.dart          # 24 pengujian otomatis
+tools/capture_screenshots.js   # skrip screenshot runtime
+docs/                          # rancangan, Firebase, pengujian, presentasi
+firestore.rules                # draft aturan akses berbasis role
+firebase.json                  # konfigurasi Firestore rules + Hosting
+```
+
+Alur data: `AppShell` memuat daftar calon dari `AppBackend` → halaman menerima `List<Candidate>` → form mengirim `Candidate` kembali → backend menyimpan (memori atau Firestore) → daftar dimuat ulang → skor dihitung ulang oleh `rankCandidates()`.
+
+## Alur pengguna
+
+```
+Login → Beranda → Data Calon Penerima → Penilaian & Prioritas → Hasil Prioritas → Keluar
+```
+
+- Login gagal menampilkan pesan validasi atau pesan autentikasi dan tetap di halaman Login.
+- Login berhasil membuka Beranda dengan ringkasan yang dihitung dari data termuat.
+- CRUD calon memakai dialog form yang sama untuk tambah dan ubah.
+- Hapus selalu meminta konfirmasi dan menampilkan pesan berhasil/gagal.
+- Keluar memanggil `signOut` dan kembali ke Login.
+
+Rincian ada di [docs/rancangan/USER_FLOW.md](docs/rancangan/USER_FLOW.md).
+
+## Menjalankan aplikasi (mode demo)
+
+Prasyarat: Flutter SDK 3.47.7 (Dart 3.13.5), Git, dan Chrome. Android memerlukan Android SDK.
+
+```bash
+flutter pub get
+flutter analyze
+flutter test
+flutter run -d chrome
+```
+
+Untuk build Web:
+
+```bash
+flutter build web
+```
+
+Akun demo lokal:
+
+- Email: `demo@blt-dd.local`
+- Kata sandi: `demo123`
+
+Akun ini hanya berlaku pada mode demo dan bukan Firebase Authentication. Jangan memakai kata sandi ini untuk akun nyata.
+
+### Mode dokumentasi (screenshot)
+
+Build dengan `--dart-define=SCREENSHOT_MODE=true`, lalu buka `?page=N`:
+
+| `page` | Halaman |
+|---|---|
+| 0 | Login |
+| 1–4 | Beranda, Data Calon, Penilaian, Hasil |
+| 5 | Data Calon + dialog form terbuka |
+| 6 | Data Calon + dialog form dengan pesan validasi |
+
+Mode ini hanya untuk dokumentasi dan tidak melewati autentikasi pada build normal.
 
 ## Konfigurasi Firebase
-Baca docs/firebase/SETUP_FIREBASE.md. Konfigurasi client dibaca melalui dart-define. Jangan unggah password, token, private key, atau rahasia pengguna. Firebase belum dapat dinyatakan aktif sampai akun, Email/Password, role, rules, dan CRUD benar-benar diuji.
 
-Kode saat ini menyimpan data calon dan ketujuh skor di satu koleksi calon_penerima. Koleksi penilaian, kriteria_bobot, hasil_prioritas, dan riwayat_proses adalah rancangan lanjutan yang belum dipakai kode aplikasi.
+Kode membaca konfigurasi client dari `--dart-define` (lihat `lib/config/firebase_config.dart`):
+
+- `FIREBASE_API_KEY`
+- `FIREBASE_APP_ID`
+- `FIREBASE_MESSAGING_SENDER_ID`
+- `FIREBASE_PROJECT_ID`
+- `FIREBASE_AUTH_DOMAIN` (opsional)
+- `FIREBASE_STORAGE_BUCKET` (opsional, tidak dipakai fitur saat ini)
+
+Contoh (placeholder, isi dengan nilai project Anda):
+
+```bash
+flutter run -d chrome \
+  --dart-define=FIREBASE_API_KEY=ISI_SENDIRI \
+  --dart-define=FIREBASE_APP_ID=ISI_SENDIRI \
+  --dart-define=FIREBASE_MESSAGING_SENDER_ID=ISI_SENDIRI \
+  --dart-define=FIREBASE_PROJECT_ID=ISI_SENDIRI
+```
+
+Jika konfigurasi tidak lengkap atau inisialisasi gagal, aplikasi tetap berjalan di mode demo dan menampilkan label yang sesuai. Panduan lengkap: [docs/firebase/SETUP_FIREBASE.md](docs/firebase/SETUP_FIREBASE.md).
+
+**Yang belum dilakukan:** project Firebase belum dibuat/dihubungkan, Email/Password belum diaktifkan untuk aplikasi ini, akun uji dan role belum dibuat, rules belum diuji di Emulator Suite, dan Hosting belum di-deploy.
+
+## Keamanan dan privasi
+
+- Tidak ada password, private key, token, atau service account di repository ini.
+- Kredensial demo (`demo@blt-dd.local` / `demo123`) adalah akun sintetis internal mode demo, bukan akun layanan nyata.
+- Data contoh memakai label fiktif (`Calon Simulasi A`–`E`, `SIM-001`–`SIM-005`), bukan NIK atau data warga.
+- `firestore.rules` **tidak** membuka akses publik: hanya user terautentikasi dengan dokumen `users/{uid}` berrole `admin`/`petugas` yang boleh mengakses data operasional, dan dokumen `users` tidak dapat ditulis dari client.
+- Rules masih draft dan wajib diuji di lingkungan non-produksi sebelum dipakai.
+
+## Pengujian
+
+Lingkungan: Windows, Flutter 3.47.7 stable, Dart 3.13.5.
+
+| Pemeriksaan | Perintah | Hasil |
+|---|---|---|
+| Analisis statis | `flutter analyze` | **No issues found** |
+| Test otomatis | `flutter test` | **24 test, semua lulus** |
+| Build Web | `flutter build web` | **Berhasil** |
+| Screenshot runtime | Chrome headless terhadap build Web | **14 file** (7 halaman × 2 viewport) |
+| Build Android | — | **Belum dijalankan** (Android SDK tidak tersedia) |
+| Firebase Auth/Firestore | — | **Belum diuji** (project belum dikonfigurasi) |
+| Firebase Hosting | — | **Belum di-deploy** |
+
+Cakupan 24 test otomatis: tujuh kriteria & total bobot, rentang skor, urutan ranking, tie-break, serialisasi dan kontrak field Firestore, CRUD mode demo, penolakan ID duplikat, login demo salah/benar, validasi email & kata sandi, logout, navigasi lebar/sempit, validasi form, tambah/ubah/hapus, perubahan nilai memengaruhi skor, dan mode dokumentasi.
+
+Matriks skenario lengkap beserta status per skenario: [docs/PENGUJIAN.md](docs/PENGUJIAN.md).
 
 ## Status verifikasi
+
 | Area | Status |
 |---|---|
-| Kode inti halaman dan form | Ditambahkan; belum diverifikasi dengan Flutter SDK dalam sesi ini |
-| Mode demo in-memory | Diimplementasikan; belum diuji runtime dalam sesi ini |
-| Firebase Auth dan Firestore | Kode bersyarat konfigurasi; belum dihubungkan ke project nyata |
-| Firestore rules | Draft; perlu review dan pengujian rules |
-| Scaffold Android/Web | Perlu dibuat/diperiksa melalui Flutter SDK lokal |
-| Screenshot runtime | Belum tersedia; yang ada adalah wireframe statis |
+| Kode inti, form, navigasi | Selesai, `flutter analyze` bersih |
+| Mode demo in-memory | Berfungsi, diuji otomatis |
+| Test otomatis | 24/24 lulus |
+| Build Web | Berhasil |
+| Screenshot runtime | Tersedia dan diambil dari build Web |
+| Scaffold Android | Tersedia (Gradle Kotlin DSL, `minSdk` mengikuti Flutter, izin INTERNET) |
+| Build/run Android | Belum diverifikasi (tidak ada Android SDK) |
+| Firebase Auth + Firestore | Kode siap; belum dihubungkan/diuji |
+| Firestore rules | Draft; belum diuji/deploy |
+| CI GitHub Actions | Workflow disiapkan; hasil run dilihat setelah push |
 | Firebase Hosting | Belum di-deploy |
-| flutter pub get/analyze/test/run | Belum dijalankan dalam sesi ini |
 
-## Wireframe (preview statis, bukan runtime)
+## Roadmap
 
-| Login | Beranda |
-|---|---|
-| ![Wireframe login](docs/screenshots/01-login-wireframe.svg) | ![Wireframe beranda](docs/screenshots/02-beranda-wireframe.svg) |
+1. Membuat project Firebase, mengaktifkan Email/Password, dan menguji Auth + CRUD di Emulator Suite.
+2. Menguji rules (user tanpa role, role petugas, akses tulis `users`).
+3. Build dan uji APK di perangkat/emulator Android.
+4. Deploy Firebase Hosting setelah build Web final.
+5. Menyimpan snapshot hasil per periode + versi bobot dan audit trail.
+6. Validasi persona, bobot, subkriteria, dan formula bersama dosen/petugas.
 
-| Data Calon Penerima | Penilaian & Prioritas |
-|---|---|
-| ![Wireframe data calon](docs/screenshots/03-data-calon-wireframe.svg) | ![Wireframe penilaian](docs/screenshots/04-penilaian-wireframe.svg) |
+Rincian: [docs/ROADMAP.md](docs/ROADMAP.md).
 
-| Hasil Prioritas |
-|---|
-| ![Wireframe hasil prioritas](docs/screenshots/05-hasil-prioritas-wireframe.svg) |
+## Dokumentasi
 
-Gambar di atas hanya wireframe statis untuk menjelaskan rancangan antarmuka. Ini bukan screenshot yang diambil dari aplikasi Flutter saat berjalan.
-
-## Dokumentasi lanjutan
+- [Identitas, kebutuhan, dan keterlacakan](docs/rancangan/KEBUTUHAN.md)
 - [Persona](docs/rancangan/PERSONA.md)
-- [Kebutuhan dan keterlacakan](docs/rancangan/KEBUTUHAN.md)
 - [User story](docs/rancangan/USER_STORY.md)
 - [User flow](docs/rancangan/USER_FLOW.md)
 - [Wireframe](docs/rancangan/WIREFRAME.md)
-- [Database](docs/rancangan/DATABASE.md)
+- [Rancangan database](docs/rancangan/DATABASE.md)
 - [Panduan Firebase](docs/firebase/SETUP_FIREBASE.md)
 - [Matriks pengujian](docs/PENGUJIAN.md)
 - [Panduan presentasi UTS](docs/PRESENTASI_UTS.md)
 - [Roadmap](docs/ROADMAP.md)
+- [Keterangan screenshot](docs/screenshots/README.md)
+
+---
+
+Prototipe ini dibuat untuk keperluan akademik. Skor dan peringkat yang dihasilkan tidak boleh digunakan sebagai dasar keputusan penerima bantuan tanpa verifikasi dan musyawarah resmi.

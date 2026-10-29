@@ -18,6 +18,19 @@ Untuk menjaga alur CRUD awal sederhana, kode saat ini menyimpan data calon dan t
 
 Mapping: C1 Penghasilan keluarga; C2 Jumlah tanggungan; C3 Kondisi dinding; C4 Kondisi lantai; C5 Akses air bersih; C6 Sumber penerangan; C7 Tabungan keluarga.
 
+Kontrak field di atas diuji otomatis (`Nilai kontrak Firestore sesuai field yang didokumentasikan`) dan serialisasi model menyimpan tepat tujuh nilai. Nama field harus tetap sinkron dengan `Candidate.toMap()`/`fromMap()`.
+
+## Koleksi users
+
+| Field | Jenis | Keterangan |
+|---|---|---|
+| ID dokumen | string | UID dari Firebase Authentication |
+| role | string | `admin` atau `petugas`; dibaca oleh `firestore.rules` |
+| nama | string | Nama petugas (opsional, tidak dibaca kode klien saat ini) |
+| createdAt | timestamp | Opsional |
+
+Dokumen ini dibuat manual oleh administrator melalui Console/jalur tepercaya. Rules saat ini menetapkan `allow write: if false` untuk `users`, sehingga user tidak dapat menaikkan role sendiri.
+
 ## Koleksi untuk fase berikutnya
 
 | Koleksi | Field utama | Fungsi / relasi | Status |

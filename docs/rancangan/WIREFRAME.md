@@ -20,3 +20,6 @@ Rancangan UTS menyebut lima halaman utama. SVG di folder docs/screenshots adalah
 
 ## Keputusan konsistensi
 Tujuh kriteria dari presentasi menjadi acuan form dan model. ID dokumen dipisahkan dari ID simulasi yang dilihat pengguna. Form tambah/ubah menggunakan dialog yang sama. Hasil dihitung dari nilai, tidak diketik manual. Status demo dibedakan dari Firebase. Desain belum divalidasi melalui usability test.
+
+## Implementasi aktual
+Screenshot runtime hasil implementasi ada di `docs/screenshots/runtime/` (desktop 1280×800 dan mobile 390×844). Tampilan mengikuti prinsip di atas dengan penyesuaian: kartu ringkasan Beranda memakai `Wrap` agar tidak overflow pada layar sempit, dan dialog form dapat digulir.

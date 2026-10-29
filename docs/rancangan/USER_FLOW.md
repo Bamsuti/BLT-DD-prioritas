@@ -52,3 +52,6 @@ Pilih ikon Hapus lalu baca dialog konfirmasi. Batal tidak menghapus data. Hapus 
 - Hasil Prioritas: skor terhitung dan peringkat.
 
 Persona petugas pengelola data BLT-DD masih asumsi awal; wawancara belum diklaim dilakukan.
+
+## Status implementasi
+Alur di atas sudah berjalan pada mode demo dan diuji otomatis (lihat `docs/PENGUJIAN.md`). Jalur Firebase Authentication/Firestore belum diuji karena project belum dikonfigurasi. Mode dokumentasi `?page=N` hanya dipakai untuk mengambil screenshot dan tidak mengubah alur normal.

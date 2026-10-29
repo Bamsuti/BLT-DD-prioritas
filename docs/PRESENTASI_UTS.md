@@ -1,37 +1,60 @@
 # Panduan Demonstrasi Presentasi UTS
 
-Ini adalah rencana demonstrasi, bukan catatan bahwa semua aksi sudah diuji.
+Dokumen ini adalah skenario demonstrasi. Status di bawah mencerminkan apa yang **sudah** dijalankan pada lingkungan pengembangan (Windows, Flutter 3.47.7) dan apa yang masih perlu dilakukan saat presentasi.
 
 ## 1. Proposal — masalah, pengguna, scope
-Buka README.md dan docs/rancangan/KEBUTUHAN.md. Jelaskan bahwa prototipe menggabungkan alur data calon, penilaian tujuh kriteria, dan peninjauan skor. Petugas pengelola data BLT-DD adalah persona asumsi awal yang masih perlu divalidasi. Tegaskan batasan: tidak menangani pencairan dana, tidak terintegrasi langsung ke sistem pemerintah, tidak menggunakan data warga nyata, dan tidak menggantikan musyawarah.
+
+Buka `README.md` dan `docs/rancangan/KEBUTUHAN.md`. Jelaskan bahwa prototipe menggabungkan alur data calon, penilaian tujuh kriteria, dan peninjauan skor. Petugas pengelola data BLT-DD adalah persona asumsi awal yang perlu divalidasi. Tegaskan batasan: tidak menangani pencairan dana, tidak terintegrasi ke sistem pemerintah, tidak memakai data warga nyata, dan tidak menggantikan musyawarah.
 
 ## 2. Desain
-Buka PERSONA.md, USER_STORY.md, USER_FLOW.md, dan WIREFRAME.md. Tunjukkan lima halaman, alur login berhasil/gagal, validasi form, dan hubungan kebutuhan dengan fitur. Wireframe SVG adalah preview statis, bukan screenshot runtime. Wawancara pengguna belum diklaim dilakukan.
+
+Buka `PERSONA.md`, `USER_STORY.md`, `USER_FLOW.md`, `WIREFRAME.md`, lalu `docs/screenshots/runtime/`. Tunjukkan lima halaman, alur login berhasil/gagal, validasi form, dan hubungan kebutuhan dengan fitur. Wireframe SVG adalah rancangan awal; screenshot di `runtime/` adalah bukti implementasi. Wawancara pengguna belum diklaim dilakukan.
 
 ## 3. Demo Flutter
-1. Jalankan flutter pub get, flutter analyze, dan flutter test; sebut hasil dari terminal yang terlihat.
-2. Jalankan flutter run -d chrome atau perangkat Android.
-3. Tunjukkan Login, validasi input, dan label Mode Demo/Firebase.
-4. Mode demo: email demo@blt-dd.local dan kata sandi demo123.
-5. Tunjukkan ringkasan Beranda, lalu Data Calon.
-6. Tambahkan calon menggunakan ID simulasi unik, nama label sintetis, dusun, dan tujuh nilai.
-7. Ubah calon dan tunjukkan hasilnya pada daftar.
-8. Buka dialog hapus lalu Batal; ulangi dan konfirmasi penghapusan.
-9. Tunjukkan tujuh kriteria dan bobot demo.
-10. Tunjukkan hasil ranking dan jelaskan skor berasal dari data.
-11. Resize browser ke bawah/atas 760 px untuk memperlihatkan navigasi.
-12. Pilih Keluar dan pastikan kembali ke Login.
 
-Mode demo menyimpan data di memori; reload dapat menghilangkannya. Jangan menyatakan Firestore berhasil jika Firebase belum aktif dan diuji.
+Persiapan (sudah diverifikasi di lingkungan ini):
 
-## 4. Repository
-Buka repository GitHub, README, lib, test, docs, firestore.rules, dan riwayat commit. Jelaskan mana yang berupa kode dan dokumentasi, dan bahwa koneksi Firebase baru diakui setelah layanan dites. Jangan menyebut tes/runtime/deployment yang tidak memiliki bukti.
+```bash
+flutter pub get
+flutter analyze    # No issues found!
+flutter test       # 24 test, All tests passed!
+flutter run -d chrome
+```
 
-## Checklist sebelum rekaman
-- [ ] Scaffold Android/Web tersedia dan sudah diperiksa.
-- [ ] flutter pub get, flutter analyze, flutter test selesai dan keluarannya dicatat.
-- [ ] Demo berjalan di Chrome atau Android.
-- [ ] Screenshot runtime diambil.
-- [ ] Skenario uji diisi hasil aktual.
-- [ ] Bobot dan interpretasi tetap ditandai simulasi sampai tervalidasi.
-- [ ] Tidak ada data pribadi atau rahasia konfigurasi yang terlihat.
+Langkah demonstrasi:
+
+1. Tunjukkan hasil `flutter analyze` dan `flutter test` dari terminal.
+2. Buka Login. Tunjukkan label **Mode demo**, coba email kosong/format salah, lalu login dengan akun demo.
+3. Jelaskan bahwa mode demo bukan Firebase Authentication.
+4. Tunjukkan ringkasan Beranda: 5 calon, 7 kriteria, dan tiga skor tertinggi (SIM-001 = 85,0).
+5. Buka Data Calon Penerima, tambah calon dengan ID simulasi unik dan nama fiktif, isi tujuh nilai.
+6. Ubah calon dan tunjukkan skor berubah di daftar.
+7. Buka dialog hapus, tekan Batal, lalu ulangi dan konfirmasi penghapusan.
+8. Buka Penilaian & Prioritas: tunjukkan tujuh kriteria dan bobot demo 20/15/15/15/10/10/15.
+9. Buka Hasil Prioritas: jelaskan rumus SAW (`r = nilai/5`, `V = Σ bobot×r`, skor = V×100) dan urutan menurun.
+10. Perkecil jendela browser melewati 760 px untuk memperlihatkan `NavigationRail` berubah menjadi `NavigationBar`.
+11. Tekan Keluar dan pastikan kembali ke Login.
+
+Catatan: mode demo menyimpan data di memori; reload mengembalikan data contoh. Jangan menyatakan Firestore berhasil jika Firebase belum aktif dan diuji.
+
+## 4. Repository dan bukti
+
+Buka repository GitHub, `README.md`, `lib/`, `test/`, `docs/`, `firestore.rules`, dan riwayat commit. Tunjukkan bahwa:
+
+- 24 test otomatis lulus (`flutter test`);
+- build Web berhasil dan screenshot runtime tersedia;
+- kode Firebase bersyarat dan belum diuji dengan project nyata;
+- tidak ada kredensial, token, atau data warga di repository.
+
+## Checklist presentasi
+
+- [x] Scaffold Android/Web tersedia dan diperiksa strukturnya.
+- [x] `flutter pub get`, `flutter analyze`, `flutter test` dijalankan; hasil dicatat di `docs/PENGUJIAN.md`.
+- [x] Build Web berhasil.
+- [x] Screenshot runtime diambil dari build Web (desktop dan mobile).
+- [x] Skenario uji mode demo diisi hasil aktual.
+- [x] Bobot dan interpretasi ditandai sebagai simulasi.
+- [x] Tidak ada data pribadi atau rahasia konfigurasi di repository.
+- [ ] Demo berjalan di perangkat Android (Android SDK belum tersedia).
+- [ ] Firebase Auth + Firestore diuji dengan project nyata.
+- [ ] Firebase Hosting di-deploy.

@@ -1,13 +1,13 @@
 # Panduan Mengaktifkan Firebase
 
-Status saat perubahan repository: kode integrasi disiapkan, tetapi belum dikonfigurasi atau diuji dengan project Firebase nyata. Jangan mengirim password akun atau private key lewat chat dan jangan memasukkannya ke GitHub.
+Status saat repository diperbarui: build Web dan mode demo sudah berjalan serta diuji otomatis, tetapi integrasi Firebase **belum dikonfigurasi atau diuji** dengan project nyata. Jangan mengirim password akun atau private key lewat chat dan jangan memasukkannya ke GitHub.
 
 ## Persiapan Firebase
 1. Buat/pilih Firebase project pada akun pemilik proyek.
 2. Aktifkan Authentication → Sign-in method → Email/Password.
 3. Daftarkan aplikasi Web dan catat client config dari Firebase Console.
-4. Buat scaffold Flutter Android/Web dengan Flutter SDK lokal jika folder platform belum ada, lalu daftarkan Android application ID.
-5. Buat Cloud Firestore dalam mode/lokasi yang sesuai.
+4. Jika akan menguji Android, daftarkan aplikasi Android dengan application ID `com.example.blt_dd_prioritas` (lihat `android/app/build.gradle.kts`). Ganti application ID bila perlu sebelum rilis.
+5. Buat Cloud Firestore dalam mode/lokasi yang sesuai, lalu terapkan `firestore.rules` setelah diuji di Emulator Suite.
 
 ## Konfigurasi runtime
 Kode membaca opsi melalui dart-define. Nilai diperlukan berasal dari Firebase Console sendiri:
@@ -38,7 +38,7 @@ Kode melakukan CRUD di calon_penerima. Field meliputi idSimulasi, namaLabel, dus
 firestore.rules mengizinkan akses pada data operasional kepada user terautentikasi yang dokumen users/{uid}-nya memiliki role admin/petugas. Aturan ini draft awal; periksa validasi tipe data, akses admin, skenario query, dan gunakan Firebase Emulator Suite sebelum dipakai. Jangan deploy rules tanpa review.
 
 ## Firebase Hosting
-Setelah flutter build web berhasil menggunakan konfigurasi yang tepat, pasang Firebase CLI, login, pilih project, inisialisasi Hosting ke build/web, periksa konfigurasi SPA lalu deploy. Buka URL yang dikeluarkan CLI dan uji login, CRUD, refresh, navigasi dan rules. Firebase Hosting belum di-deploy dari sesi ini; tidak ada URL deployment yang diklaim.
+`flutter build web` sudah berhasil pada mode demo. Setelah build dengan konfigurasi Firebase yang tepat, pasang Firebase CLI, login, pilih project, inisialisasi Hosting ke `build/web`, periksa konfigurasi SPA (`firebase.json` sudah memiliki rewrite ke `index.html`), lalu deploy. Buka URL yang dikeluarkan CLI dan uji login, CRUD, refresh, navigasi, dan rules. Firebase Hosting belum di-deploy dari sesi ini; tidak ada URL deployment yang diklaim.
 
 ## Checklist aktivasi
 - [ ] Label aplikasi menunjukkan Mode Firebase aktif.
