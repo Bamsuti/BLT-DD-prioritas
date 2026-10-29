@@ -31,11 +31,11 @@ flutter run -d chrome
 ## Screenshot
 | Login | Beranda | Data Calon |
 |---|---|---|
-| ![Login](docs/screenshot-login.png) | ![Beranda](docs/screenshot-beranda.png) | ![Data Calon](docs/screenshot-data-calon.png) |
+| ![Login](login.png) | ![Beranda](beranda.png) | ![Data Calon](data-calon.png) |
 
 | Penilaian & Prioritas (form) | Hasil Prioritas |
 |---|---|
-| ![Penilaian](docs/screenshot-penilaian.png) | ![Hasil](docs/screenshot-hasil.png) |
+| ![Penilaian](penilaian.png) | ![Hasil](hasil.png) |
 
 ## Pengujian form (data simulasi)
 | # | Kasus | Hasil diharapkan | Status |
