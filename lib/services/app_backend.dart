@@ -70,7 +70,7 @@ class AppBackend {
   static Future<Candidate> saveCandidate(Candidate candidate) async {
     if (!firebaseReady) {
       final id = candidate.id.isEmpty
-          ? 'SIM-' + DateTime.now().microsecondsSinceEpoch.toString()
+          ? 'SIM-${DateTime.now().microsecondsSinceEpoch}'
           : candidate.id;
       final saved = candidate.copyWith(id: id);
       final index = _demoData.indexWhere((item) => item.id == id);

@@ -342,7 +342,7 @@ class _AppShellState extends State<AppShell> {
       context: context,
       builder: (dialogContext) => AlertDialog(
         title: const Text('Hapus calon?'),
-        content: Text('Data ' + candidate.name + ' akan dihapus dari prototipe.'),
+        content: Text('Data ${candidate.name} akan dihapus dari prototipe.'),
         actions: [
           TextButton(onPressed: () => Navigator.pop(dialogContext, false), child: const Text('Batal')),
           FilledButton(onPressed: () => Navigator.pop(dialogContext, true), child: const Text('Hapus')),
@@ -459,9 +459,9 @@ class CandidateListPage extends StatelessWidget {
                 child: ListTile(
                   leading: const CircleAvatar(child: Icon(Icons.person_outline)),
                   title: Text(candidate.name),
-                  subtitle: Text(candidate.simulationCode + ' • ' + candidate.dusun + (candidate.notes.isEmpty ? '' : ' • ' + candidate.notes)),
+                  subtitle: Text('${candidate.simulationCode} • ${candidate.dusun}${candidate.notes.isEmpty ? '' : ' • ${candidate.notes}'}'),
                   isThreeLine: candidate.notes.isNotEmpty,
-                  trailing: Wrap(mainAxisSize: MainAxisSize.min, children: [
+                  trailing: Row(mainAxisSize: MainAxisSize.min, children: [
                     IconButton(tooltip: 'Ubah', onPressed: () => onEdit(candidate), icon: const Icon(Icons.edit_outlined)),
                     IconButton(tooltip: 'Hapus', onPressed: () => onDelete(candidate), icon: const Icon(Icons.delete_outline)),
                   ]),
@@ -485,11 +485,11 @@ class ScoringPage extends StatelessWidget {
           const Text('Skala 1–5 menilai tingkat kerentanan. Nilai 5 berarti kerentanan lebih tinggi. Bobot dan interpretasi berikut hanya untuk demonstrasi, belum divalidasi.'),
           const SizedBox(height: 12),
           for (final criterion in criteria)
-            Card(child: ListTile(title: Text(criterion.name), subtitle: Text(criterion.description), trailing: Text(criterion.weightPercent.toString() + '%'))),
+            Card(child: ListTile(title: Text(criterion.name), subtitle: Text(criterion.description), trailing: Text('${criterion.weightPercent}%'))),
           const SizedBox(height: 16),
           Text('Ubah penilaian calon', style: Theme.of(context).textTheme.titleLarge),
           for (final candidate in candidates)
-            Card(child: ListTile(title: Text(candidate.simulationCode + ' — ' + candidate.name), subtitle: const Text('Buka formulir untuk memperbarui ketujuh nilai kriteria.'), trailing: TextButton(onPressed: () => onEdit(candidate), child: const Text('Isi nilai')))),
+            Card(child: ListTile(title: Text('${candidate.simulationCode} — ${candidate.name}'), subtitle: const Text('Buka formulir untuk memperbarui ketujuh nilai kriteria.'), trailing: TextButton(onPressed: () => onEdit(candidate), child: const Text('Isi nilai')))),
         ],
       );
 }
@@ -512,7 +512,7 @@ class ResultsPage extends StatelessWidget {
           const Text('Belum ada calon yang dapat diperingkat.')
         else
           for (var index = 0; index < ranked.length; index++)
-            Card(child: ListTile(leading: CircleAvatar(child: Text((index + 1).toString())), title: Text(ranked[index].simulationCode + ' — ' + ranked[index].name), subtitle: Text(ranked[index].dusun + ' • Skor preferensi'), trailing: Text((ranked[index].preferenceScore(candidates) * 100).toStringAsFixed(2)))),
+            Card(child: ListTile(leading: CircleAvatar(child: Text((index + 1).toString())), title: Text('${ranked[index].simulationCode} — ${ranked[index].name}'), subtitle: Text('${ranked[index].dusun} • Skor preferensi'), trailing: Text((ranked[index].preferenceScore(candidates) * 100).toStringAsFixed(2)))),
         const SizedBox(height: 12),
         const Text('Rumus demo SAW: Vᵢ = Σ(wⱼ × rᵢⱼ), rᵢⱼ = xᵢⱼ / nilai maksimum kriteria. Total bobot = 100%. Semua kriteria sementara ditafsirkan sebagai indikator kerentanan (benefit); validasi arah dan bobot masih diperlukan.'),
       ],
@@ -616,13 +616,13 @@ class _CandidateFormDialogState extends State<CandidateFormDialog> {
                       padding: const EdgeInsets.only(top: 10),
                       child: DropdownButtonFormField<int>(
                         value: _scores[criterion.code],
-                        decoration: InputDecoration(labelText: criterion.name + ' *'),
+                        decoration: InputDecoration(labelText: '${criterion.name} *'),
                         items: [
                           for (var value = 1; value <= 5; value++)
-                            DropdownMenuItem(value: value, child: Text(value.toString() + ' - ' + _ratingLabel(value))),
+                            DropdownMenuItem(value: value, child: Text('$value - ${_ratingLabel(value)}')),
                         ],
                         onChanged: (value) => setState(() => _scores[criterion.code] = value),
-                        validator: (value) => value == null ? 'Pilih nilai untuk ' + criterion.name + '.' : null,
+                        validator: (value) => value == null ? 'Pilih nilai untuk ${criterion.name}.' : null,
                       ),
                     ),
                 ],
