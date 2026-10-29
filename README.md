@@ -31,7 +31,8 @@ flutter run -d chrome
 ## Screenshot
 | Login | Beranda | Data Calon |
 |---|---|---|
-| ![Login](docs/screenshot-login.png) | ![Beranda](docs/screenshot-beranda.png) | ![Data Calon](docs/screenshot-data-calon.png) |
+| ![Login](<img width="179" height="378" alt="image" src="https://github.com/user-attachments/assets/09d08c3f-2738-4e56-88a9-7b7977bcf138" />
+) | ![Beranda](docs/screenshot-beranda.png) | ![Data Calon](docs/screenshot-data-calon.png) |
 
 | Penilaian & Prioritas (form) | Hasil Prioritas |
 |---|---|
