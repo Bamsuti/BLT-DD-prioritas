@@ -31,11 +31,13 @@ flutter run -d chrome
 ## Screenshot
 | Login | Beranda | Data Calon |
 |---|---|---|
-| ![Login](<img width="152" height="344" alt="login" src="https://github.com/user-attachments/assets/7c43e3a4-9a5d-41fe-b128-275a0d564672" />| ![Beranda](<img width="152" height="344" alt="beranda" src="https://github.com/user-attachments/assets/40d8f28b-821c-4f5e-9cf3-abe930b0ffb2" />| ![Data Calon](<img width="152" height="344" alt="beranda" src="https://github.com/user-attachments/assets/a245c996-923a-49fd-99cb-9d4d0cfd6f6b" />|
+|(<img width="152" height="344" alt="login" src="https://github.com/user-attachments/assets/7c43e3a4-9a5d-41fe-b128-275a0d564672" />|(<img width="152" height="344" alt="beranda" src="https://github.com/user-attachments/assets/40d8f28b-821c-4f5e-9cf3-abe930b0ffb2" />|(<img width="152" height="344" alt="beranda" src="https://github.com/user-attachments/assets/a245c996-923a-49fd-99cb-9d4d0cfd6f6b" />|
 
 | Penilaian & Prioritas (form) | Hasil Prioritas |
 |---|---|
-| ![Penilaian](penilaian.png) | ![Hasil](hasil.png) |
+|(<img width="150" height="344" alt="penilaian" src="https://github.com/user-attachments/assets/0d679a81-6574-4483-8072-d9d7335bfc32" />
+) |(<img width="150" height="344" alt="hasil" src="https://github.com/user-attachments/assets/58261424-721b-4662-8fe9-d079e0bdda63" />
+) |
 
 ## Pengujian form (data simulasi)
 | # | Kasus | Hasil diharapkan | Status |
