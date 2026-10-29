@@ -49,13 +49,7 @@ jobs:
               manifest["background_color"] = "#FFFFFF"
               manifest_path.write_text(json.dumps(manifest, indent=2) + "\n")
 
-          # Firebase Auth Android SDK currently resolved by this pubspec requires
-          # minSdk 23. Adapt the generated Flutter scaffold instead of overriding
-          # the dependency manifest.
-          gradle_paths = [
-              Path("android/app/build.gradle"),
-              Path("android/app/build.gradle.kts"),
-          ]
+          gradle_paths = [Path("android/app/build.gradle"), Path("android/app/build.gradle.kts")]
           for gradle_path in gradle_paths:
               if not gradle_path.exists():
                   continue
@@ -75,9 +69,29 @@ jobs:
         run: flutter test
       - name: Build Web
         run: flutter build web
+      - name: Install Playwright browser for runtime screenshots
+        continue-on-error: true
+        run: |
+          python3 -m pip install --user playwright
+          python3 -m playwright install --with-deps chromium
+      - name: Capture runtime screenshots
+        continue-on-error: true
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m http.server 8765 --directory build/web > /tmp/blt-web-server.log 2>&1 &
+          SERVER_PID=$!
+          trap 'kill "$SERVER_PID" 2>/dev/null || true' EXIT
+          for attempt in $(seq 1 30); do
+            if curl -fsS http://127.0.0.1:8765/ >/dev/null; then
+              break
+            fi
+            sleep 1
+          done
+          BLT_BASE_URL=http://127.0.0.1:8765/ python3 tools/capture_runtime_screenshots.py
       - name: Build Android debug APK
         run: flutter build apk --debug
-      - name: Commit generated platform scaffold
+      - name: Commit generated platform scaffold and screenshot evidence
         if: ${{ github.event_name != 'pull_request' }}
         shell: bash
         run: |
@@ -85,9 +99,17 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add .metadata android web
+          if [[ -d docs/screenshots/runtime ]]; then
+            git add -f docs/screenshots/runtime
+          fi
           if git diff --cached --quiet; then
-            echo "No generated platform changes to commit."
+            echo "No generated platform or screenshot changes to commit."
           else
-            git commit -m "build: add generated Android and Web platform scaffold [skip ci]"
+            if git diff --cached --name-only | grep -q '^docs/screenshots/runtime/'; then
+              MESSAGE="test: add Flutter Web runtime screenshots [skip ci]"
+            else
+              MESSAGE="build: add generated Android and Web platform scaffold [skip ci]"
+            fi
+            git commit -m "$MESSAGE"
             git push origin "HEAD:${GITHUB_REF_NAME}"
           fi
