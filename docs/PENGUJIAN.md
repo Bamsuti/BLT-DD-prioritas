@@ -10,7 +10,7 @@ Dokumen ini mencatat pengujian yang **benar-benar dijalankan** dan yang belum. S
 | Flutter | 3.47.7 stable (revision abaf9c5237) |
 | Dart | 3.13.5 |
 | Perangkat uji Web | Chrome headless (puppeteer-core 25), viewport 1280×800 dan 390×844, DPR 2 |
-| Android SDK | Tidak tersedia |
+| Android SDK | Tidak tersedia lokal; build APK dijalankan di GitHub Actions (ubuntu-latest) |
 | Project Firebase | Tidak tersedia |
 
 ## Ringkasan hasil
@@ -21,7 +21,8 @@ Dokumen ini mencatat pengujian yang **benar-benar dijalankan** dan yang belum. S
 | Test otomatis | `flutter test` | `00:08 +24: All tests passed!` |
 | Build Web | `flutter build web --dart-define=SCREENSHOT_MODE=true` | `√ Built build\web` |
 | Screenshot runtime | `tools/capture_screenshots.js` | 14 PNG (7 halaman × desktop/mobile) |
-| Build Android | — | Tidak dijalankan (Android SDK tidak tersedia) |
+| Build Android | `flutter build apk --debug` di GitHub Actions | Berhasil (run #7); belum dijalankan di perangkat |
+| CI | GitHub Actions run #7 | Semua langkah berhasil |
 | Firebase Auth/Firestore | — | Tidak diuji (project belum dikonfigurasi) |
 
 Contoh keluaran terminal yang tercatat:
@@ -96,8 +97,8 @@ Compiling lib\main.dart for the Web...   37.3s
 | T-32 | Rules menolak user tanpa role | Permission denied | **Belum diuji** | Butuh Emulator Suite |
 | T-33 | Rules menolak tulis `users` dari client | Permission denied | **Belum diuji** | Butuh Emulator Suite |
 | T-34 | Firebase Hosting | URL publik dapat diakses | **Belum di-deploy** | Belum ada URL |
-| T-35 | Build Android debug | APK terbentuk dan berjalan | **Tidak dapat dijalankan** | Android SDK tidak tersedia di lingkungan ini |
-| T-36 | GitHub Actions | Analyze, test, build Web/APK hijau | **Belum terverifikasi** | Workflow baru berjalan setelah push |
+| T-35 | Build Android debug | APK terbentuk dan berjalan | **Lulus (build)** | APK debug berhasil dibangun di CI; belum diinstal/dijalankan di perangkat |
+| T-36 | GitHub Actions | Analyze, test, build Web/APK hijau | **Lulus** | [Run #7](https://github.com/Bamsuti/BLT-DD-prioritas/actions/runs/40902045482) selesai dengan status success |
 
 ## Cakupan test otomatis (24 test)
 
@@ -107,6 +108,7 @@ Compiling lib\main.dart for the Web...   37.3s
 
 - Widget test berjalan pada mesin uji Flutter, bukan perangkat fisik; gesture, keyboard, dan performa nyata belum diukur.
 - Screenshot runtime berasal dari Chrome headless, bukan emulator Android.
+- APK debug dibangun di CI, tetapi belum diinstal atau dijalankan pada perangkat/emulator.
 - Tidak ada pengujian aksesibilitas (screen reader), pengujian beban, atau pengujian keamanan dinamis.
 - Firebase, rules, dan Hosting belum diuji karena tidak ada project/kredensial pada sesi ini.
 

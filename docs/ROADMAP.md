@@ -11,6 +11,7 @@ Status dibedakan antara artefak yang sudah diverifikasi dan pekerjaan yang masih
 - [x] Mode demo terpisah dari Firebase dengan label yang jelas.
 - [x] `flutter analyze` bersih dan 24 test otomatis lulus.
 - [x] Build Web berhasil; 14 screenshot runtime desktop/mobile.
+- [x] APK debug berhasil dibangun melalui GitHub Actions.
 - [x] Scaffold Android (Gradle Kotlin DSL) dan izin INTERNET.
 - [x] Dokumentasi rancangan, Firebase, pengujian, presentasi, dan roadmap.
 - [x] Draft rules berbasis autentikasi + role tanpa akses publik.
@@ -21,9 +22,9 @@ Status dibedakan antara artefak yang sudah diverifikasi dan pekerjaan yang masih
 - [ ] Aktifkan Email/Password, buat akun uji, dan set dokumen `users/{uid}.role`.
 - [ ] Uji Auth + CRUD Firestore dan tinjau hasilnya di Console.
 - [ ] Uji `firestore.rules` di Firebase Emulator Suite (user tanpa role, role petugas, tulis `users`).
-- [ ] Build dan uji APK pada perangkat/emulator Android.
+- [ ] Instal dan jalankan APK debug pada perangkat/emulator Android.
 - [ ] Deploy Firebase Hosting dan uji URL publik.
-- [ ] Verifikasi hasil GitHub Actions setelah push.
+- [x] Verifikasi hasil GitHub Actions setelah push (run #7 sukses).
 
 ## Pengembangan lanjutan
 

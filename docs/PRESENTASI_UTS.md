@@ -55,6 +55,7 @@ Buka repository GitHub, `README.md`, `lib/`, `test/`, `docs/`, `firestore.rules`
 - [x] Skenario uji mode demo diisi hasil aktual.
 - [x] Bobot dan interpretasi ditandai sebagai simulasi.
 - [x] Tidak ada data pribadi atau rahasia konfigurasi di repository.
-- [ ] Demo berjalan di perangkat Android (Android SDK belum tersedia).
+- [x] APK debug berhasil dibangun melalui GitHub Actions (run #7).
+- [ ] Demo berjalan di perangkat Android fisik (APK belum diinstal/diuji di perangkat).
 - [ ] Firebase Auth + Firestore diuji dengan project nyata.
 - [ ] Firebase Hosting di-deploy.

@@ -2,7 +2,7 @@
 
 Prototipe akademik untuk mencatat data simulasi calon penerima BLT-DD, menilai tujuh kriteria kerentanan, lalu meninjau urutan prioritas. Satu basis kode Flutter dijalankan sebagai aplikasi Web dan Android.
 
-> **Status jujur:** aplikasi berjalan dalam **mode demo** (data di memori) dan sudah diuji otomatis dengan `flutter analyze` + `flutter test`. Integrasi Firebase Authentication dan Cloud Firestore tersedia di kode, tetapi **belum dihubungkan ke project Firebase nyata dan belum diuji**. Firebase Hosting belum di-deploy. Android belum dibangun karena Android SDK tidak tersedia di lingkungan pengerjaan. Semua nama calon dan nilai adalah data sintetis; skor bukan keputusan resmi penerima bantuan.
+> **Status jujur:** aplikasi berjalan dalam **mode demo** (data di memori) dan sudah diuji otomatis dengan `flutter analyze` + `flutter test`. Integrasi Firebase Authentication dan Cloud Firestore tersedia di kode, tetapi **belum dihubungkan ke project Firebase nyata dan belum diuji**. Firebase Hosting belum di-deploy. APK debug berhasil dibangun melalui GitHub Actions, tetapi belum dijalankan di perangkat/emulator. Semua nama calon dan nilai adalah data sintetis; skor bukan keputusan resmi penerima bantuan.
 
 ## Identitas proyek
 
@@ -212,9 +212,11 @@ Lingkungan: Windows, Flutter 3.47.7 stable, Dart 3.13.5.
 | Test otomatis | `flutter test` | **24 test, semua lulus** |
 | Build Web | `flutter build web` | **Berhasil** |
 | Screenshot runtime | Chrome headless terhadap build Web | **14 file** (7 halaman × 2 viewport) |
-| Build Android | — | **Belum dijalankan** (Android SDK tidak tersedia) |
+| Build Android | GitHub Actions `flutter build apk --debug` | **Berhasil**; belum dijalankan di perangkat |
 | Firebase Auth/Firestore | — | **Belum diuji** (project belum dikonfigurasi) |
 | Firebase Hosting | — | **Belum di-deploy** |
+
+CI: [run #7](https://github.com/Bamsuti/BLT-DD-prioritas/actions/runs/40902045482) — prepare, analyze, 24 test, build Web, dan build APK debug semuanya berhasil.
 
 Cakupan 24 test otomatis: tujuh kriteria & total bobot, rentang skor, urutan ranking, tie-break, serialisasi dan kontrak field Firestore, CRUD mode demo, penolakan ID duplikat, login demo salah/benar, validasi email & kata sandi, logout, navigasi lebar/sempit, validasi form, tambah/ubah/hapus, perubahan nilai memengaruhi skor, dan mode dokumentasi.
 
@@ -230,10 +232,10 @@ Matriks skenario lengkap beserta status per skenario: [docs/PENGUJIAN.md](docs/P
 | Build Web | Berhasil |
 | Screenshot runtime | Tersedia dan diambil dari build Web |
 | Scaffold Android | Tersedia (Gradle Kotlin DSL, `minSdk` mengikuti Flutter, izin INTERNET) |
-| Build/run Android | Belum diverifikasi (tidak ada Android SDK) |
+| Build Android | APK debug berhasil dibangun di GitHub Actions; belum diuji di perangkat/emulator |
 | Firebase Auth + Firestore | Kode siap; belum dihubungkan/diuji |
 | Firestore rules | Draft; belum diuji/deploy |
-| CI GitHub Actions | Workflow disiapkan; hasil run dilihat setelah push |
+| CI GitHub Actions | Berhasil (run #7): analyze, 24 test, build Web, build APK debug |
 | Firebase Hosting | Belum di-deploy |
 
 ## Roadmap
