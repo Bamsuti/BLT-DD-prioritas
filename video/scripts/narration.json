@@ -34,7 +34,7 @@
   {
     "id": "scene-04",
     "title": "Ruang Lingkup",
-    "text": "Ruang lingkup prototipe mencakup pengelolaan data calon, validasi formulir, tujuh kriteria dengan skala satu sampai lima, perhitungan skor SAW, pengurutan otomatis, dan tampilan responsif untuk web serta Android. Integrasi Firebase Authentication dan Cloud Firestore sudah disiapkan, tetapi belum dihubungkan ke proyek nyata, sehingga aplikasi berjalan dalam mode demo. Di luar ruang lingkup: pencairan dana, integrasi sistem pemerintah, penggunaan data warga nyata, dan keputusan resmi penerima bantuan.",
+    "text": "Ruang lingkup prototipe mencakup pengelolaan data calon, validasi formulir, tujuh kriteria dengan skala satu sampai lima, perhitungan skor Simple Additive Weighting, pengurutan otomatis, dan tampilan responsif untuk web serta Android. Integrasi Firebase Authentication dan Cloud Firestore sudah disiapkan, tetapi belum dihubungkan ke proyek nyata, sehingga aplikasi berjalan dalam mode demo. Di luar ruang lingkup: pencairan dana, integrasi sistem pemerintah, penggunaan data warga nyata, dan keputusan resmi penerima bantuan.",
     "captions": [
       "Lingkup: pengelolaan data calon dan validasi formulir.",
       "Tujuh kriteria skala 1–5, skor SAW, dan pengurutan otomatis.",

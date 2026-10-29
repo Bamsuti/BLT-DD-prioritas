@@ -31,7 +31,7 @@ Langkah demonstrasi:
 6. Ubah calon dan tunjukkan skor berubah di daftar.
 7. Buka dialog hapus, tekan Batal, lalu ulangi dan konfirmasi penghapusan.
 8. Buka Penilaian & Prioritas: tunjukkan tujuh kriteria dan bobot demo 20/15/15/15/10/10/15.
-9. Buka Hasil Prioritas: jelaskan rumus SAW (`r = nilai/5`, `V = Σ bobot×r`, skor = V×100) dan urutan menurun.
+9. Buka Hasil Prioritas: jelaskan rumus SAW — sebutkan sebagai *Simple Additive Weighting* — (`r = nilai/5`, `V = Σ bobot×r`, skor = V×100) dan urutan menurun.
 10. Perkecil jendela browser melewati 760 px untuk memperlihatkan `NavigationRail` berubah menjadi `NavigationBar`.
 11. Tekan Keluar dan pastikan kembali ke Login.
 

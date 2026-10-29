@@ -57,7 +57,7 @@ Ruang lingkup dibatasi pada:
 
 Skala nilai 1–5, di mana **nilai lebih tinggi berarti kondisi lebih rentan**. Karena itu seluruh kriteria diperlakukan sebagai *benefit* pada perhitungan demo.
 
-Rumus SAW demo:
+Rumus SAW (Simple Additive Weighting) demo:
 
 ```
 rᵢⱼ = xᵢⱼ / 5

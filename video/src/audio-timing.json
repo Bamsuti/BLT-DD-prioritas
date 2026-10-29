@@ -1,7 +1,7 @@
 {
   "voice": "id-ID-ArdiNeural",
   "rate": 0.95,
-  "totalSeconds": 119.264,
+  "totalSeconds": 119.24,
   "scenes": [
     {
       "id": "scene-01",
@@ -44,9 +44,9 @@
     {
       "id": "scene-04",
       "title": "Ruang Lingkup",
-      "audio": 33.288,
+      "audio": 33.264,
       "padding": 2,
-      "duration": 35.288,
+      "duration": 35.264,
       "captions": [
         "Lingkup: pengelolaan data calon dan validasi formulir.",
         "Tujuh kriteria skala 1–5, skor SAW, dan pengurutan otomatis.",

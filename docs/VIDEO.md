@@ -3,9 +3,10 @@
 Video ini merupakan media pendukung presentasi. Isinya menjelaskan tiga hal yang diminta: masalah yang melatarbelakangi prototipe, target pengguna, dan ruang lingkup yang dikerjakan.
 
 - Berkas: [blt-dd-prioritas-promo.mp4](video/blt-dd-prioritas-promo.mp4)
-- Ukuran: 10.240.064 byte (±10,2 MB)
+- Ukuran: 10.237.713 byte (±10,2 MB)
 - Durasi: 119,3 detik (1 menit 59 detik)
 - Narasi: Bahasa Indonesia, suara `id-ID-ArdiNeural` dari Microsoft Edge TTS (gratis, tanpa API key), rate 0,95
+- Singkatan **SAW** tetap ditulis SAW pada layar, caption, dan dokumen; dalam narasi diucapkan "Simple Additive Weighting" agar tidak terbaca sebagai kata lain
 - Musik: tidak ada
 - Visual: motion graphic Remotion dengan screenshot runtime mode demo
 
@@ -17,7 +18,7 @@ Video ini merupakan media pendukung presentasi. Isinya menjelaskan tiga hal yang
 | Frame rate | 30 fps |
 | Codec video | H.264 |
 | Codec audio | AAC, 48 kHz, stereo |
-| Jumlah frame | 3.579 |
+| Jumlah frame | 3.578 |
 | Sumber | `video/` (Remotion 4.0.539, React 19, TypeScript 5.9.3) |
 | Lingkungan render | Windows, Node.js v24.16.0, Chrome Headless Shell bawaan Remotion |
 
