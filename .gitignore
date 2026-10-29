@@ -27,3 +27,6 @@ Thumbs.db
 video/node_modules/
 video/out/
 video/.remotion/
+
+# IDE metadata (dibuat ulang otomatis oleh Flutter)
+*.iml
