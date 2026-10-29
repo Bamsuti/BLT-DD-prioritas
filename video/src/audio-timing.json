@@ -1,0 +1,72 @@
+{
+  "voice": "id-ID-ArdiNeural",
+  "rate": 0.95,
+  "totalSeconds": 119.264,
+  "scenes": [
+    {
+      "id": "scene-01",
+      "title": "Pembuka",
+      "audio": 10.272,
+      "padding": 2,
+      "duration": 12.272,
+      "captions": [
+        "BLT-DD Prioritas",
+        "Prototipe akademik penentuan prioritas calon penerima BLT-DD,",
+        "dibangun dengan Flutter dan Firebase."
+      ]
+    },
+    {
+      "id": "scene-02",
+      "title": "Masalah",
+      "audio": 23.688,
+      "padding": 2,
+      "duration": 25.688,
+      "captions": [
+        "Data calon tersebar di beberapa berkas spreadsheet.",
+        "Penilaian manual dan perhitungan prioritas diulang dengan cara berbeda.",
+        "Riwayat perubahan sulit ditelusuri.",
+        "Kriteria yang tidak konsisten membuat hasil sulit dipertanggungjawabkan.",
+        "Petugas butuh waktu lebih lama menyiapkan bahan musyawarah."
+      ]
+    },
+    {
+      "id": "scene-03",
+      "title": "Target",
+      "audio": 21.192,
+      "padding": 2,
+      "duration": 23.192,
+      "captions": [
+        "Sasaran: petugas pengelola data BLT-DD di tingkat desa.",
+        "Lima halaman: login, beranda, data calon, penilaian, hasil prioritas.",
+        "Satu alur kerja konsisten, dari pendataan hingga peninjauan prioritas."
+      ]
+    },
+    {
+      "id": "scene-04",
+      "title": "Ruang Lingkup",
+      "audio": 33.288,
+      "padding": 2,
+      "duration": 35.288,
+      "captions": [
+        "Lingkup: pengelolaan data calon dan validasi formulir.",
+        "Tujuh kriteria skala 1–5, skor SAW, dan pengurutan otomatis.",
+        "Tampilan responsif untuk web dan Android.",
+        "Firebase sudah disiapkan, tetapi belum terhubung; aplikasi berjalan di mode demo.",
+        "Di luar lingkup: pencairan dana dan integrasi pemerintah.",
+        "Juga di luar lingkup: data warga nyata dan keputusan resmi."
+      ]
+    },
+    {
+      "id": "scene-05",
+      "title": "Penutup",
+      "audio": 19.824,
+      "padding": 3,
+      "duration": 22.824,
+      "captions": [
+        "Skor hanya bahan simulasi, bukan keputusan resmi.",
+        "Seluruh data demonstrasi bersifat sintetis.",
+        "Kode dan dokumentasi: GitHub Bamsuti, BLT-DD prioritas."
+      ]
+    }
+  ]
+}

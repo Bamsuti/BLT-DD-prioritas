@@ -4,7 +4,7 @@ Dokumen ini adalah skenario demonstrasi. Status di bawah mencerminkan apa yang *
 
 ## 1. Proposal — masalah, pengguna, scope
 
-Buka `README.md` dan `docs/rancangan/KEBUTUHAN.md`. Jelaskan bahwa prototipe menggabungkan alur data calon, penilaian tujuh kriteria, dan peninjauan skor. Petugas pengelola data BLT-DD adalah persona asumsi awal yang perlu divalidasi. Tegaskan batasan: tidak menangani pencairan dana, tidak terintegrasi ke sistem pemerintah, tidak memakai data warga nyata, dan tidak menggantikan musyawarah.
+Buka `README.md` dan `docs/rancangan/KEBUTUHAN.md`. Jelaskan bahwa prototipe menggabungkan alur data calon, penilaian tujuh kriteria, dan peninjauan skor. Petugas pengelola data BLT-DD adalah persona asumsi awal yang perlu divalidasi. Tegaskan batasan: tidak menangani pencairan dana, tidak terintegrasi ke sistem pemerintah, tidak memakai data warga nyata, dan tidak menggantikan musyawarah. Video ringkas masalah, target, dan scope tersedia di `docs/video/blt-dd-prioritas-promo.mp4` (rincian di `docs/VIDEO.md`).
 
 ## 2. Desain
 
@@ -52,6 +52,7 @@ Buka repository GitHub, `README.md`, `lib/`, `test/`, `docs/`, `firestore.rules`
 - [x] `flutter pub get`, `flutter analyze`, `flutter test` dijalankan; hasil dicatat di `docs/PENGUJIAN.md`.
 - [x] Build Web berhasil.
 - [x] Screenshot runtime diambil dari build Web (desktop dan mobile).
+- [x] Video penjelasan masalah, target, dan scope dirender (1:59, 1080p, narasi TTS).
 - [x] Skenario uji mode demo diisi hasil aktual.
 - [x] Bobot dan interpretasi ditandai sebagai simulasi.
 - [x] Tidak ada data pribadi atau rahasia konfigurasi di repository.

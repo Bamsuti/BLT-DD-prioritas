@@ -24,3 +24,6 @@ android/app/release/
 # OS
 .DS_Store
 Thumbs.db
+video/node_modules/
+video/out/
+video/.remotion/

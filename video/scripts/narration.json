@@ -1,0 +1,57 @@
+[
+  {
+    "id": "scene-01",
+    "title": "Pembuka",
+    "text": "BLT-DD Prioritas. Prototipe akademik penentuan prioritas calon penerima bantuan langsung tunai dana desa, dibangun dengan Flutter dan Firebase.",
+    "captions": [
+      "BLT-DD Prioritas",
+      "Prototipe akademik penentuan prioritas calon penerima BLT-DD,",
+      "dibangun dengan Flutter dan Firebase."
+    ]
+  },
+  {
+    "id": "scene-02",
+    "title": "Masalah",
+    "text": "Masalahnya, data calon penerima sering tersebar di beberapa berkas spreadsheet. Penilaian dilakukan manual, perhitungan prioritas diulang dengan cara berbeda, dan riwayat perubahan sulit ditelusuri. Ketika tujuh kriteria tidak diterapkan secara konsisten, hasil perbandingan antar calon sulit dipertanggungjawabkan, dan petugas membutuhkan waktu lebih lama untuk menyiapkan bahan musyawarah.",
+    "captions": [
+      "Data calon tersebar di beberapa berkas spreadsheet.",
+      "Penilaian manual dan perhitungan prioritas diulang dengan cara berbeda.",
+      "Riwayat perubahan sulit ditelusuri.",
+      "Kriteria yang tidak konsisten membuat hasil sulit dipertanggungjawabkan.",
+      "Petugas butuh waktu lebih lama menyiapkan bahan musyawarah."
+    ]
+  },
+  {
+    "id": "scene-03",
+    "title": "Target",
+    "text": "Sasaran aplikasi ini adalah petugas pengelola data BLT-DD di tingkat desa. Melalui lima halaman, yaitu login, beranda, data calon, penilaian, dan hasil prioritas, petugas memperoleh satu alur kerja yang konsisten, mulai dari pendataan calon, pengisian nilai, hingga peninjauan urutan prioritas.",
+    "captions": [
+      "Sasaran: petugas pengelola data BLT-DD di tingkat desa.",
+      "Lima halaman: login, beranda, data calon, penilaian, hasil prioritas.",
+      "Satu alur kerja konsisten, dari pendataan hingga peninjauan prioritas."
+    ]
+  },
+  {
+    "id": "scene-04",
+    "title": "Ruang Lingkup",
+    "text": "Ruang lingkup prototipe mencakup pengelolaan data calon, validasi formulir, tujuh kriteria dengan skala satu sampai lima, perhitungan skor SAW, pengurutan otomatis, dan tampilan responsif untuk web serta Android. Integrasi Firebase Authentication dan Cloud Firestore sudah disiapkan, tetapi belum dihubungkan ke proyek nyata, sehingga aplikasi berjalan dalam mode demo. Di luar ruang lingkup: pencairan dana, integrasi sistem pemerintah, penggunaan data warga nyata, dan keputusan resmi penerima bantuan.",
+    "captions": [
+      "Lingkup: pengelolaan data calon dan validasi formulir.",
+      "Tujuh kriteria skala 1–5, skor SAW, dan pengurutan otomatis.",
+      "Tampilan responsif untuk web dan Android.",
+      "Firebase sudah disiapkan, tetapi belum terhubung; aplikasi berjalan di mode demo.",
+      "Di luar lingkup: pencairan dana dan integrasi pemerintah.",
+      "Juga di luar lingkup: data warga nyata dan keputusan resmi."
+    ]
+  },
+  {
+    "id": "scene-05",
+    "title": "Penutup",
+    "text": "Skor pada aplikasi ini hanya bahan simulasi, bukan keputusan resmi. Seluruh data demonstrasi bersifat sintetis. Kode, dokumentasi, pengujian, dan tautan repositori tersedia di GitHub Bamsuti, repositori BLT-DD prioritas. Terima kasih.",
+    "captions": [
+      "Skor hanya bahan simulasi, bukan keputusan resmi.",
+      "Seluruh data demonstrasi bersifat sintetis.",
+      "Kode dan dokumentasi: GitHub Bamsuti, BLT-DD prioritas."
+    ]
+  }
+]

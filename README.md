@@ -91,6 +91,16 @@ Screenshot diambil dari **build Web yang benar-benar dijalankan** (Flutter Web +
 
 Wireframe rancangan awal tetap disimpan sebagai SVG di `docs/screenshots/` dan bukan bukti runtime.
 
+## Video penjelasan
+
+Video 16:9 berdurasi 1 menit 59 detik menjelaskan masalah, target pengguna, dan ruang lingkup prototipe dengan narasi Bahasa Indonesia.
+
+- Berkas: [docs/video/blt-dd-prioritas-promo.mp4](docs/video/blt-dd-prioritas-promo.mp4) (±10,2 MB)
+- Spesifikasi: 1920×1080, 30 fps, H.264 + AAC, suara Edge TTS `id-ID-ArdiNeural`, tanpa musik
+- Sumber dan cara render: `video/` (Remotion); rincian di [docs/VIDEO.md](docs/VIDEO.md)
+
+Video memakai screenshot runtime mode demo. Firebase belum terhubung ke proyek nyata dan seluruh skor bersifat simulasi.
+
 ## Arsitektur dan struktur proyek
 
 ```
@@ -111,7 +121,9 @@ lib/
 └── widgets/app_widgets.dart   # SummaryCard, SectionCard, InfoBanner, dll.
 test/widget_test.dart          # 24 pengujian otomatis
 tools/capture_screenshots.js   # skrip screenshot runtime
+video/                         # sumber video Remotion + narasi Edge TTS
 docs/                          # rancangan, Firebase, pengujian, presentasi
+docs/video/                    # hasil render video penjelasan (MP4)
 firestore.rules                # draft aturan akses berbasis role
 firebase.json                  # konfigurasi Firestore rules + Hosting
 ```
@@ -212,6 +224,7 @@ Lingkungan: Windows, Flutter 3.47.7 stable, Dart 3.13.5.
 | Test otomatis | `flutter test` | **24 test, semua lulus** |
 | Build Web | `flutter build web` | **Berhasil** |
 | Screenshot runtime | Chrome headless terhadap build Web | **14 file** (7 halaman × 2 viewport) |
+| Video penjelasan | `npm run render` di `video/` | **Berhasil**; 119,3 detik, 1920×1080, audio AAC terverifikasi |
 | Build Android | GitHub Actions `flutter build apk --debug` | **Berhasil**; belum dijalankan di perangkat |
 | Firebase Auth/Firestore | — | **Belum diuji** (project belum dikonfigurasi) |
 | Firebase Hosting | — | **Belum di-deploy** |
@@ -231,6 +244,7 @@ Matriks skenario lengkap beserta status per skenario: [docs/PENGUJIAN.md](docs/P
 | Test otomatis | 24/24 lulus |
 | Build Web | Berhasil |
 | Screenshot runtime | Tersedia dan diambil dari build Web |
+| Video penjelasan | Dirender 29 Oktober 2026; 1:59, 1080p, narasi Edge TTS, tanpa musik |
 | Scaffold Android | Tersedia (Gradle Kotlin DSL, `minSdk` mengikuti Flutter, izin INTERNET) |
 | Build Android | APK debug berhasil dibangun di GitHub Actions; belum diuji di perangkat/emulator |
 | Firebase Auth + Firestore | Kode siap; belum dihubungkan/diuji |
@@ -262,6 +276,7 @@ Rincian: [docs/ROADMAP.md](docs/ROADMAP.md).
 - [Panduan presentasi UTS](docs/PRESENTASI_UTS.md)
 - [Roadmap](docs/ROADMAP.md)
 - [Keterangan screenshot](docs/screenshots/README.md)
+- [Video penjelasan (spesifikasi dan produksi)](docs/VIDEO.md)
 
 ---
 

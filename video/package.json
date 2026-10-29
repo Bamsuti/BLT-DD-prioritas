@@ -1,0 +1,31 @@
+{
+  "name": "video",
+  "version": "1.0.0",
+  "description": "Video promosi akademik BLT-DD Prioritas (Remotion + Edge TTS)",
+  "main": "index.js",
+  "scripts": {
+    "tts": "node scripts/tts.mjs",
+    "typecheck": "tsc --noEmit",
+    "studio": "remotion studio",
+    "still": "remotion still BltPromo out/preview.png",
+    "render": "remotion render BltPromo ../docs/video/blt-dd-prioritas-promo.mp4"
+  },
+  "keywords": [],
+  "author": "Nabhan Miqdad Mubarok",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "@remotion/cli": "^4.0.539",
+    "@remotion/fonts": "^4.0.539",
+    "msedge-tts": "^2.1.1",
+    "music-metadata": "^12.3.2",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "remotion": "^4.0.539"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.6",
+    "@types/react": "^19.3.0",
+    "typescript": "^5.9.3"
+  }
+}
