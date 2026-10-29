@@ -38,15 +38,33 @@ jobs:
             python3 - <<'PY'
           import json
           from pathlib import Path
-          path = Path("web/manifest.json")
-          if path.exists():
-              data = json.loads(path.read_text())
-              data["name"] = "BLT-DD Prioritas"
-              data["short_name"] = "BLT-DD"
-              data["description"] = "Prototipe akademik penentuan prioritas calon penerima BLT-DD."
-              data["theme_color"] = "#7A1C2E"
-              data["background_color"] = "#FFFFFF"
-              path.write_text(json.dumps(data, indent=2) + "\n")
+
+          manifest_path = Path("web/manifest.json")
+          if manifest_path.exists():
+              manifest = json.loads(manifest_path.read_text())
+              manifest["name"] = "BLT-DD Prioritas"
+              manifest["short_name"] = "BLT-DD"
+              manifest["description"] = "Prototipe akademik penentuan prioritas calon penerima BLT-DD."
+              manifest["theme_color"] = "#7A1C2E"
+              manifest["background_color"] = "#FFFFFF"
+              manifest_path.write_text(json.dumps(manifest, indent=2) + "\n")
+
+          # Firebase Auth Android SDK currently resolved by this pubspec requires
+          # minSdk 23. Adapt the generated Flutter scaffold instead of overriding
+          # the dependency manifest.
+          gradle_paths = [
+              Path("android/app/build.gradle"),
+              Path("android/app/build.gradle.kts"),
+          ]
+          for gradle_path in gradle_paths:
+              if not gradle_path.exists():
+                  continue
+              content = gradle_path.read_text()
+              content = content.replace("minSdkVersion flutter.minSdkVersion", "minSdkVersion 23")
+              content = content.replace("minSdk = flutter.minSdkVersion", "minSdk = 23")
+              content = content.replace("minSdkVersion 21", "minSdkVersion 23")
+              content = content.replace("minSdk = 21", "minSdk = 23")
+              gradle_path.write_text(content)
           PY
           fi
       - name: Install dependencies
