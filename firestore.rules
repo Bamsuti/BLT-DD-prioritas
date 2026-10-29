@@ -1,0 +1,42 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    function isPetugas() {
+      return signedIn()
+        && exists(/databases/$(database)/documents/users/$(request.auth.uid))
+        && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role in ['admin', 'petugas'];
+    }
+
+    match /users/{userId} {
+      allow read: if signedIn() && request.auth.uid == userId;
+      // Profil dan role dibuat oleh administrator melalui Firebase Console
+      // atau proses admin tepercaya, bukan oleh pengguna dari aplikasi.
+      allow write: if false;
+    }
+
+    match /calon_penerima/{document=**} {
+      allow read, write: if isPetugas();
+    }
+
+    match /penilaian/{document=**} {
+      allow read, write: if isPetugas();
+    }
+
+    match /kriteria_bobot/{document=**} {
+      allow read: if isPetugas();
+      allow write: if isPetugas();
+    }
+
+    match /hasil_prioritas/{document=**} {
+      allow read, write: if isPetugas();
+    }
+
+    match /riwayat_proses/{document=**} {
+      allow read, write: if isPetugas();
+    }
+  }
+}
