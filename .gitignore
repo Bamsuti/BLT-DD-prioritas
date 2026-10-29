@@ -5,16 +5,18 @@
 build/
 .flutter-plugins
 .flutter-plugins-dependencies
-.metadata
 coverage/
 # Local IDE settings
 .idea/
 .vscode/
-# Generated Firebase options and local configuration
+# Firebase and local configuration
 lib/firebase_options.dart
 android/app/google-services.json
-ios/Runner/GoogleService-Info.plist
-macos/Runner/GoogleService-Info.plist
+android/local.properties
+android/.gradle/
+android/app/debug/
+android/app/profile/
+android/app/release/
 .env
 .env.*
 *.jks

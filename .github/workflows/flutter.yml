@@ -6,8 +6,11 @@ on:
     branches: [main]
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
-  analyze-and-test:
+  analyze-test-build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -18,9 +21,55 @@ jobs:
           flutter-version: "3.24.0"
           channel: stable
           cache: true
+      - name: Generate Android and Web scaffold if missing
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [[ ! -d android || ! -f .metadata || ! -f web/manifest.json ]]; then
+            flutter create --no-pub --project-name blt_dd_prioritas --platforms=android,web /tmp/blt_dd_prioritas_scaffold
+            if [[ ! -d android ]]; then
+              cp -a /tmp/blt_dd_prioritas_scaffold/android ./android
+            fi
+            if [[ ! -f .metadata ]]; then
+              cp /tmp/blt_dd_prioritas_scaffold/.metadata .metadata
+            fi
+            mkdir -p web
+            cp -an /tmp/blt_dd_prioritas_scaffold/web/. web/
+            python3 - <<'PY'
+          import json
+          from pathlib import Path
+          path = Path("web/manifest.json")
+          if path.exists():
+              data = json.loads(path.read_text())
+              data["name"] = "BLT-DD Prioritas"
+              data["short_name"] = "BLT-DD"
+              data["description"] = "Prototipe akademik penentuan prioritas calon penerima BLT-DD."
+              data["theme_color"] = "#7A1C2E"
+              data["background_color"] = "#FFFFFF"
+              path.write_text(json.dumps(data, indent=2) + "\n")
+          PY
+          fi
       - name: Install dependencies
         run: flutter pub get
       - name: Analyze
         run: flutter analyze
       - name: Run tests
         run: flutter test
+      - name: Build Web
+        run: flutter build web
+      - name: Build Android debug APK
+        run: flutter build apk --debug
+      - name: Commit generated platform scaffold
+        if: ${{ github.event_name != 'pull_request' }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .metadata android web
+          if git diff --cached --quiet; then
+            echo "No generated platform changes to commit."
+          else
+            git commit -m "build: add generated Android and Web platform scaffold [skip ci]"
+            git push origin "HEAD:${GITHUB_REF_NAME}"
+          fi
