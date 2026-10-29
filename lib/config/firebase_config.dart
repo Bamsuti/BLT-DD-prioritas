@@ -1,7 +1,9 @@
 import 'package:firebase_core/firebase_core.dart';
 
-/// Firebase client configuration is supplied locally through --dart-define.
-/// Values are intentionally not committed to the repository.
+/// Konfigurasi client Firebase dibaca dari `--dart-define`.
+///
+/// Nilai asli tidak disimpan di repository. Jalankan aplikasi dengan
+/// parameter `FIREBASE_*` milik project Firebase Anda sendiri.
 class FirebaseConfig {
   static const apiKey = String.fromEnvironment('FIREBASE_API_KEY');
   static const appId = String.fromEnvironment('FIREBASE_APP_ID');
