@@ -367,7 +367,7 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ranked = [...candidates]..sort((a, b) => b.preferenceScore(candidates).compareTo(a.preferenceScore(candidates)));
+    final ranked = rankCandidates(candidates);
     return ListView(
       padding: const EdgeInsets.all(20),
       children: [
@@ -500,7 +500,7 @@ class ResultsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ranked = [...candidates]..sort((a, b) => b.preferenceScore(candidates).compareTo(a.preferenceScore(candidates)));
+    final ranked = rankCandidates(candidates);
     return ListView(
       padding: const EdgeInsets.all(20),
       children: [
