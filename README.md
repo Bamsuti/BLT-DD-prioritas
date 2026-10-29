@@ -4,6 +4,8 @@ Prototipe akademik untuk mencatat data simulasi calon penerima BLT-DD, menilai t
 
 > **Status jujur:** aplikasi berjalan dalam **mode demo** (data di memori) dan sudah diuji otomatis dengan `flutter analyze` + `flutter test`. Integrasi Firebase Authentication dan Cloud Firestore tersedia di kode, tetapi **belum dihubungkan ke project Firebase nyata dan belum diuji**. Firebase Hosting belum di-deploy. APK debug berhasil dibangun melalui GitHub Actions, tetapi belum dijalankan di perangkat/emulator. Semua nama calon dan nilai adalah data sintetis; skor bukan keputusan resmi penerima bantuan.
 
+**Akses demo web:** https://bamsuti.github.io/BLT-DD-prioritas/ — diterbitkan melalui GitHub Pages, berjalan dalam mode demo dengan akun `demo@blt-dd.local` / `demo123`.
+
 ## Identitas proyek
 
 | Item | Keterangan |
@@ -15,6 +17,7 @@ Prototipe akademik untuk mencatat data simulasi calon penerima BLT-DD, menilai t
 | Mata kuliah | Mobile and Web Application Development |
 | Periode | Ganjil 2026/2027 |
 | Repository | https://github.com/Bamsuti/BLT-DD-prioritas |
+| Demo web | https://bamsuti.github.io/BLT-DD-prioritas/ |
 | Versi aplikasi | 1.0.0+1 |
 
 ## Masalah dan tujuan
@@ -225,6 +228,7 @@ Lingkungan: Windows, Flutter 3.47.7 stable, Dart 3.13.5.
 | Build Web | `flutter build web` | **Berhasil** |
 | Screenshot runtime | Chrome headless terhadap build Web | **14 file** (7 halaman × 2 viewport) |
 | Video penjelasan | `npm run render` di `video/` | **Berhasil**; 119,3 detik, 1920×1080, audio AAC terverifikasi |
+| Deploy web (GitHub Pages) | Workflow `Deploy Web to GitHub Pages` | **Berhasil**; halaman publik merespons 200 dan tampilan login terverifikasi |
 | Build Android | GitHub Actions `flutter build apk --debug` | **Berhasil**; belum dijalankan di perangkat |
 | Firebase Auth/Firestore | — | **Belum diuji** (project belum dikonfigurasi) |
 | Firebase Hosting | — | **Belum di-deploy** |
@@ -245,6 +249,7 @@ Matriks skenario lengkap beserta status per skenario: [docs/PENGUJIAN.md](docs/P
 | Build Web | Berhasil |
 | Screenshot runtime | Tersedia dan diambil dari build Web |
 | Video penjelasan | Dirender 29 Oktober 2026; 1:59, 1080p, narasi Edge TTS, tanpa musik |
+| Deploy web | GitHub Pages aktif 29 Oktober 2026; aplikasi berjalan mode demo |
 | Scaffold Android | Tersedia (Gradle Kotlin DSL, `minSdk` mengikuti Flutter, izin INTERNET) |
 | Build Android | APK debug berhasil dibangun di GitHub Actions; belum diuji di perangkat/emulator |
 | Firebase Auth + Firestore | Kode siap; belum dihubungkan/diuji |

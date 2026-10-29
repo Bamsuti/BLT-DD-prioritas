@@ -39,7 +39,7 @@ Catatan: mode demo menyimpan data di memori; reload mengembalikan data contoh. J
 
 ## 4. Repository dan bukti
 
-Buka repository GitHub, `README.md`, `lib/`, `test/`, `docs/`, `firestore.rules`, dan riwayat commit. Tunjukkan bahwa:
+Buka repository GitHub, `README.md`, `lib/`, `test/`, `docs/`, `firestore.rules`, dan riwayat commit. Demo web tersedia di https://bamsuti.github.io/BLT-DD-prioritas/ (mode demo, bukan Firebase). Tunjukkan bahwa:
 
 - 24 test otomatis lulus (`flutter test`);
 - build Web berhasil dan screenshot runtime tersedia;
@@ -53,6 +53,7 @@ Buka repository GitHub, `README.md`, `lib/`, `test/`, `docs/`, `firestore.rules`
 - [x] Build Web berhasil.
 - [x] Screenshot runtime diambil dari build Web (desktop dan mobile).
 - [x] Video penjelasan masalah, target, dan scope dirender (1:59, 1080p, narasi TTS).
+- [x] Build web diterbitkan di GitHub Pages dan halaman login terverifikasi terbuka.
 - [x] Skenario uji mode demo diisi hasil aktual.
 - [x] Bobot dan interpretasi ditandai sebagai simulasi.
 - [x] Tidak ada data pribadi atau rahasia konfigurasi di repository.
