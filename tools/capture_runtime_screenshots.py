@@ -82,6 +82,10 @@ def wait_text(page: Page, text: str) -> None:
     try:
         page.get_by_text(text, exact=True).first.wait_for(state="visible", timeout=15000)
     except PlaywrightTimeoutError as exc:
+        print("DEBUG body text:", page.locator("body").inner_text()[:3000])
+        debug_path = TEMP_DIR / "debug-login-failed.png"
+        TEMP_DIR.mkdir(parents=True, exist_ok=True)
+        page.screenshot(path=str(debug_path), full_page=False)
         raise RuntimeError(f"Halaman runtime tidak menunjukkan teks yang diharapkan: {text}") from exc
 
 
@@ -100,9 +104,9 @@ def capture_desktop(browser) -> None:
     page.wait_for_timeout(1800)
     screenshot(page, "01-login-runtime.png")
 
-    fill_text(page, "Email", 0, "demo@blt-dd.local", (640, 475))
-    fill_text(page, "Kata sandi", 1, "demo123", (640, 550))
-    click_button(page, "Masuk", (640, 620))
+    fill_text(page, "Email", 0, "demo@blt-dd.local", (640, 432))
+    fill_text(page, "Kata sandi", 1, "demo123", (640, 500))
+    click_button(page, "Masuk", (640, 580))
     wait_text(page, "Ringkasan aplikasi")
     screenshot(page, "02-beranda-runtime.png")
 
@@ -131,7 +135,7 @@ def capture_desktop(browser) -> None:
 
 def capture_mobile(browser) -> None:
     page = browser.new_page(viewport={"width": 390, "height": 844}, device_scale_factor=1, is_mobile=True)
-    login(page, (195, 454), (195, 525), (195, 594))
+    login(page, (195, 424), (195, 490), (195, 570))
     screenshot(page, "08-beranda-mobile-runtime.png")
     page.close()
 
@@ -141,13 +145,22 @@ def main() -> None:
         shutil.rmtree(TEMP_DIR)
     TEMP_DIR.mkdir(parents=True, exist_ok=True)
 
-    with sync_playwright() as playwright:
-        browser = playwright.chromium.launch(headless=True, args=["--no-sandbox"])
-        try:
-            capture_desktop(browser)
-            capture_mobile(browser)
-        finally:
-            browser.close()
+    try:
+        with sync_playwright() as playwright:
+            browser = playwright.chromium.launch(headless=True, args=["--no-sandbox"])
+            try:
+                capture_desktop(browser)
+                capture_mobile(browser)
+            finally:
+                browser.close()
+    except Exception:
+        if TEMP_DIR.exists() and any(TEMP_DIR.glob("*.png")):
+            DEST_DIR.parent.mkdir(parents=True, exist_ok=True)
+            if DEST_DIR.exists():
+                shutil.rmtree(DEST_DIR)
+            shutil.copytree(TEMP_DIR, DEST_DIR)
+            print("Partial runtime screenshots copied for honest review:", sorted(p.name for p in DEST_DIR.glob("*.png")))
+        raise
 
     expected = [
         "01-login-runtime.png",
