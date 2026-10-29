@@ -24,6 +24,25 @@ Pola perintah di bawah hanya contoh dengan placeholder:
 
 Untuk build Web, jalankan flutter build web dengan dart-define yang sama. Ganti seluruh placeholder dengan nilai milik proyek Anda. Jika konfigurasi tidak lengkap atau inisialisasi gagal, aplikasi tetap pada mode demo. Lihat label pada layar untuk memastikan mode yang aktif.
 
+Login memakai Firebase Authentication (Email/Password) saat konfigurasi lengkap. Sesi tersimpan dipulihkan sebelum halaman awal ditentukan, sehingga pengguna yang sudah login tidak kembali ke halaman Login saat memuat ulang. Pesan kesalahan seperti domain belum diizinkan, metode belum aktif, atau API key salah ditampilkan dalam Bahasa Indonesia.
+
+## Aktivasi pada web GitHub Pages
+Build publik di https://bamsuti.github.io/BLT-DD-prioritas/ memakai nilai dari repository secrets. Selama secrets belum diisi, build tetap berjalan dalam mode demo.
+
+1. Buka Settings → Secrets and variables → Actions pada repository.
+2. Tambahkan secrets berikut dengan nilai dari Firebase Console (Project settings → Your apps → Web app):
+   - FIREBASE_API_KEY
+   - FIREBASE_APP_ID
+   - FIREBASE_MESSAGING_SENDER_ID
+   - FIREBASE_PROJECT_ID
+   - FIREBASE_AUTH_DOMAIN
+   - FIREBASE_STORAGE_BUCKET
+3. Di Firebase Authentication → Settings → Authorized domains, tambahkan bamsuti.github.io.
+4. Jalankan ulang workflow Deploy Web to GitHub Pages (Actions → Run workflow) atau push perubahan pada lib/.
+5. Buka aplikasi, pastikan label berubah menjadi Firebase, lalu login dengan akun uji.
+
+Nilai client config Firebase bukan private key, tetapi tetap disimpan sebagai secrets agar tidak tertulis di repository. Jangan pernah menambahkan service account, password akun, atau private key ke repository maupun secrets aplikasi web.
+
 ## Akun petugas dan role
 1. Buat akun uji di Firebase Authentication.
 2. Salin UID akun tersebut dari Console.

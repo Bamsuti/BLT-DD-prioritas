@@ -36,6 +36,7 @@ Ruang lingkup dibatasi pada:
 | Fitur | Keterangan | Status |
 |---|---|---|
 | Login petugas | Validasi email/kata sandi, indikator proses, pesan gagal, logout | Berfungsi di mode demo, diuji otomatis |
+| Login Firebase | Email/Password via Firebase Authentication saat konfigurasi tersedia; sesi tersimpan dipulihkan; pesan kesalahan Bahasa Indonesia | Kode siap; belum diuji tanpa project Firebase nyata |
 | Mode demo eksplisit | Akun lokal sintetis, label "Mode demo" pada layar | Berfungsi, diuji otomatis |
 | Beranda | Jumlah calon, jumlah kriteria, jumlah hasil dihitung dari data termuat; pintasan navigasi | Berfungsi |
 | Data calon (CRUD) | Tambah, lihat, ubah, hapus dengan dialog konfirmasi | Berfungsi di mode demo, diuji otomatis |
@@ -207,6 +208,8 @@ flutter run -d chrome \
 
 Jika konfigurasi tidak lengkap atau inisialisasi gagal, aplikasi tetap berjalan di mode demo dan menampilkan label yang sesuai. Panduan lengkap: [docs/firebase/SETUP_FIREBASE.md](docs/firebase/SETUP_FIREBASE.md).
 
+Untuk web publik di GitHub Pages, workflow membaca nilai yang sama dari repository secrets (`FIREBASE_API_KEY`, `FIREBASE_APP_ID`, `FIREBASE_MESSAGING_SENDER_ID`, `FIREBASE_PROJECT_ID`, `FIREBASE_AUTH_DOMAIN`, `FIREBASE_STORAGE_BUCKET`). Tanpa secrets, build publik tetap mode demo. Tambahkan juga `bamsuti.github.io` ke Authorized domains di Firebase Authentication.
+
 **Yang belum dilakukan:** project Firebase belum dibuat/dihubungkan, Email/Password belum diaktifkan untuk aplikasi ini, akun uji dan role belum dibuat, rules belum diuji di Emulator Suite, dan Hosting belum di-deploy.
 
 ## Keamanan dan privasi
@@ -231,6 +234,7 @@ Lingkungan: Windows, Flutter 3.47.7 stable, Dart 3.13.5.
 | Deploy web (GitHub Pages) | Workflow `Deploy Web to GitHub Pages` | **Berhasil**; halaman publik merespons 200 dan tampilan login terverifikasi |
 | Build Android | GitHub Actions `flutter build apk --debug` | **Berhasil**; belum dijalankan di perangkat |
 | Firebase Auth/Firestore | — | **Belum diuji** (project belum dikonfigurasi) |
+| Login Firebase | Build dengan `--dart-define` atau secrets Pages | **Kode siap; belum diuji** tanpa project nyata |
 | Firebase Hosting | — | **Belum di-deploy** |
 
 CI: [run #7](https://github.com/Bamsuti/BLT-DD-prioritas/actions/runs/40902045482) — prepare, analyze, 24 test, build Web, dan build APK debug semuanya berhasil.
@@ -253,6 +257,7 @@ Matriks skenario lengkap beserta status per skenario: [docs/PENGUJIAN.md](docs/P
 | Scaffold Android | Tersedia (Gradle Kotlin DSL, `minSdk` mengikuti Flutter, izin INTERNET) |
 | Build Android | APK debug berhasil dibangun di GitHub Actions; belum diuji di perangkat/emulator |
 | Firebase Auth + Firestore | Kode siap; belum dihubungkan/diuji |
+| Login Firebase | Alur Email/Password, pemulihan sesi, dan pesan error siap; menunggu project Firebase milik pengguna |
 | Firestore rules | Draft; belum diuji/deploy |
 | CI GitHub Actions | Berhasil (run #7): analyze, 24 test, build Web, build APK debug |
 | Firebase Hosting | Belum di-deploy |

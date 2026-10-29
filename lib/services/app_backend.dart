@@ -39,6 +39,7 @@ class AppBackend {
   static const demoPassword = 'demo123';
 
   static bool firebaseReady = false;
+  static String? firebaseInitError;
   static bool _demoSignedIn = false;
   static List<Candidate> _demoData = demoCandidates();
 
@@ -46,15 +47,20 @@ class AppBackend {
       firebaseReady ? FirebaseAuth.instance.currentUser != null : _demoSignedIn;
 
   static Future<void> initialize() async {
+    firebaseInitError = null;
     if (!FirebaseConfig.isConfigured) {
       firebaseReady = false;
       return;
     }
     try {
       await Firebase.initializeApp(options: FirebaseConfig.options);
+      // Tunggu pemulihan sesi tersimpan agar pengguna tidak terlempar ke
+      // halaman login setiap kali aplikasi dimuat ulang.
+      await FirebaseAuth.instance.authStateChanges().first;
       firebaseReady = true;
-    } catch (_) {
+    } catch (error) {
       firebaseReady = false;
+      firebaseInitError = error.toString();
     }
   }
 
@@ -142,6 +148,7 @@ class AppBackend {
   /// Dipakai pengujian agar setiap kasus uji berdiri sendiri.
   static void resetForTest() {
     firebaseReady = false;
+    firebaseInitError = null;
     _demoSignedIn = false;
     _demoData = demoCandidates();
   }

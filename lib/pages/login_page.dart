@@ -65,10 +65,21 @@ class _LoginPageState extends State<LoginPage> {
         return 'Email atau kata sandi tidak sesuai.';
       case 'invalid-email':
         return 'Format email tidak valid.';
+      case 'user-disabled':
+        return 'Akun ini dinonaktifkan. Hubungi admin.';
       case 'too-many-requests':
         return 'Terlalu banyak percobaan. Coba lagi nanti.';
       case 'network-request-failed':
         return 'Jaringan bermasalah. Periksa koneksi internet.';
+      case 'unauthorized-domain':
+        return 'Domain ini belum diizinkan pada Firebase Authentication.';
+      case 'operation-not-allowed':
+        return 'Metode Email/Password belum diaktifkan di Firebase.';
+      case 'invalid-api-key':
+      case 'api-key-not-valid':
+        return 'Konfigurasi Firebase tidak valid. Periksa API key.';
+      case 'web-storage-unsupported':
+        return 'Browser memblokir penyimpanan sesi. Aktifkan penyimpanan situs.';
       default:
         return 'Login gagal. Periksa akun dan konfigurasi Firebase.';
     }
@@ -204,13 +215,19 @@ class _LoginPageState extends State<LoginPage> {
                             borderRadius: BorderRadius.circular(12),
                             border: Border.all(color: AppColors.warningBorder),
                           ),
-                          child: const Text(
-                            'Mode demo aktif. Gunakan email '
-                            'demo@blt-dd.local dan kata sandi demo123. '
-                            'Akun ini bukan Firebase Authentication dan data '
-                            'hanya tersimpan selama aplikasi berjalan.',
+                          child: Text(
+                            AppBackend.firebaseInitError == null
+                                ? 'Mode demo aktif. Gunakan email '
+                                      'demo@blt-dd.local dan kata sandi demo123. '
+                                      'Akun ini bukan Firebase Authentication dan data '
+                                      'hanya tersimpan selama aplikasi berjalan.'
+                                : 'Konfigurasi Firebase gagal diinisialisasi, '
+                                      'sehingga aplikasi berjalan di mode demo. '
+                                      'Periksa nilai --dart-define dan domain yang '
+                                      'diizinkan. Akun demo: demo@blt-dd.local / '
+                                      'demo123.',
                             textAlign: TextAlign.center,
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 12,
                               height: 1.4,
                               color: AppColors.warningText,
