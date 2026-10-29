@@ -94,14 +94,21 @@ Kode saat ini menyimpan data calon dan ketujuh skor di satu koleksi calon_peneri
 | Firebase Hosting | Belum di-deploy |
 | flutter pub get/analyze/test/run | Belum dijalankan dalam sesi ini |
 
-## Wireframe
-- [Login](docs/screenshots/01-login-wireframe.svg)
-- [Beranda](docs/screenshots/02-beranda-wireframe.svg)
-- [Data Calon](docs/screenshots/03-data-calon-wireframe.svg)
-- [Penilaian](docs/screenshots/04-penilaian-wireframe.svg)
-- [Hasil Prioritas](docs/screenshots/05-hasil-prioritas-wireframe.svg)
+## Wireframe (preview statis, bukan runtime)
 
-Gambar tersebut adalah wireframe statis, bukan tangkapan layar aplikasi yang berjalan.
+| Login | Beranda |
+|---|---|
+| ![Wireframe login](docs/screenshots/01-login-wireframe.svg) | ![Wireframe beranda](docs/screenshots/02-beranda-wireframe.svg) |
+
+| Data Calon Penerima | Penilaian & Prioritas |
+|---|---|
+| ![Wireframe data calon](docs/screenshots/03-data-calon-wireframe.svg) | ![Wireframe penilaian](docs/screenshots/04-penilaian-wireframe.svg) |
+
+| Hasil Prioritas |
+|---|
+| ![Wireframe hasil prioritas](docs/screenshots/05-hasil-prioritas-wireframe.svg) |
+
+Gambar di atas hanya wireframe statis untuk menjelaskan rancangan antarmuka. Ini bukan screenshot yang diambil dari aplikasi Flutter saat berjalan.
 
 ## Dokumentasi lanjutan
 - [Persona](docs/rancangan/PERSONA.md)

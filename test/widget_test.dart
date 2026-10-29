@@ -20,6 +20,22 @@ void main() {
     expect(find.text('Masukkan format email yang valid.'), findsOneWidget);
   });
 
+  testWidgets('Form calon menolak nama kosong', (tester) async {
+    var saved = false;
+    await tester.pumpWidget(MaterialApp(
+      home: Scaffold(
+        body: CandidateFormDialog(
+          allCandidates: const [],
+          onSave: (candidate) async { saved = true; },
+        ),
+      ),
+    ));
+    await tester.tap(find.text('Simpan'));
+    await tester.pumpAndSettle();
+    expect(find.text('Nama calon wajib diisi.'), findsOneWidget);
+    expect(saved, isFalse);
+  });
+
   test('Bobot kriteria demo berjumlah tepat 100 persen', () {
     expect(criteria.fold<int>(0, (sum, item) => sum + item.weightPercent), 100);
   });
