@@ -1,13 +1,11 @@
-name: Flutter checks
+name: Flutter CI
+
 on:
   push:
     branches: [main]
   pull_request:
     branches: [main]
   workflow_dispatch:
-
-permissions:
-  contents: write
 
 jobs:
   analyze-test-build:
@@ -18,49 +16,9 @@ jobs:
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: "3.24.0"
+          flutter-version: "3.47.7"
           channel: stable
           cache: true
-      - name: Generate Android and Web scaffold if missing
-        shell: bash
-        run: |
-          set -euo pipefail
-          if [[ ! -d android || ! -f .metadata || ! -f web/manifest.json ]]; then
-            flutter create --no-pub --project-name blt_dd_prioritas --platforms=android,web /tmp/blt_dd_prioritas_scaffold
-            if [[ ! -d android ]]; then
-              cp -a /tmp/blt_dd_prioritas_scaffold/android ./android
-            fi
-            if [[ ! -f .metadata ]]; then
-              cp /tmp/blt_dd_prioritas_scaffold/.metadata .metadata
-            fi
-            mkdir -p web
-            cp -an /tmp/blt_dd_prioritas_scaffold/web/. web/
-            python3 - <<'PY'
-          import json
-          from pathlib import Path
-
-          manifest_path = Path("web/manifest.json")
-          if manifest_path.exists():
-              manifest = json.loads(manifest_path.read_text())
-              manifest["name"] = "BLT-DD Prioritas"
-              manifest["short_name"] = "BLT-DD"
-              manifest["description"] = "Prototipe akademik penentuan prioritas calon penerima BLT-DD."
-              manifest["theme_color"] = "#7A1C2E"
-              manifest["background_color"] = "#FFFFFF"
-              manifest_path.write_text(json.dumps(manifest, indent=2) + "\n")
-
-          gradle_paths = [Path("android/app/build.gradle"), Path("android/app/build.gradle.kts")]
-          for gradle_path in gradle_paths:
-              if not gradle_path.exists():
-                  continue
-              content = gradle_path.read_text()
-              content = content.replace("minSdkVersion flutter.minSdkVersion", "minSdkVersion 23")
-              content = content.replace("minSdk = flutter.minSdkVersion", "minSdk = 23")
-              content = content.replace("minSdkVersion 21", "minSdkVersion 23")
-              content = content.replace("minSdk = 21", "minSdk = 23")
-              gradle_path.write_text(content)
-          PY
-          fi
       - name: Install dependencies
         run: flutter pub get
       - name: Analyze
@@ -69,47 +27,5 @@ jobs:
         run: flutter test
       - name: Build Web
         run: flutter build web
-      - name: Install Playwright browser for runtime screenshots
-        continue-on-error: true
-        run: |
-          python3 -m pip install --user playwright
-          python3 -m playwright install --with-deps chromium
-      - name: Capture runtime screenshots
-        continue-on-error: true
-        shell: bash
-        run: |
-          set -euo pipefail
-          python3 -m http.server 8765 --directory build/web > /tmp/blt-web-server.log 2>&1 &
-          SERVER_PID=$!
-          trap 'kill "$SERVER_PID" 2>/dev/null || true' EXIT
-          for attempt in $(seq 1 30); do
-            if curl -fsS http://127.0.0.1:8765/ >/dev/null; then
-              break
-            fi
-            sleep 1
-          done
-          BLT_BASE_URL=http://127.0.0.1:8765/ python3 tools/capture_runtime_screenshots.py
       - name: Build Android debug APK
         run: flutter build apk --debug
-      - name: Commit generated platform scaffold and screenshot evidence
-        if: ${{ github.event_name != 'pull_request' }}
-        shell: bash
-        run: |
-          set -euo pipefail
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add .metadata android web
-          if [[ -d docs/screenshots/runtime ]]; then
-            git add -f docs/screenshots/runtime
-          fi
-          if git diff --cached --quiet; then
-            echo "No generated platform or screenshot changes to commit."
-          else
-            if git diff --cached --name-only | grep -q '^docs/screenshots/runtime/'; then
-              MESSAGE="test: add Flutter Web runtime screenshots [skip ci]"
-            else
-              MESSAGE="build: add generated Android and Web platform scaffold [skip ci]"
-            fi
-            git commit -m "$MESSAGE"
-            git push origin "HEAD:${GITHUB_REF_NAME}"
-          fi
