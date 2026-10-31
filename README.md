@@ -20,7 +20,7 @@ Prototipe akademik untuk mencatat data simulasi calon penerima BLT-DD, menilai t
 | Demo web | https://bamsuti.github.io/BLT-DD-prioritas/ |
 | Proposal UTS | [docs/proposal/PROPOSAL_UTS.pdf](docs/proposal/PROPOSAL_UTS.pdf) |
 | Video presentasi | [docs/video/blt-dd-prioritas-promo.mp4](docs/video/blt-dd-prioritas-promo.mp4) |
-| Wireframe | [lima SVG](docs/rancangan/WIREFRAME.md) — Figma tidak digunakan |
+| Wireframe | [Figma](https://www.figma.com/make/xnbomh0HD3xaMEtZ0ehUwh/BLT-DD-Prioritas-Wireframe?t=xP6ZZ7tKgaItZh19-1) · [lima SVG](docs/rancangan/WIREFRAME.md) |
 | Versi aplikasi | 1.0.0+1 |
 
 ## Masalah dan tujuan
@@ -106,7 +106,7 @@ Proposal lengkap tersedia sebagai PDF 9 halaman: [docs/proposal/PROPOSAL_UTS.pdf
 - Sitemap versi Mermaid: [docs/rancangan/SITEMAP.md](docs/rancangan/SITEMAP.md)
 - Peta kesesuaian butir UTS: [docs/UTS_CHECKLIST.md](docs/UTS_CHECKLIST.md)
 
-**Catatan Figma:** proyek ini tidak memakai Figma karena tidak ada berkas Figma yang dibuat. Wireframe berupa SVG di `docs/screenshots/`, termasuk yang tertanam di proposal. Tautan Figma tidak dicantumkan karena belum ada; SVG dapat diimpor ke Figma bila diwajibkan.
+**Tautan Figma:** [BLT-DD Prioritas — Wireframe](https://www.figma.com/make/xnbomh0HD3xaMEtZ0ehUwh/BLT-DD-Prioritas-Wireframe?t=xP6ZZ7tKgaItZh19-1). Tautan ini disediakan pemilik proyek. Lima SVG di `docs/screenshots/` tetap disertakan sebagai aset rancangan yang tertanam di proposal, sehingga dokumen dapat dibuka tanpa akses Figma.
 
 ## Video penjelasan
 

@@ -8,7 +8,7 @@ Buka [docs/proposal/PROPOSAL_UTS.pdf](proposal/PROPOSAL_UTS.pdf). Jelaskan latar
 
 ## 2. Desain
 
-Buka `PERSONA.md`, `USER_STORY.md`, `USER_FLOW.md`, `SITEMAP.md`, `WIREFRAME.md`, lalu `docs/screenshots/runtime/`. Tunjukkan lima halaman, alur login berhasil/gagal, validasi form, dan hubungan kebutuhan dengan fitur. Wireframe SVG adalah rancangan awal; screenshot di `runtime/` adalah bukti implementasi. Wawancara pengguna belum diklaim dilakukan, dan proyek tidak memakai Figma.
+Buka `PERSONA.md`, `USER_STORY.md`, `USER_FLOW.md`, `SITEMAP.md`, `WIREFRAME.md`, lalu `docs/screenshots/runtime/`. Tunjukkan lima halaman, alur login berhasil/gagal, validasi form, dan hubungan kebutuhan dengan fitur. Wireframe SVG adalah rancangan awal; screenshot di `runtime/` adalah bukti implementasi. Wawancara pengguna belum diklaim dilakukan. Tautan Figma: [BLT-DD Prioritas — Wireframe](https://www.figma.com/make/xnbomh0HD3xaMEtZ0ehUwh/BLT-DD-Prioritas-Wireframe?t=xP6ZZ7tKgaItZh19-1).
 
 ## 3. Demo Flutter
 

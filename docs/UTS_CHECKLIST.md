@@ -24,11 +24,11 @@ Setiap butir ketentuan proposal ada di `docs/proposal/PROPOSAL_UTS.pdf` dan juga
 | Functional requirements | Bagian 4 "Kebutuhan Fungsional", K-01 … K-08 dalam tabel | Ada |
 | User flow | Bagian 5 "User Flow", alur login → beranda → data calon → penilaian → hasil | Ada |
 | Sitemap | Bagian 6 "Sitemap"; versi Mermaid di [`docs/rancangan/SITEMAP.md`](rancangan/SITEMAP.md) | Ada |
-| Wireframe / tautan Figma | Bagian 7 "Wireframe", lima SVG wireframe tertanam di PDF | Ada sebagai SVG |
+| Wireframe / tautan Figma | Bagian 7 "Wireframe", lima SVG tertanam di PDF, plus tautan Figma di bawah | Ada |
 | Tech stack | Bagian 8 "Tech Stack" (Flutter, Dart, Firebase, GitHub Actions) | Ada |
 | Rancangan database Firestore | Bagian 9 "Rancangan Database Firestore", koleksi `calon_penerima` dan `users` beserta field | Ada |
 
-**Catatan kejujuran Figma:** proyek ini **tidak memakai Figma** karena tidak ada berkas Figma yang benar-benar dibuat. Wireframe asli berupa SVG di `docs/screenshots/` dan ditampilkan di PDF. Proposal menyatakan hal ini secara eksplisit; tidak ada tautan Figma yang dibuat-buat. SVG dapat diimpor ke Figma bila dosen meminta kanal tersebut.
+**Tautan Figma:** [BLT-DD Prioritas — Wireframe](https://www.figma.com/make/xnbomh0HD3xaMEtZ0ehUwh/BLT-DD-Prioritas-Wireframe?t=xP6ZZ7tKgaItZh19-1). Tautan ini disediakan pemilik proyek dan merespons HTTP 200 saat diperiksa. Lima SVG di `docs/screenshots/` tetap disertakan agar PDF dapat dibuka tanpa akses Figma.
 
 ## 3. Isi video
 
@@ -69,7 +69,7 @@ Demonstrasi memakai rekaman aplikasi yang benar-benar dijalankan di GitHub Pages
 | Lima halaman sesuai rancangan | Sama dengan sitemap dan user flow | Selesai |
 | Responsif pada 760 px | `NavigationBar` < 760 px, `NavigationRail` ≥ 760 px; screenshot dua viewport | Selesai, diuji otomatis |
 | Minimal 15 skenario uji | `test/widget_test.dart` berisi 24 test otomatis + matriks manual di `docs/PENGUJIAN.md` | Selesai |
-| Status jujur | README, proposal, video, dan checklist menandai Firebase belum terhubung, Android belum diuji di perangkat, Figma tidak dipakai | Selesai |
+| Status jujur | README, proposal, video, dan checklist menandai Firebase belum terhubung, Android belum diuji di perangkat, dan tautan Figma disertakan | Selesai |
 | Dokumentasi Bahasa Indonesia | README dan seluruh `docs/` berbahasa Indonesia | Selesai |
 | Commit bermakna | Riwayat `git log` bertahap per fitur/dokumen | Selesai |
 | Laporan akhir | `docs/proposal/PROPOSAL_UTS.pdf` | Selesai |
@@ -81,7 +81,6 @@ Demonstrasi memakai rekaman aplikasi yang benar-benar dijalankan di GitHub Pages
 | Firebase Auth + Firestore diuji dengan project nyata | Belum ada project Firebase dan akun uji; tidak boleh diklaim sebelum dijalankan |
 | Firebase Hosting | Belum di-deploy; web berjalan di GitHub Pages |
 | APK dijalankan di perangkat/emulator | APK debug hanya dibangun di CI, belum diinstal |
-| Figma | Tidak ada berkas Figma; wireframe berupa SVG |
 | Wawancara/validasi persona dengan petugas desa | Persona masih asumsi akademik |
 | Validasi bobot dan formula dengan dosen/pihak desa | Bobot masih simulasi |
 

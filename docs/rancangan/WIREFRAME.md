@@ -2,6 +2,8 @@
 
 Rancangan UTS menyebut lima halaman utama. SVG di folder docs/screenshots adalah wireframe statis untuk menunjukkan susunan halaman, bukan screenshot runtime.
 
+Rancangan juga tersedia di Figma: [BLT-DD Prioritas — Wireframe](https://www.figma.com/make/xnbomh0HD3xaMEtZ0ehUwh/BLT-DD-Prioritas-Wireframe?t=xP6ZZ7tKgaItZh19-1). Tautan ini disediakan pemilik proyek. Lima SVG di bawah disertakan agar isi rancangan tetap dapat dibuka tanpa akun Figma.
+
 ## Prinsip
 - Antarmuka memakai Bahasa Indonesia.
 - Istilah halaman konsisten dengan presentasi UTS.
@@ -18,7 +20,7 @@ Rancangan UTS menyebut lima halaman utama. SVG di folder docs/screenshots adalah
 | Penilaian & Prioritas | Tujuh kriteria, bobot demo, pintasan edit nilai | [04-penilaian-wireframe.svg](../screenshots/04-penilaian-wireframe.svg) |
 | Hasil Prioritas | Peringkat, label simulasi, skor, penjelasan rumus | [05-hasil-prioritas-wireframe.svg](../screenshots/05-hasil-prioritas-wireframe.svg) |
 
-Proyek ini tidak memakai Figma; kelima SVG di atas adalah rancangan asli dan dapat diimpor ke Figma bila diperlukan.
+Kelima SVG di atas disertakan sebagai aset rancangan; tautan Figma ada di bagian atas dokumen.
 
 ## Keputusan konsistensi
 Tujuh kriteria dari presentasi menjadi acuan form dan model. ID dokumen dipisahkan dari ID simulasi yang dilihat pengguna. Form tambah/ubah menggunakan dialog yang sama. Hasil dihitung dari nilai, tidak diketik manual. Status demo dibedakan dari Firebase. Desain belum divalidasi melalui usability test.
