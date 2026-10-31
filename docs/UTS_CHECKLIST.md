@@ -12,6 +12,17 @@ Dokumen ini memetakan setiap butir ketentuan UTS ke bukti yang benar-benar ada d
 
 Video dapat diunduh langsung dari repository (raw GitHub, terverifikasi HTTP 200 dengan ukuran 24.272.781 byte) dan diputar dengan pemutar video apa pun. Tautan demo web: <https://bamsuti.github.io/BLT-DD-prioritas/>.
 
+### 1.1 Isi README repository
+
+| Ketentuan README | Lokasi di `README.md` | Status |
+|---|---|---|
+| Identitas proyek (nama, NIM, kelas, mata kuliah, judul) | Bagian "Identitas proyek" | Ada |
+| Deskripsi proyek | Bagian "Masalah dan tujuan" serta "Fitur yang tersedia" | Ada |
+| Tautan Figma | Tabel identitas baris "Wireframe" dan bagian "Proposal UTS" | Ada |
+| Petunjuk menjalankan | Bagian "Menjalankan aplikasi (mode demo)" dan "Konfigurasi Firebase" | Ada |
+| Screenshot | Bagian "Screenshot runtime", 14 gambar desktop dan mobile | Ada |
+| Riwayat commit bertahap | `git log --oneline` menampilkan commit terpisah per fitur/dokumen | Ada |
+
 ## 2. Isi proposal
 
 Setiap butir ketentuan proposal ada di `docs/proposal/PROPOSAL_UTS.pdf` dan juga tersedia sebagai HTML sumbernya.
@@ -45,7 +56,7 @@ Durasi total 5 menit 7 detik (307,18 detik) — di bawah batas 10 menit. Narasi 
 | 03:30–04:21 | Rencana teknis & data | Arsitektur Flutter → model SAW → backend → Firebase; skema Firestore `calon_penerima` dan `users`; catatan Firebase belum terhubung |
 | 04:21–05:07 | Empat jawaban & penutup | Ringkasan empat pertanyaan, disclaimer simulasi, tautan repositori |
 
-Demonstrasi memakai rekaman aplikasi yang benar-benar dijalankan di GitHub Pages (`video/public/demo/desktop.mp4` 41,7 detik dan `mobile.mp4` 15,6 detik), bukan mockup.
+Demonstrasi memakai rekaman aplikasi yang benar-benar dijalankan di GitHub Pages (`video/public/demo/desktop.mp4` 40,5 detik dan `mobile.mp4` 14,4 detik), bukan mockup.
 
 ## 4. Empat pertanyaan wajib
 
@@ -63,7 +74,7 @@ Demonstrasi memakai rekaman aplikasi yang benar-benar dijalankan di GitHub Pages
 | Android + Web dari satu basis kode Flutter | `lib/` dipakai keduanya; scaffold `android/`, build Web Pages aktif | Selesai |
 | Lebih dari 3 halaman | Login, Beranda, Data Calon, Penilaian, Hasil (5 halaman) | Selesai |
 | CRUD | Tambah, ubah, hapus, lihat pada Data Calon | Selesai, diuji otomatis |
-| Formulir valid dan dapat diuji | Validasi ID simulasi, nama, dusun, ID duplikat, tujuh nilai; 7 skenario uji | Selesai |
+| Formulir valid dan dapat diuji | Validasi ID simulasi, nama, dusun, ID duplikat, dan tujuh nilai; 5 widget test formulir, 1 test dokumentasi alur, serta matriks manual T-09…T-17 | Selesai |
 | Firebase Auth + Firestore bersyarat | Kode aktif hanya bila `--dart-define` lengkap; jika tidak, mode demo | Kode siap, **belum dihubungkan/diuji** |
 | Tujuh kriteria konsisten | `C1`–`C7` dengan bobot 20/15/15/15/10/10/15 = 100% di model, halaman, test, dan dokumen | Selesai |
 | Lima halaman sesuai rancangan | Sama dengan sitemap dan user flow | Selesai |

@@ -61,8 +61,8 @@ Naskah lengkap dan caption tersimpan di `video/scripts/narration.json`. Durasi t
 
 Bagian demo memakai rekaman layar dari aplikasi yang berjalan di <https://bamsuti.github.io/BLT-DD-prioritas/>, bukan mockup:
 
-- `video/public/demo/desktop.mp4` — 41,7 detik, 1280×800, alur login sampai hasil termasuk form kosong yang ditolak.
-- `video/public/demo/mobile.mp4` — 15,6 detik, 390×844, navigasi bawah.
+- `video/public/demo/desktop.mp4` — 40,5 detik, 1280×800, alur login sampai hasil termasuk form kosong yang ditolak.
+- `video/public/demo/mobile.mp4` — 14,4 detik, 390×844, navigasi bawah.
 
 Rekaman diambil dengan Chrome headless (CDP screencast) terhadap build Web mode demo, lalu diubah menjadi MP4 dengan ffmpeg.
 
