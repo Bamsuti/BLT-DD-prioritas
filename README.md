@@ -250,7 +250,7 @@ Lingkungan: Windows, Flutter 3.47.7 stable, Dart 3.13.5.
 | Login Firebase | Build dengan `--dart-define` atau secrets Pages | **Kode siap; belum diuji** tanpa project nyata |
 | Firebase Hosting | — | **Belum di-deploy** |
 
-CI: [run #7](https://github.com/Bamsuti/BLT-DD-prioritas/actions/runs/40902045482) — prepare, analyze, 24 test, build Web, dan build APK debug semuanya berhasil.
+CI: [GitHub Actions](https://github.com/Bamsuti/BLT-DD-prioritas/actions) menjalankan analyze, 24 test, build Web, dan build APK debug pada setiap push ke `main`. Hasil terbaru dapat dilihat langsung di halaman Actions.
 
 Cakupan 24 test otomatis: tujuh kriteria & total bobot, rentang skor, urutan ranking, tie-break, serialisasi dan kontrak field Firestore, CRUD mode demo, penolakan ID duplikat, login demo salah/benar, validasi email & kata sandi, logout, navigasi lebar/sempit, validasi form, tambah/ubah/hapus, perubahan nilai memengaruhi skor, dan mode dokumentasi.
 
@@ -273,7 +273,7 @@ Matriks skenario lengkap beserta status per skenario: [docs/PENGUJIAN.md](docs/P
 | Firebase Auth + Firestore | Kode siap; belum dihubungkan/diuji |
 | Login Firebase | Alur Email/Password, pemulihan sesi, dan pesan error siap; menunggu project Firebase milik pengguna |
 | Firestore rules | Draft; belum diuji/deploy |
-| CI GitHub Actions | Berhasil (run #7): analyze, 24 test, build Web, build APK debug |
+| CI GitHub Actions | Berjalan pada setiap push: analyze, 24 test, build Web, build APK debug |
 | Firebase Hosting | Belum di-deploy |
 
 ## Roadmap
