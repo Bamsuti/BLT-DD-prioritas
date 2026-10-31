@@ -175,16 +175,20 @@
         <tr><th>Repository</th><td><a href="https://github.com/Bamsuti/BLT-DD-prioritas">github.com/Bamsuti/BLT-DD-prioritas</a></td></tr>
         <tr><th>Demo web</th><td><a href="https://bamsuti.github.io/BLT-DD-prioritas/">bamsuti.github.io/BLT-DD-prioritas</a></td></tr>
         <tr><th>Video</th><td><a href="https://youtu.be/AnvDqdBBxeM">YouTube</a> · <a href="https://github.com/Bamsuti/BLT-DD-prioritas/raw/main/docs/video/blt-dd-prioritas-promo.mp4">MP4 di repository</a></td></tr>
-        <tr><th>Tanggal</th><td>31 Oktober 2026</td></tr>
+        <tr><th>Tanggal</th><td>1 November 2026</td></tr>
       </table>
     </div>
   </div>
 
   <div class="cover-foot">
+    <strong>Batas pengumpulan:</strong> E-Learning UNISBANK, Kamis 5 November 2026, 23.59 WIB.
+    Video presentasi berdurasi di bawah 10 menit.
+    <br />
     <strong>Status jujur:</strong> prototipe berjalan di mode demo dengan data sintetis.
     Firebase Authentication dan Cloud Firestore sudah disiapkan di kode, tetapi belum
-    dihubungkan ke project nyata dan belum diuji. Skor SAW hanya bahan simulasi, bukan
-    keputusan resmi penerima bantuan. Tidak ada data warga nyata dalam repository ini.
+    dihubungkan ke project nyata dan belum diuji. Firebase Hosting belum di-deploy.
+    Skor SAW hanya bahan simulasi, bukan keputusan resmi penerima bantuan. Tidak ada
+    data warga nyata dalam repository ini.
   </div>
 </section>
 
@@ -267,18 +271,23 @@
 <section class="section">
   <h2>4. Kebutuhan Fungsional</h2>
   <table>
-    <thead><tr><th style="width:8%">Kode</th><th style="width:36%">Kebutuhan</th><th style="width:22%">Fitur</th><th>Bukti pemeriksaan</th></tr></thead>
+    <thead><tr><th style="width:7%">Kode</th><th style="width:33%">Kebutuhan</th><th style="width:8%">Prioritas</th><th style="width:22%">Fitur</th><th>Bukti pemeriksaan</th></tr></thead>
     <tbody>
-      <tr><td>K-01</td><td>Login dan mengetahui login gagal</td><td>Validasi email/password, loading, error, logout</td><td>6 test login/logout (mode demo)</td></tr>
-      <tr><td>K-02</td><td>Ringkasan kondisi data</td><td>Jumlah calon/kriteria, pintasan</td><td>Ringkasan dihitung dari data; screenshot runtime</td></tr>
-      <tr><td>K-03</td><td>Mengelola calon</td><td>Tambah, lihat, ubah, hapus, konfirmasi</td><td>4 test CRUD/validasi (mode demo)</td></tr>
-      <tr><td>K-04</td><td>Mengisi tujuh nilai konsisten</td><td>Dropdown skala 1–5, field wajib</td><td>Test model kriteria dan validator</td></tr>
-      <tr><td>K-05</td><td>Kode simulasi unik</td><td>ID simulasi wajib dan cek duplikat</td><td>Test ID duplikat</td></tr>
-      <tr><td>K-06</td><td>Meninjau hasil</td><td>Normalisasi, pembobotan, pengurutan</td><td>5 test model + screenshot</td></tr>
-      <tr><td>K-07</td><td>Akses pada layar berbeda</td><td>NavigationBar dan NavigationRail</td><td>2 test viewport 420/1280 px + screenshot 390 px</td></tr>
-      <tr><td>K-08</td><td>Mengetahui status data</td><td>Status Demo/Firebase, pesan error</td><td>Label demo tampil; jalur Firebase belum diuji</td></tr>
+      <tr><td>K-01</td><td>Login dan mengetahui login gagal</td><td>Should</td><td>Validasi email/password, loading, error, logout</td><td>6 test login/logout (mode demo)</td></tr>
+      <tr><td>K-02</td><td>Ringkasan kondisi data</td><td>Should</td><td>Jumlah calon/kriteria, pintasan</td><td>Ringkasan dihitung dari data; screenshot runtime</td></tr>
+      <tr><td>K-03</td><td>Mengelola calon</td><td>Must</td><td>Tambah, lihat, ubah, hapus, konfirmasi</td><td>4 test CRUD/validasi (mode demo)</td></tr>
+      <tr><td>K-04</td><td>Mengisi tujuh nilai konsisten</td><td>Must</td><td>Dropdown skala 1–5, field wajib</td><td>Test model kriteria dan validator</td></tr>
+      <tr><td>K-05</td><td>Kode simulasi unik</td><td>Must</td><td>ID simulasi wajib dan cek duplikat</td><td>Test ID duplikat</td></tr>
+      <tr><td>K-06</td><td>Meninjau hasil</td><td>Must</td><td>Normalisasi, pembobotan, pengurutan</td><td>5 test model + screenshot</td></tr>
+      <tr><td>K-07</td><td>Akses pada layar berbeda</td><td>Should</td><td>NavigationBar dan NavigationRail</td><td>2 test viewport 420/1280 px + screenshot 390 px</td></tr>
+      <tr><td>K-08</td><td>Mengetahui status data</td><td>Should</td><td>Status Demo/Firebase, pesan error</td><td>Label demo tampil; jalur Firebase belum diuji</td></tr>
     </tbody>
   </table>
+  <p class="small">
+    Prioritas <strong>Must</strong> adalah CRUD, validasi formulir, penilaian tujuh kriteria,
+    dan perhitungan skor karena tanpa keempatnya alur inti tidak berjalan dan data tidak
+    dapat dipertanggungjawabkan. Login, ringkasan, tampilan responsif, dan status data
+    bersifat <strong>Should</strong> (pendukung pada tahap UTS).
   <p class="small">Kebutuhan dipetakan ke halaman dan bukti di <code>docs/rancangan/KEBUTUHAN.md</code>. Matriks pengujian lengkap ada di <code>docs/PENGUJIAN.md</code>.</p>
 </section>
 
@@ -344,7 +353,9 @@
       <tr><td>Aplikasi</td><td>Flutter 3.47.7 / Dart 3.13.5, Material 3</td><td>Satu basis kode untuk Web dan Android; responsif pada breakpoint 760 px.</td></tr>
       <tr><td>Model &amp; perhitungan</td><td>Dart murni</td><td>Tujuh kriteria, normalisasi, bobot, skor SAW, ranking, dan tie-break.</td></tr>
       <tr><td>Autentikasi</td><td>Firebase Authentication</td><td>Email/Password; kode aktif hanya bila konfigurasi <code>--dart-define</code> lengkap. Belum diuji dengan project nyata.</td></tr>
+      <tr><td>Paket Firebase</td><td>Firebase Spark (gratis)</td><td>Rencana biaya untuk Auth, Cloud Firestore, dan Hosting selama pengembangan akademik.</td></tr>
       <tr><td>Database</td><td>Cloud Firestore + Security Rules</td><td>Koleksi <code>calon_penerima</code> dan <code>users</code>; rules berbasis role. Belum diuji di Emulator Suite.</td></tr>
+      <tr><td>Hosting</td><td>Firebase Hosting (direncanakan)</td><td>Deploy web ke Hosting masuk rencana Pertemuan 9–15; demo publik saat ini memakai GitHub Pages.</td></tr>
       <tr><td>Backend mode demo</td><td>Penyimpanan di memori</td><td>Data contoh dimuat ulang saat aplikasi dibuka; dipakai untuk demo publik.</td></tr>
       <tr><td>CI/CD</td><td>GitHub Actions, GitHub Pages</td><td>Analyze, 24 test, build Web, deploy Pages; build APK debug juga berhasil di CI.</td></tr>
       <tr><td>Dokumentasi video</td><td>Remotion 4, React 19, TypeScript 5.9, Edge TTS</td><td>Video 1920×1080, narasi Bahasa Indonesia, tanpa musik.</td></tr>
@@ -432,10 +443,10 @@ Skor = Vᵢ × 100</div>
       <tr><td>Analisis statis</td><td><code>flutter analyze</code></td><td><span class="stamp ok">No issues found</span></td></tr>
       <tr><td>Test otomatis</td><td><code>flutter test</code></td><td><span class="stamp ok">24 test lulus</span></td></tr>
       <tr><td>Build Web</td><td><code>flutter build web</code></td><td><span class="stamp ok">Berhasil</span></td></tr>
-      <tr><td>Screenshot runtime</td><td>Chrome headless terhadap build Web</td><td><span class="stamp ok">14 file (7 halaman × 2 viewport)</span></td></tr>
+      <tr><td>Screenshot runtime</td><td>Chrome headless terhadap build Web</td><td><span class="stamp ok">16 file (7 halaman × 2 viewport + bukti SnackBar dan enam calon)</span></td></tr>
       <tr><td>Deploy web</td><td>GitHub Actions → GitHub Pages</td><td><span class="stamp ok">Aktif, halaman login merespons 200</span></td></tr>
       <tr><td>Build Android</td><td>CI <code>flutter build apk --debug</code></td><td><span class="stamp ok">Berhasil dibangun</span> · belum dijalankan di perangkat</td></tr>
-      <tr><td>Video presentasi</td><td>Remotion + Edge TTS</td><td><span class="stamp ok">5 menit 7 detik, 1080p</span></td></tr>
+      <tr><td>Video presentasi</td><td>Remotion + Edge TTS</td><td><span class="stamp ok">6 menit 15 detik, 1080p</span></td></tr>
       <tr><td>Firebase Auth/Firestore</td><td>—</td><td><span class="stamp">Belum diuji</span> — project belum dikonfigurasi</td></tr>
       <tr><td>Firestore rules</td><td>Emulator Suite</td><td><span class="stamp">Belum diuji/deploy</span></td></tr>
       <tr><td>Firebase Hosting</td><td>—</td><td><span class="stamp">Belum di-deploy</span></td></tr>
@@ -451,7 +462,58 @@ Skor = Vᵢ × 100</div>
     Validasi lapangan persona dan bobot berada di luar lingkup UTS.
   </p>
 
-  <h2 style="margin-top:18px">11. Tautan</h2>
+</section>
+
+<section class="section">
+  <h2>11. Klarifikasi dan Rencana Tindak Lanjut</h2>
+  <p class="lead">
+    Bagian ini menyiapkan jawaban atas pertanyaan klarifikasi saat presentasi dan
+    rencana kerja setelah UTS. Semua status ditulis sesuai kondisi repository.
+  </p>
+
+  <h3>Q5 — Contoh validasi, aturan bisnis, dan kaitannya dengan user story</h3>
+  <p>
+    Pada halaman Data Calon, formulir tambah ditekan <strong>Simpan</strong> dalam keadaan
+    kosong. Aplikasi menolak penyimpanan dan menampilkan pesan tepat di bawah kolom:
+    “ID simulasi wajib diisi.”, “Nama calon wajib diisi.”, dan “Dusun/kelompok wajib diisi.”.
+    Aturan bisnisnya: satu calon hanya boleh tersimpan jika memiliki kode simulasi unik,
+    nama label, dusun, dan tujuh nilai kriteria 1–5. Aturan ini adalah kriteria penerimaan
+    <strong>US-03</strong> (“ID simulasi, nama, dusun, dan tujuh nilai wajib; ID duplikat
+    ditolak; setelah simpan calon tampil”). Setelah data valid diisi dan disimpan, SnackBar
+    “Data … tersimpan.” muncul dan baris baru tampil di daftar.
+  </p>
+
+  <h3>Q6 — Perilaku saat formulir kosong atau nilai di luar rentang</h3>
+  <ul>
+    <li><strong>Kosong:</strong> Simpan diblokir; setiap kolom wajib menampilkan pesan validasi sendiri, bukan satu pesan umum.</li>
+    <li><strong>Nilai kriteria di luar 1–5:</strong> tidak dapat diketik karena memakai dropdown 1–5; nilai awal 3 (Sedang).</li>
+    <li><strong>Kode duplikat:</strong> ditolak dengan pesan “ID simulasi sudah digunakan.”</li>
+    <li><strong>Catatan:</strong> opsional, dibatasi 200 karakter dan dihitung pada form.</li>
+  </ul>
+
+  <h3>Q7 — Yang belum selesai dan rencana sebelum UAS</h3>
+  <table>
+    <thead><tr><th style="width:34%">Pekerjaan</th><th style="width:18%">Status</th><th>Rencana</th></tr></thead>
+    <tbody>
+      <tr><td>Project Firebase nyata (Spark)</td><td>Belum ada</td><td>Dibuat pada Pertemuan 9; konfigurasi lewat <code>--dart-define</code>, tanpa menyimpan kredensial di repository.</td></tr>
+      <tr><td>Auth + role admin/petugas</td><td>Kode siap, belum diuji</td><td>Pertemuan 10: buat akun uji, verifikasi login/logout dan pembacaan role.</td></tr>
+      <tr><td>Security rules</td><td>Draft</td><td>Pertemuan 11: uji <code>firestore.rules</code> di Emulator Suite sebelum deploy.</td></tr>
+      <tr><td>Penyimpanan Firestore</td><td>Mode demo memori</td><td>Pertemuan 12: pindahkan CRUD ke Firestore dan uji data sintetis.</td></tr>
+      <tr><td>Firebase Hosting</td><td>Belum deploy</td><td>Pertemuan 13: deploy web dan uji tautan dari mode incognito.</td></tr>
+      <tr><td>APK di perangkat</td><td>Baru dibangun di CI</td><td>Pertemuan 14: pasang APK debug dan uji alur utama di perangkat/emulator.</td></tr>
+      <tr><td>Validasi bobot dan istilah</td><td>Asumsi demo</td><td>Pertemuan 15: konsultasi dosen/petugas, perbarui dokumen dan pengujian.</td></tr>
+    </tbody>
+  </table>
+
+  <div class="note">
+    <strong>Batas pengumpulan UTS:</strong> unggah proposal, video, dan tautan repository
+    melalui E-Learning UNISBANK paling lambat <strong>Kamis, 5 November 2026, 23.59 WIB</strong>.
+    Video presentasi maksimal 10 menit; video pada repository berdurasi kurang dari batas tersebut.
+  </div>
+</section>
+
+<section class="section">
+  <h2>12. Tautan</h2>
   <table>
     <tr><th style="width:24%">Repository</th><td><a href="https://github.com/Bamsuti/BLT-DD-prioritas">https://github.com/Bamsuti/BLT-DD-prioritas</a></td></tr>
     <tr><th>Demo web</th><td><a href="https://bamsuti.github.io/BLT-DD-prioritas/">https://bamsuti.github.io/BLT-DD-prioritas/</a> (mode demo)</td></tr>

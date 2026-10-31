@@ -19,7 +19,7 @@ Prototipe akademik untuk mencatat data simulasi calon penerima BLT-DD, menilai t
 | Repository | https://github.com/Bamsuti/BLT-DD-prioritas |
 | Demo web | https://bamsuti.github.io/BLT-DD-prioritas/ |
 | Proposal UTS | [docs/proposal/PROPOSAL_UTS.pdf](docs/proposal/PROPOSAL_UTS.pdf) |
-| Video presentasi | [YouTube](https://youtu.be/AnvDqdBBxeM) |
+| Video presentasi | [YouTube](https://youtu.be/AnvDqdBBxeM) · [MP4 6:15](docs/video/blt-dd-prioritas-promo.mp4) |
 | Wireframe | [Figma](https://www.figma.com/make/xnbomh0HD3xaMEtZ0ehUwh/BLT-DD-Prioritas-Wireframe?t=xP6ZZ7tKgaItZh19-1) · [lima SVG](docs/rancangan/WIREFRAME.md) |
 | Versi aplikasi | 1.0.0+1 |
 
@@ -95,12 +95,14 @@ Screenshot diambil dari **build Web yang benar-benar dijalankan** (Flutter Web +
 | Hasil prioritas | ![Hasil desktop](docs/screenshots/runtime/05-hasil-desktop.png) | ![Hasil mobile](docs/screenshots/runtime/05-hasil-mobile.png) |
 | Form tambah calon | ![Form desktop](docs/screenshots/runtime/06-form-tambah-desktop.png) | ![Form mobile](docs/screenshots/runtime/06-form-tambah-mobile.png) |
 | Validasi form | ![Validasi desktop](docs/screenshots/runtime/07-form-validasi-desktop.png) | ![Validasi mobile](docs/screenshots/runtime/07-form-validasi-mobile.png) |
+| Simpan berhasil (SnackBar) | ![SnackBar desktop](docs/screenshots/runtime/08-form-snackbar-desktop.png) | — |
+| Hasil dengan data baru | ![Hasil enam calon](docs/screenshots/runtime/09-hasil-enam-calon-desktop.png) | — |
 
 Wireframe rancangan awal tetap disimpan sebagai SVG di `docs/screenshots/` dan bukan bukti runtime.
 
 ## Proposal UTS
 
-Proposal lengkap tersedia sebagai PDF 9 halaman: [docs/proposal/PROPOSAL_UTS.pdf](docs/proposal/PROPOSAL_UTS.pdf). Isinya mencakup identitas, latar belakang dan masalah, ruang lingkup, persona, sembilan user story, kebutuhan fungsional K-01–K-08, user flow, sitemap, lima wireframe, tech stack, rumus SAW, rancangan Firestore, keamanan, status verifikasi, dan tautan.
+Proposal lengkap tersedia sebagai PDF 11 halaman: [docs/proposal/PROPOSAL_UTS.pdf](docs/proposal/PROPOSAL_UTS.pdf). Isinya mencakup identitas, latar belakang dan masalah, ruang lingkup, persona, sembilan user story, kebutuhan fungsional K-01–K-08, user flow, sitemap, lima wireframe, tech stack, rumus SAW, rancangan Firestore, keamanan, status verifikasi, dan tautan.
 
 - Sumber HTML: [docs/proposal/PROPOSAL_UTS.html](docs/proposal/PROPOSAL_UTS.html)
 - Sitemap versi Mermaid: [docs/rancangan/SITEMAP.md](docs/rancangan/SITEMAP.md)
@@ -110,10 +112,10 @@ Proposal lengkap tersedia sebagai PDF 9 halaman: [docs/proposal/PROPOSAL_UTS.pdf
 
 ## Video penjelasan
 
-Video 16:9 berdurasi 5 menit 7 detik, di bawah batas 10 menit, menjelaskan masalah, pengguna utama, prioritas fitur, desain, demo prototipe, rencana teknis, dan empat pertanyaan wajib.
+Video 16:9 berdurasi 6 menit 15 detik, di bawah batas 10 menit, menjelaskan masalah, pengguna utama, prioritas fitur, desain, demo prototipe (termasuk form kosong ditolak, data valid disimpan, SnackBar, dan baris baru tampil), rencana teknis termasuk rencana Pertemuan 9–15, serta empat pertanyaan wajib.
 
-- Berkas: [docs/video/blt-dd-prioritas-promo.mp4](docs/video/blt-dd-prioritas-promo.mp4)
-- YouTube: [https://youtu.be/AnvDqdBBxeM](https://youtu.be/AnvDqdBBxeM) — publik; judul dan durasi 5:07 terverifikasi
+- Berkas terbaru: [docs/video/blt-dd-prioritas-promo.mp4](docs/video/blt-dd-prioritas-promo.mp4) — 6:15, 1080p
+- YouTube: [https://youtu.be/AnvDqdBBxeM](https://youtu.be/AnvDqdBBxeM) — tautan publik; masih memuat versi 5:07 dan perlu diunggah ulang dengan versi terbaru
 - Spesifikasi: 1920×1080, 30 fps, H.264 + AAC, suara Edge TTS `id-ID-ArdiNeural`, tanpa musik
 - Isi per babak dan rincian produksi: [docs/VIDEO.md](docs/VIDEO.md)
 - Sumber dan cara render: `video/` (Remotion)
@@ -246,8 +248,9 @@ Seluruh pengujian dijalankan mandiri oleh pembuat: test otomatis dan screenshot 
 | Analisis statis | `flutter analyze` | **No issues found** |
 | Test otomatis | `flutter test` | **24 test, semua lulus** |
 | Build Web | `flutter build web` | **Berhasil** |
-| Screenshot runtime | Chrome headless terhadap build Web | **14 file** (7 halaman × 2 viewport) |
-| Video penjelasan | `npm run render` di `video/` | **Berhasil**; 5 menit 7 detik, 1920×1080, audio AAC terverifikasi |
+| Screenshot runtime | Chrome headless terhadap build Web dan demo live | **16 file** (14 utama + 2 bukti SnackBar/hasil) |
+| Video penjelasan | `npm run render` di `video/` | **Berhasil**; 6 menit 15 detik, 1920×1080, audio AAC terverifikasi |
+| Uji live GitHub Pages | Chrome headless ke demo publik | **Berhasil**; form kosong ditolak per kolom, SnackBar "tersimpan", dan baris SIM-006 tampil |
 | Deploy web (GitHub Pages) | Workflow `Deploy Web to GitHub Pages` | **Berhasil**; halaman publik merespons 200 dan tampilan login terverifikasi |
 | Build Android | GitHub Actions `flutter build apk --debug` | **Berhasil**; belum dijalankan di perangkat |
 | Firebase Auth/Firestore | — | **Belum diuji** (project belum dikonfigurasi) |
@@ -256,7 +259,7 @@ Seluruh pengujian dijalankan mandiri oleh pembuat: test otomatis dan screenshot 
 
 CI: [GitHub Actions](https://github.com/Bamsuti/BLT-DD-prioritas/actions) menjalankan analyze, 24 test, build Web, dan build APK debug pada setiap push ke `main`. Hasil terbaru dapat dilihat langsung di halaman Actions.
 
-Cakupan 24 test otomatis: tujuh kriteria & total bobot, rentang skor, urutan ranking, tie-break, serialisasi dan kontrak field Firestore, CRUD mode demo, penolakan ID duplikat, login demo salah/benar, validasi email & kata sandi, logout, navigasi lebar/sempit, validasi form, tambah/ubah/hapus, perubahan nilai memengaruhi skor, dan mode dokumentasi.
+Cakupan 24 test otomatis: tujuh kriteria & total bobot, rentang skor, urutan ranking, tie-break, serialisasi dan kontrak field Firestore, CRUD mode demo, penolakan ID duplikat, login demo salah/benar, validasi email & kata sandi, logout, navigasi lebar/sempit, validasi form, tambah/ubah/hapus, SnackBar data tersimpan, empty state "Belum ada data", perubahan nilai memengaruhi skor, dan mode dokumentasi.
 
 Matriks skenario lengkap beserta status per skenario: [docs/PENGUJIAN.md](docs/PENGUJIAN.md).
 
@@ -269,8 +272,8 @@ Matriks skenario lengkap beserta status per skenario: [docs/PENGUJIAN.md](docs/P
 | Test otomatis | 24/24 lulus |
 | Build Web | Berhasil |
 | Screenshot runtime | Tersedia dan diambil dari build Web |
-| Video penjelasan | Dirender 31 Oktober 2026; 5:07, 1080p, delapan babak, narasi Edge TTS, demo runtime asli, tanpa musik |
-| Proposal UTS | PDF 9 halaman dengan persona, sembilan user story, kebutuhan, user flow, sitemap, wireframe, tech stack, dan rancangan Firestore |
+| Video penjelasan | Dirender 1 November 2026; 6:15, 1080p, delapan babak, narasi Edge TTS, demo runtime asli (validasi + SnackBar), tanpa musik |
+| Proposal UTS | PDF dengan persona, sembilan user story, kebutuhan **Must/Should**, user flow, sitemap, wireframe, tech stack Firebase Spark, rancangan Firestore, dan jawaban Q5–Q7 |
 | Deploy web | GitHub Pages aktif 29 Oktober 2026; aplikasi berjalan mode demo |
 | Scaffold Android | Tersedia (Gradle Kotlin DSL, `minSdk` mengikuti Flutter, izin INTERNET) |
 | Build Android | APK debug berhasil dibangun di GitHub Actions; belum diuji di perangkat/emulator |

@@ -12,6 +12,7 @@ Seluruh pengujian fungsional dijalankan **mandiri oleh pembuat proyek**: test ot
 | Flutter | 3.47.7 stable (revision abaf9c5237) |
 | Dart | 3.13.5 |
 | Perangkat uji Web | Chrome headless (puppeteer-core 25), viewport 1280×800 dan 390×844, DPR 2 |
+| Uji live Pages | Chrome headless 1280×800 terhadap <https://bamsuti.github.io/BLT-DD-prioritas/>, 1 November 2026 |
 | Android SDK | Tidak tersedia lokal; build APK dijalankan di GitHub Actions (ubuntu-latest) |
 | Project Firebase | Tidak tersedia |
 | Pelaksana uji | Pembuat proyek (mandiri), tanpa penguji eksternal atau petugas desa |
@@ -23,9 +24,10 @@ Seluruh pengujian fungsional dijalankan **mandiri oleh pembuat proyek**: test ot
 | Analisis statis | `flutter analyze` | `No issues found!` |
 | Test otomatis | `flutter test` | `00:08 +24: All tests passed!` |
 | Build Web | `flutter build web --dart-define=SCREENSHOT_MODE=true` | `√ Built build\web` |
-| Screenshot runtime | `tools/capture_screenshots.js` | 14 PNG (7 halaman × desktop/mobile) |
+| Screenshot runtime | `tools/capture_screenshots.js` + tangkapan live Pages | 16 PNG (7 halaman × desktop/mobile + SnackBar dan hasil enam calon) |
 | Build Android | `flutter build apk --debug` di GitHub Actions | Berhasil (run #7); belum dijalankan di perangkat |
 | CI | GitHub Actions run #7 | Semua langkah berhasil |
+| Uji live Pages | Chrome headless ke demo publik | Form kosong ditolak per kolom; SnackBar "Data Calon Simulasi Enam (SIM-006) tersimpan." dan baris baru tampil; SIM-006 masuk peringkat hasil |
 | Firebase Auth/Firestore | — | Tidak diuji (project belum dikonfigurasi) |
 
 Contoh keluaran terminal yang tercatat:
@@ -61,14 +63,31 @@ Compiling lib\main.dart for the Web...   37.3s
 |---|---|---|---|---|
 | T-09 | ID, nama, dusun kosong | Simpan ditolak dengan pesan per field | **Lulus** | Test `Form menolak data wajib yang kosong` |
 | T-10 | ID simulasi duplikat | Pesan "ID simulasi sudah digunakan." | **Lulus** | Test `Form menolak ID simulasi duplikat` (widget) dan `ID simulasi duplikat ditolak` (backend) |
-| T-11 | Tambah calon valid | Data tersimpan dan muncul di daftar | **Lulus** | Test `Tambah dan ubah calon tercermin pada daftar` |
+| T-11 | Tambah calon valid | Data tersimpan, SnackBar tampil, dan baris baru muncul di daftar | **Lulus** | Test `Tambah dan ubah calon tercermin pada daftar`; uji live Pages → `08-form-snackbar-desktop.png` |
 | T-12 | Ubah calon | Nama/nilai berubah di daftar dan backend | **Lulus** | Test yang sama (assertion `Calon Simulasi A Revisi`) |
 | T-13 | Batal hapus | Data tetap ada | **Lulus** | Test `Hapus dapat dibatalkan lalu dikonfirmasi` |
-| T-14 | Konfirmasi hapus | Data terhapus dari backend | **Lulus** | Test yang sama |
+| T-14 | Konfirmasi hapus | Data terhapus dan empty state tampil setelah semua data dihapus | **Lulus** | Test yang sama; assertion `Belum ada data` dan `Klik "Tambah calon"` |
 | T-15 | CRUD mode demo | Simpan, ubah, hapus konsisten di memori | **Lulus** | Test `CRUD calon tersimpan dan terhapus dari daftar` |
 | T-16 | Nilai kriteria kosong | Validator menolak nilai null | **Tidak diuji langsung** | Dropdown selalu punya nilai awal 3; validator null tersedia di kode |
 | T-17 | Perubahan nilai memengaruhi skor | Skor dihitung ulang (85,0 → 69,0 saat C1 = 1) | **Lulus** | Test `Nilai kriteria yang diubah memengaruhi skor` |
 | T-18 | Penyimpanan gagal (I/O/aturan) | SnackBar pesan gagal, dialog tetap terbuka | **Belum diuji** | Butuh Firebase/kegagalan jaringan nyata |
+
+### B1. Tabel uji formulir (8 kasus)
+
+Formulir Data Calon memiliki 4 kolom teks (ID simulasi, nama, dusun, catatan opsional) dan 7 dropdown kriteria skala 1–5 — dua jenis input.
+
+| No | Kasus | Input | Hasil yang diharapkan | Status | Bukti |
+|---|---|---|---|---|---|
+| F-1 | Kolom wajib kosong | Tekan Simpan tanpa mengisi apa pun | Tiga pesan per kolom: "ID simulasi wajib diisi.", "Nama calon wajib diisi.", "Dusun/kelompok wajib diisi."; data tidak tersimpan | **Lulus** | Test `Form menolak data wajib yang kosong`; uji live Pages → `07-form-validasi-desktop.png` |
+| F-2 | ID simulasi duplikat | ID `SIM-001` | Pesan "ID simulasi sudah digunakan." dan simpan ditolak | **Lulus** | Test widget dan test backend |
+| F-3 | Data valid | `SIM-006`, `Calon Simulasi Enam`, `Dusun Enam`, skor awal 3 | Dialog tertutup, SnackBar "Data … tersimpan.", baris baru tampil di daftar | **Lulus** | Test widget; uji live Pages → `08-form-snackbar-desktop.png` |
+| F-4 | Ubah data | Ubah nama menjadi `Calon Simulasi A Revisi` | Daftar menampilkan nama baru; ID tidak berubah | **Lulus** | Test `Tambah dan ubah calon tercermin pada daftar` |
+| F-5 | Batal hapus | Tekan Batal pada konfirmasi | Data tetap ada | **Lulus** | Test `Hapus dapat dibatalkan lalu dikonfirmasi` |
+| F-6 | Konfirmasi hapus | Tekan Hapus pada konfirmasi | Data hilang dari daftar | **Lulus** | Test yang sama |
+| F-7 | Empty state | Hapus seluruh calon | Tampil "Belum ada data" dan "Klik \"Tambah calon\" untuk memasukkan data pertama." | **Lulus** | Test yang sama; assertion teks empty state |
+| F-8 | Nilai di luar 1–5 | Tidak tersedia pilihan di luar 1–5 | Tidak dapat dimasukkan karena dropdown; validator juga menolak nilai null | **Lulus secara konstruksi** | Dropdown 1–5 di form; validator null ada di kode dan tidak diuji langsung (T-16) |
+
+Catatan: F-1, F-2, F-3, F-4, F-5, F-6, F-7 dijalankan melalui test otomatis; F-1 dan F-3 juga diverifikasi pada aplikasi live di GitHub Pages. F-8 diverifikasi dari struktur input, bukan input manual di luar rentang.
 
 ### C. Perhitungan dan hasil
 
