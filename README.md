@@ -19,7 +19,7 @@ Prototipe akademik untuk mencatat data simulasi calon penerima BLT-DD, menilai t
 | Repository | https://github.com/Bamsuti/BLT-DD-prioritas |
 | Demo web | https://bamsuti.github.io/BLT-DD-prioritas/ |
 | Proposal UTS | [docs/proposal/PROPOSAL_UTS.pdf](docs/proposal/PROPOSAL_UTS.pdf) |
-| Video presentasi | [YouTube](https://youtu.be/AnvDqdBBxeM) · [MP4](docs/video/blt-dd-prioritas-promo.mp4) |
+| Video presentasi | [YouTube](https://youtu.be/AnvDqdBBxeM) |
 | Wireframe | [Figma](https://www.figma.com/make/xnbomh0HD3xaMEtZ0ehUwh/BLT-DD-Prioritas-Wireframe?t=xP6ZZ7tKgaItZh19-1) · [lima SVG](docs/rancangan/WIREFRAME.md) |
 | Versi aplikasi | 1.0.0+1 |
 
