@@ -2,6 +2,8 @@
 
 Dokumen ini mencatat pengujian yang **benar-benar dijalankan** dan yang belum. Status "Lulus" hanya diberikan bila perintah/perilaku sudah dieksekusi dan hasilnya teramati.
 
+Seluruh pengujian fungsional dijalankan **mandiri oleh pembuat proyek**: test otomatis di mesin lokal, screenshot melalui Chrome headless, dan build APK melalui GitHub Actions. Tidak ada skenario yang menunggu pengujian atau persetujuan petugas desa. Validasi lapangan persona dan bobot berada di luar lingkup pengujian UTS dan tidak dihitung sebagai skenario yang tertunda.
+
 ## Lingkungan pengujian
 
 | Item | Nilai |
@@ -12,6 +14,7 @@ Dokumen ini mencatat pengujian yang **benar-benar dijalankan** dan yang belum. S
 | Perangkat uji Web | Chrome headless (puppeteer-core 25), viewport 1280×800 dan 390×844, DPR 2 |
 | Android SDK | Tidak tersedia lokal; build APK dijalankan di GitHub Actions (ubuntu-latest) |
 | Project Firebase | Tidak tersedia |
+| Pelaksana uji | Pembuat proyek (mandiri), tanpa penguji eksternal atau petugas desa |
 
 ## Ringkasan hasil
 
@@ -111,6 +114,7 @@ Compiling lib\main.dart for the Web...   37.3s
 - APK debug dibangun di CI, tetapi belum diinstal atau dijalankan pada perangkat/emulator.
 - Tidak ada pengujian aksesibilitas (screen reader), pengujian beban, atau pengujian keamanan dinamis.
 - Firebase, rules, dan Hosting belum diuji karena tidak ada project/kredensial pada sesi ini.
+- Pengujian bersifat verifikasi fungsional mandiri, bukan validasi lapangan; tidak ada pengujian oleh petugas desa dan hasilnya tidak menunggu pengujian tersebut.
 
 ## Cara mengulang pengujian
 

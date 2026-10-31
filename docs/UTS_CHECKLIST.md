@@ -80,20 +80,23 @@ Demonstrasi memakai rekaman aplikasi yang benar-benar dijalankan di GitHub Pages
 | Lima halaman sesuai rancangan | Sama dengan sitemap dan user flow | Selesai |
 | Responsif pada 760 px | `NavigationBar` < 760 px, `NavigationRail` ≥ 760 px; screenshot dua viewport | Selesai, diuji otomatis |
 | Minimal 15 skenario uji | `test/widget_test.dart` berisi 24 test otomatis + matriks manual di `docs/PENGUJIAN.md` | Selesai |
+| Pengujian mandiri oleh pembuat | Seluruh bukti dihasilkan dari mesin pembuat dan CI; tidak menunggu penguji eksternal atau petugas desa | Selesai |
 | Status jujur | README, proposal, video, dan checklist menandai Firebase belum terhubung, Android belum diuji di perangkat, dan tautan Figma disertakan | Selesai |
 | Dokumentasi Bahasa Indonesia | README dan seluruh `docs/` berbahasa Indonesia | Selesai |
 | Commit bermakna | Riwayat `git log` bertahap per fitur/dokumen | Selesai |
 | Laporan akhir | `docs/proposal/PROPOSAL_UTS.pdf` | Selesai |
 
-## 6. Yang belum dikerjakan (dinyatakan terbuka)
+## 6. Yang belum dikerjakan / di luar pengujian mandiri
+
+Pengujian UTS dilakukan mandiri oleh pembuat dan tidak menunggu pengujian oleh petugas desa. Butir berikut adalah keterbatasan yang dinyatakan terbuka; dua butir terakhir bersifat validasi lapangan di luar lingkup pengujian.
 
 | Butir | Alasan |
 |---|---|
 | Firebase Auth + Firestore diuji dengan project nyata | Belum ada project Firebase dan akun uji; tidak boleh diklaim sebelum dijalankan |
 | Firebase Hosting | Belum di-deploy; web berjalan di GitHub Pages |
 | APK dijalankan di perangkat/emulator | APK debug hanya dibangun di CI, belum diinstal |
-| Wawancara/validasi persona dengan petugas desa | Persona masih asumsi akademik |
-| Validasi bobot dan formula dengan dosen/pihak desa | Bobot masih simulasi |
+| Validasi lapangan persona dengan petugas desa | Di luar lingkup pengujian mandiri; persona masih asumsi akademik |
+| Validasi bobot dan formula dengan dosen/pihak desa | Di luar pengujian fungsional mandiri; bobot masih simulasi |
 
 ## 7. Cara memeriksa ulang
 

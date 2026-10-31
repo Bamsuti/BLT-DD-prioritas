@@ -238,6 +238,8 @@ Untuk web publik di GitHub Pages, workflow membaca nilai yang sama dari reposito
 
 Lingkungan: Windows, Flutter 3.47.7 stable, Dart 3.13.5.
 
+Seluruh pengujian dijalankan mandiri oleh pembuat: test otomatis dan screenshot di mesin lokal, build APK di GitHub Actions. Tidak ada pengujian yang menunggu petugas desa; validasi lapangan persona dan bobot berada di luar lingkup UTS.
+
 | Pemeriksaan | Perintah | Hasil |
 |---|---|---|
 | Analisis statis | `flutter analyze` | **No issues found** |
