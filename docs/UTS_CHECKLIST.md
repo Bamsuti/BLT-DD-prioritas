@@ -6,11 +6,11 @@ Dokumen ini memetakan setiap butir ketentuan UTS ke bukti yang benar-benar ada d
 
 | Keluaran | Bukti | Status |
 |---|---|---|
-| Video presentasi maksimal 10 menit dan dapat dibuka dosen | [`docs/video/blt-dd-prioritas-promo.mp4`](video/blt-dd-prioritas-promo.mp4), 5 menit 7 detik, 1080p, narasi Bahasa Indonesia | Selesai |
+| Video presentasi maksimal 10 menit dan dapat dibuka dosen | [`docs/video/blt-dd-prioritas-promo.mp4`](video/blt-dd-prioritas-promo.mp4), 5 menit 7 detik, 1080p, narasi Bahasa Indonesia; [YouTube](https://youtu.be/AnvDqdBBxeM) | Selesai |
 | Proposal PDF | [`docs/proposal/PROPOSAL_UTS.pdf`](proposal/PROPOSAL_UTS.pdf) — 9 halaman | Selesai |
 | Repository GitHub | <https://github.com/Bamsuti/BLT-DD-prioritas> — README, kode, test, dokumen, riwayat commit bertahap | Selesai |
 
-Video dapat diunduh langsung dari repository (raw GitHub, terverifikasi HTTP 200 dengan ukuran 24.272.781 byte) dan diputar dengan pemutar video apa pun. Tautan demo web: <https://bamsuti.github.io/BLT-DD-prioritas/>.
+Video dapat diunduh langsung dari repository (raw GitHub, terverifikasi HTTP 200 dengan ukuran 24.272.781 byte) dan diputar dengan pemutar video apa pun. Video juga tersedia di YouTube: <https://youtu.be/AnvDqdBBxeM> (publik, judul dan durasi 5:07 terverifikasi). Tautan demo web: <https://bamsuti.github.io/BLT-DD-prioritas/>.
 
 ### 1.1 Isi README repository
 

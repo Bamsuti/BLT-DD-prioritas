@@ -19,7 +19,7 @@ Prototipe akademik untuk mencatat data simulasi calon penerima BLT-DD, menilai t
 | Repository | https://github.com/Bamsuti/BLT-DD-prioritas |
 | Demo web | https://bamsuti.github.io/BLT-DD-prioritas/ |
 | Proposal UTS | [docs/proposal/PROPOSAL_UTS.pdf](docs/proposal/PROPOSAL_UTS.pdf) |
-| Video presentasi | [docs/video/blt-dd-prioritas-promo.mp4](docs/video/blt-dd-prioritas-promo.mp4) |
+| Video presentasi | [YouTube](https://youtu.be/AnvDqdBBxeM) · [MP4](docs/video/blt-dd-prioritas-promo.mp4) |
 | Wireframe | [Figma](https://www.figma.com/make/xnbomh0HD3xaMEtZ0ehUwh/BLT-DD-Prioritas-Wireframe?t=xP6ZZ7tKgaItZh19-1) · [lima SVG](docs/rancangan/WIREFRAME.md) |
 | Versi aplikasi | 1.0.0+1 |
 
@@ -113,6 +113,7 @@ Proposal lengkap tersedia sebagai PDF 9 halaman: [docs/proposal/PROPOSAL_UTS.pdf
 Video 16:9 berdurasi 5 menit 7 detik, di bawah batas 10 menit, menjelaskan masalah, pengguna utama, prioritas fitur, desain, demo prototipe, rencana teknis, dan empat pertanyaan wajib.
 
 - Berkas: [docs/video/blt-dd-prioritas-promo.mp4](docs/video/blt-dd-prioritas-promo.mp4)
+- YouTube: [https://youtu.be/AnvDqdBBxeM](https://youtu.be/AnvDqdBBxeM) — publik; judul dan durasi 5:07 terverifikasi
 - Spesifikasi: 1920×1080, 30 fps, H.264 + AAC, suara Edge TTS `id-ID-ArdiNeural`, tanpa musik
 - Isi per babak dan rincian produksi: [docs/VIDEO.md](docs/VIDEO.md)
 - Sumber dan cara render: `video/` (Remotion)

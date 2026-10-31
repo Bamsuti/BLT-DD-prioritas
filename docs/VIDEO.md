@@ -3,6 +3,7 @@
 Video ini adalah media presentasi UTS. Isinya mengikuti urutan yang diminta: pembuka dan identitas, masalah dan pengguna, kebutuhan dan prioritas fitur, desain (user flow, sitemap, wireframe), demo prototipe yang benar-benar berjalan, rencana teknis dan penyimpanan data, lalu empat jawaban kunci dan penutup.
 
 - Berkas: [blt-dd-prioritas-promo.mp4](video/blt-dd-prioritas-promo.mp4)
+- Publikasi YouTube: <https://youtu.be/AnvDqdBBxeM> — tautan publik; judul dan durasi 5:07 terverifikasi
 - Ukuran: 24.272.781 byte (±24,3 MB)
 - SHA-256: `dc6f9892cb3fc894c049cbe3bb66d7f77255b0a9fd9ef8de52e0fc15cca8ad67`
 - Durasi: 5 menit 7 detik (307,18 detik) — batas UTS 10 menit
