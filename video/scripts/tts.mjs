@@ -15,6 +15,18 @@ const narration = JSON.parse(
 const audioDir = path.join(root, 'public', 'audio');
 fs.mkdirSync(audioDir, { recursive: true });
 
+const writeWithRetry = async (file, data) => {
+  for (let attempt = 1; ; attempt++) {
+    try {
+      fs.writeFileSync(file, data);
+      return;
+    } catch (error) {
+      if (attempt === 5) throw error;
+      await new Promise((resolve) => setTimeout(resolve, 400));
+    }
+  }
+};
+
 const timing = [];
 
 for (const scene of narration) {
@@ -30,7 +42,7 @@ for (const scene of narration) {
   });
 
   const file = path.join(audioDir, `${scene.id}.mp3`);
-  fs.writeFileSync(file, Buffer.concat(chunks));
+  await writeWithRetry(file, Buffer.concat(chunks));
 
   const meta = await parseFile(file);
   const audioSeconds = Number(meta.format.duration.toFixed(3));
@@ -54,7 +66,7 @@ for (const scene of narration) {
 }
 
 const total = timing.reduce((sum, scene) => sum + scene.duration, 0);
-fs.writeFileSync(
+await writeWithRetry(
   path.join(root, 'src', 'audio-timing.json'),
   JSON.stringify({ voice: VOICE, rate: RATE, totalSeconds: Number(total.toFixed(3)), scenes: timing }, null, 2) + '\n',
 );

@@ -14,10 +14,11 @@ type Props = { scene: SceneTiming; index: number; total: number };
 const steps = [
   { label: 'Login', at: 0 },
   { label: 'Beranda', at: 8 },
-  { label: 'Data calon', at: 15 },
-  { label: 'Validasi form', at: 20 },
-  { label: 'Penilaian', at: 30 },
-  { label: 'Hasil', at: 35 },
+  { label: 'Data calon', at: 16 },
+  { label: 'Validasi form', at: 24 },
+  { label: 'Simpan berhasil', at: 37 },
+  { label: 'Penilaian', at: 44 },
+  { label: 'Hasil', at: 50 },
 ];
 
 export const DemoScene: React.FC<Props> = ({ scene, index, total }) => {
@@ -29,6 +30,13 @@ export const DemoScene: React.FC<Props> = ({ scene, index, total }) => {
     0,
   );
   const enter = spring({ frame, fps, config: { damping: 200 } });
+  const summaryStart = Math.max(0, scene.duration - 7);
+  const showSummary = seconds >= summaryStart;
+  const summaryIn = spring({
+    frame: Math.max(0, frame - summaryStart * fps),
+    fps,
+    config: { damping: 200 },
+  });
 
   return (
     <SceneChrome scene={scene} index={index} total={total}>
@@ -125,6 +133,42 @@ export const DemoScene: React.FC<Props> = ({ scene, index, total }) => {
             style={{ width: 1040, display: 'block' }}
           />
         </div>
+
+        {showSummary && (
+          <div
+            style={{
+              position: 'absolute',
+              left: 108,
+              right: 108,
+              bottom: 12,
+              padding: '16px 26px',
+              borderRadius: 16,
+              background: 'rgba(255, 251, 248, 0.97)',
+              border: `1px solid ${colors.line}`,
+              boxShadow: '0 18px 44px rgba(64, 32, 40, 0.24)',
+              opacity: summaryIn,
+              transform: `translateY(${(1 - summaryIn) * 18}px)`,
+            }}
+          >
+            <div style={{ display: 'flex', alignItems: 'center', gap: 22 }}>
+              <div
+                style={{
+                  fontSize: 13,
+                  fontWeight: 800,
+                  letterSpacing: 1.8,
+                  color: colors.maroon,
+                  whiteSpace: 'nowrap',
+                }}
+              >
+                BUKTI DI DEMO
+              </div>
+              <div style={{ fontSize: 19, fontWeight: 650, lineHeight: 1.45 }}>
+                5 halaman terhubung · form kosong ditolak per kolom · data valid tersimpan
+                (SnackBar) dan tampil di daftar · rekaman runtime asli.
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </SceneChrome>
   );

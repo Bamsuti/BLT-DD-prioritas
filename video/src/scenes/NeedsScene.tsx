@@ -5,49 +5,49 @@ import { colors, type SceneTiming } from '../theme';
 
 type Props = { scene: SceneTiming; index: number; total: number };
 
-const needs = [
+const stories = [
   {
-    code: 'K-01',
+    code: 'US-01',
     title: 'Login petugas',
-    body: 'Membatasi akses ke pengguna berwenang dan menampilkan pesan gagal.',
+    body: 'Sebagai petugas, saya ingin login agar halaman pengelolaan hanya dibuka pengguna berwenang.',
   },
   {
-    code: 'K-02',
-    title: 'Pengelolaan data calon',
-    body: 'Tambah, lihat, ubah, dan hapus data dengan konfirmasi.',
+    code: 'US-03',
+    title: 'Tambah data calon',
+    body: 'Sebagai petugas, saya ingin menambah calon agar data terkelola; ID unik, nama, dusun, dan tujuh nilai wajib.',
   },
   {
-    code: 'K-03',
-    title: 'Validasi formulir',
-    body: 'Kolom wajib, ID unik, dan tujuh nilai kriteria diperiksa sebelum simpan.',
+    code: 'US-05',
+    title: 'Konfirmasi hapus',
+    body: 'Sebagai petugas, saya ingin konfirmasi sebelum menghapus agar data tidak hilang tanpa sengaja.',
   },
   {
-    code: 'K-04',
-    title: 'Penilaian tujuh kriteria',
-    body: 'Skala 1–5 yang konsisten untuk C1 sampai C7.',
+    code: 'US-06',
+    title: 'Isi tujuh kriteria',
+    body: 'Sebagai petugas, saya ingin mengisi tujuh kriteria skala 1–5 agar perbandingan konsisten.',
   },
   {
-    code: 'K-05',
-    title: 'Skor SAW dan tampilan responsif',
-    body: 'Pengurutan otomatis, Web dan Android dari satu basis kode.',
+    code: 'US-07',
+    title: 'Lihat peringkat',
+    body: 'Sebagai petugas, saya ingin melihat peringkat agar skor dan urutan calon dapat ditinjau.',
   },
 ];
 
 const priorities = [
   {
-    level: 'Prioritas 1',
-    title: 'CRUD + validasi formulir',
-    reason: 'Data yang bersih adalah dasar perhitungan yang dapat dipercaya.',
+    level: 'Must · K-03, K-04, K-05, K-06',
+    title: 'CRUD, validasi, penilaian, skor SAW',
+    reason: 'Tanpa ini alur inti tidak berjalan; data bersih adalah dasar perhitungan.',
   },
   {
-    level: 'Prioritas 2',
-    title: 'Penilaian + skor SAW',
-    reason: 'Inti penentuan urutan calon dan bahan musyawarah.',
+    level: 'Should · K-01, K-02, K-07, K-08',
+    title: 'Login, ringkasan, responsif, status data',
+    reason: 'Mendukung keamanan akses, kenyamanan perangkat, dan kejelasan status.',
   },
   {
-    level: 'Pendukung',
-    title: 'Login, responsif, Firebase',
-    reason: 'Keamanan akses, kenyamanan perangkat, dan rencana penyimpanan.',
+    level: 'Rencana',
+    title: 'Firebase Spark: Auth, Firestore, Hosting',
+    reason: 'Penyimpanan permanen dan deploy direncanakan pada Pertemuan 9–15.',
   },
 ];
 
@@ -70,12 +70,12 @@ export const NeedsScene: React.FC<Props> = ({ scene, index, total }) => {
           Kebutuhan & prioritas fitur
         </div>
         <div style={{ marginTop: 12, fontSize: 46, fontWeight: 800, letterSpacing: -0.7 }}>
-          Lima kebutuhan, tiga tingkat prioritas
+          Lima user story utama, prioritas Must dan Should
         </div>
 
         <div style={{ display: 'flex', gap: 52, marginTop: 26 }}>
           <div style={{ width: 800, display: 'flex', flexDirection: 'column', gap: 12 }}>
-            {needs.map((item, i) => {
+            {stories.map((item, i) => {
               const enter = spring({
                 frame: Math.max(0, frame - 8 - i * 5),
                 fps,
@@ -98,13 +98,13 @@ export const NeedsScene: React.FC<Props> = ({ scene, index, total }) => {
                 >
                   <div
                     style={{
-                      width: 72,
+                      width: 74,
                       flexShrink: 0,
-                      fontSize: 15,
+                      fontSize: 14,
                       fontWeight: 800,
                       color: colors.maroon,
-                      letterSpacing: 0.8,
-                      paddingTop: 4,
+                      letterSpacing: 0.6,
+                      paddingTop: 5,
                     }}
                   >
                     {item.code}

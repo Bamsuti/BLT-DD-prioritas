@@ -23,8 +23,8 @@ const layers = [
   },
   {
     tag: 'FIREBASE',
-    title: 'Authentication & Cloud Firestore',
-    body: 'sesi petugas · dokumen data · security rules berbasis role',
+    title: 'Spark: Auth, Firestore, Hosting',
+    body: 'sesi petugas · dokumen data · security rules berbasis role · Hosting direncanakan',
   },
 ];
 
@@ -133,6 +133,20 @@ export const TechScene: React.FC<Props> = ({ scene, index, total }) => {
             >
               Firebase belum dihubungkan ke proyek nyata; demo berjalan di mode memori.
               Snapshot hasil dan audit trail direncanakan pada fase berikutnya.
+            </div>
+            <div
+              style={{
+                marginTop: 12,
+                padding: '12px 18px',
+                borderRadius: 12,
+                background: 'rgba(255, 251, 248, 0.9)',
+                border: `1px solid ${colors.line}`,
+                fontSize: 15,
+                lineHeight: 1.45,
+              }}
+            >
+              <strong>Rencana Pertemuan 9–15:</strong> hubungkan Firebase Spark → akun &
+              role → uji security rules → Firestore → Hosting → uji APK di perangkat.
             </div>
           </div>
 

@@ -25,36 +25,38 @@
   {
     "id": "scene-03",
     "title": "Kebutuhan & Prioritas",
-    "text": "Dari masalah itu, ada lima kebutuhan utama. Login petugas agar data hanya diakses pengguna berwenang. Pengelolaan data calon dengan tambah, ubah, hapus, dan validasi formulir. Penilaian tujuh kriteria dengan skala satu sampai lima. Perhitungan skor Simple Additive Weighting dan pengurutan otomatis. Tampilan responsif untuk web dan Android. Prioritas pertama adalah CRUD dan validasi formulir, karena data yang bersih adalah dasar perhitungan yang dapat dipercaya. Prioritas kedua adalah penilaian dan skor, inti penentuan urutan. Login dan tampilan responsif mendukung keamanan serta akses. Integrasi Firebase menjadi prioritas teknis berikutnya.",
+    "text": "Dari masalah itu saya susun sembilan user story; lima yang utama saya tunjukkan. US-01, sebagai petugas saya ingin login agar halaman pengelolaan hanya dibuka pengguna berwenang. US-03, saya ingin menambah calon agar data terkelola, dengan ID unik, nama, dusun, dan tujuh nilai wajib. US-05, saya ingin konfirmasi sebelum menghapus agar data tidak hilang tanpa sengaja. US-06, saya ingin mengisi tujuh kriteria dengan skala satu sampai lima agar perbandingan konsisten. US-07, saya ingin melihat peringkat agar skor dapat ditinjau. Kebutuhan fungsional intinya: pengelolaan data calon, validasi formulir, penilaian tujuh kriteria, dan perhitungan Simple Additive Weighting. Keempatnya berprioritas Must karena tanpa itu alur inti tidak berjalan dan data tidak dapat dipertanggungjawabkan. Login, ringkasan, tampilan responsif, dan status data bersifat Should.",
     "captions": [
-      "Lima kebutuhan: login, CRUD, penilaian, skor SAW, responsif.",
-      "Prioritas 1: CRUD dan validasi formulir — data bersih.",
-      "Prioritas 2: penilaian tujuh kriteria dan skor SAW.",
-      "Pendukung: login, tampilan responsif, integrasi Firebase."
+      "Sembilan user story; lima utama: US-01, US-03, US-05, US-06, US-07.",
+      "US-01 Login agar hanya petugas berwenang yang masuk.",
+      "US-03 Tambah calon: ID unik, nama, dusun, tujuh nilai wajib.",
+      "US-05 Konfirmasi sebelum menghapus data.",
+      "US-06 Tujuh kriteria skala 1–5; US-07 peringkat skor.",
+      "Must: CRUD, validasi, penilaian, skor SAW."
     ]
   },
   {
     "id": "scene-04",
     "title": "Rancangan",
-    "text": "Rancangan alurnya sederhana. Petugas login, masuk ke beranda, mengelola data calon, mengisi nilai tujuh kriteria, meninjau hasil prioritas, lalu keluar. Sitemap terdiri dari lima halaman utama yang terhubung melalui navigasi: login, beranda, data calon, penilaian, dan hasil. Wireframe awal menempatkan ringkasan di beranda, daftar calon dengan aksi tambah, ubah, dan hapus, formulir tujuh nilai, serta halaman hasil yang menampilkan peringkat. Pada layar sempit, navigasi bawah dipakai; pada layar lebar, navigasi samping.",
+    "text": "Rancangan alurnya sederhana. Petugas login, masuk ke beranda, mengelola data calon, mengisi nilai tujuh kriteria, meninjau hasil prioritas, lalu keluar. Sitemap terdiri dari lima halaman utama yang terhubung melalui navigasi: login, beranda, data calon, penilaian, dan hasil. Wireframe awal menempatkan ringkasan di beranda, daftar calon dengan aksi tambah, ubah, dan hapus, formulir tujuh nilai, serta halaman hasil yang menampilkan peringkat. Wireframe tersedia di Figma dan implementasi aplikasi mengikuti susunannya. Pada layar sempit, navigasi bawah dipakai; pada layar lebar, navigasi samping.",
     "captions": [
       "Alur: login → beranda → data calon → penilaian → hasil → keluar.",
       "Sitemap: lima halaman utama yang saling terhubung.",
-      "Wireframe: ringkasan, daftar calon, formulir, peringkat.",
-      "Layar sempit memakai navigasi bawah; layar lebar navigasi samping."
+      "Wireframe Figma: ringkasan, daftar calon, formulir, peringkat.",
+      "Implementasi mengikuti wireframe; navigasi menyesuaikan lebar layar."
     ]
   },
   {
     "id": "scene-05",
     "title": "Demo Prototipe",
-    "text": "Berikut demo prototipe yang berjalan. Saya mulai dari login dan masuk dengan akun demo. Beranda menampilkan lima calon, tujuh kriteria, dan ringkasan skor. Dari navigasi, saya membuka Data Calon Penerima. Data dapat ditambah, diubah, dan dihapus. Saat formulir disimpan tanpa kolom wajib, pesan validasi muncul dan data tidak tersimpan. Halaman Penilaian menampilkan tujuh kriteria dan bobot demo. Halaman Hasil Prioritas menampilkan skor nol sampai seratus, urutan menurun, dan penjelasan rumus. Semua perpindahan halaman ini berasal dari aplikasi web yang benar-benar berjalan, bukan mockup.",
+    "text": "Berikut demo prototipe yang berjalan. Saya mulai dari login dan masuk dengan akun demo. Beranda menampilkan lima calon, tujuh kriteria, dan ringkasan skor. Dari navigasi, saya membuka Data Calon Penerima. Saya membuka formulir tambah, lalu menekan Simpan tanpa mengisi apa pun; pesan validasi muncul per kolom dan data tidak tersimpan. Setelah itu saya mengisi ID simulasi, nama, dan dusun, lalu menyimpan. Pesan status muncul, dan data baru langsung tampil di halaman daftar. Halaman Penilaian menampilkan tujuh kriteria dan bobot demo. Halaman Hasil Prioritas menampilkan skor nol sampai seratus, urutan menurun, dan penjelasan rumus. Semua perpindahan ini berasal dari aplikasi web yang benar-benar berjalan, bukan mockup.",
     "captions": [
       "Demo runtime: login dengan akun demo.",
       "Beranda: lima calon, tujuh kriteria, ringkasan skor.",
-      "Data calon: tambah, ubah, hapus.",
-      "Formulir kosong ditolak; pesan validasi muncul.",
-      "Penilaian menampilkan tujuh kriteria dan bobot demo.",
-      "Hasil: skor 0–100, urutan menurun, penjelasan rumus."
+      "Form kosong ditolak dengan pesan per kolom.",
+      "Isi ID, nama, dan dusun; simpan berhasil.",
+      "SnackBar muncul dan data baru tampil di daftar.",
+      "Penilaian dan hasil: skor 0–100, urutan menurun."
     ]
   },
   {
@@ -70,24 +72,25 @@
   {
     "id": "scene-07",
     "title": "Rencana Teknis & Data",
-    "text": "Secara teknis, aplikasi memakai satu basis kode Flutter untuk web dan Android. Lapisan antarmuka terdiri dari lima halaman, model berisi tujuh kriteria dan rumus Simple Additive Weighting, lalu layanan backend. Firebase Authentication dipakai untuk login petugas, dan Cloud Firestore menyimpan data calon pada koleksi calon_penerima. Setiap dokumen berisi id simulasi, nama label, dusun, catatan, tujuh nilai kriteria, serta waktu dibuat dan diubah. Koleksi users menyimpan role admin atau petugas. Skor dihitung di klien; snapshot hasil, versi bobot, dan audit trail direncanakan pada fase berikutnya. Firebase belum dihubungkan ke proyek nyata, sehingga demo berjalan di mode memori.",
+    "text": "Secara teknis, aplikasi memakai satu basis kode Flutter untuk web dan Android. Lapisan antarmuka terdiri dari lima halaman, model berisi tujuh kriteria dan rumus Simple Additive Weighting, lalu layanan backend. Firebase Authentication dipakai untuk login petugas, Cloud Firestore menyimpan data calon pada koleksi calon_penerima, dan Firebase Hosting direncanakan untuk deploy web. Rencana saya memakai Firebase Spark yang gratis. Setiap dokumen berisi id simulasi, nama label, dusun, catatan, tujuh nilai kriteria, serta waktu dibuat dan diubah. Koleksi users menyimpan role admin atau petugas. Skor dihitung di klien; snapshot hasil, versi bobot, dan audit trail direncanakan pada fase berikutnya. Firebase belum dihubungkan ke proyek nyata, sehingga demo berjalan di mode memori. Rencana Pertemuan sembilan sampai lima belas: menghubungkan project Firebase, membuat akun dan role, menguji security rules di Emulator Suite, memindahkan penyimpanan ke Firestore, lalu deploy ke Hosting dan menguji APK di perangkat.",
     "captions": [
-      "Satu basis kode Flutter untuk Web dan Android.",
-      "UI lima halaman → model SAW → backend → Firebase.",
-      "Firestore: koleksi calon_penerima menyimpan tujuh nilai.",
-      "users menyimpan role admin/petugas; rules membatasi akses.",
+      "Satu basis kode Flutter; Firebase Spark untuk Auth, Firestore, Hosting.",
+      "Firestore: calon_penerima + users; rules berbasis role.",
+      "Rencana Pertemuan 9–15: Firebase, rules, Hosting, uji APK.",
       "Firebase belum terhubung; demo berjalan di memori."
     ]
   },
   {
     "id": "scene-08",
     "title": "Empat Jawaban & Penutup",
-    "text": "Untuk menutup, empat pertanyaan kunci. Masalah yang diselesaikan: pendataan dan penilaian calon yang tersebar dan tidak konsisten. Pengguna utama: petugas pengelola data BLT-DD di desa. Fitur diprioritaskan karena CRUD dan validasi menjaga kualitas data, sedangkan penilaian dan skor adalah inti keputusan. Data akan disimpan di Cloud Firestore, dengan autentikasi Firebase dan aturan akses berbasis role. Skor hanya bahan simulasi, bukan keputusan resmi. Kode, dokumentasi, proposal, dan video tersedia di GitHub Bamsuti, repositori BLT-DD prioritas. Terima kasih.",
+    "text": "Untuk menutup, empat pertanyaan kunci. Masalah yang diselesaikan: pendataan dan penilaian calon yang tersebar dan tidak konsisten. Pengguna utama: petugas pengelola data BLT-DD di desa. Fitur diprioritaskan karena CRUD dan validasi menjaga kualitas data, sedangkan penilaian dan skor adalah inti keputusan. Data akan disimpan di Cloud Firestore, dengan autentikasi Firebase dan aturan akses berbasis role. Kendala yang saya alami: waktu pengerjaan terbatas, belum ada project Firebase, dan APK belum diuji di perangkat. Pelajaran yang saya peroleh: kualitas data harus dijaga lebih dulu, validasi dan pengujian otomatis menghemat waktu, dan status yang jujur lebih penting daripada klaim fitur. Skor hanya bahan simulasi, bukan keputusan resmi. Kode, dokumentasi, proposal, dan video tersedia di GitHub Bamsuti, repositori BLT-DD prioritas. Terima kasih.",
     "captions": [
       "Masalah: pendataan dan penilaian tersebar serta tidak konsisten.",
       "Pengguna: petugas pengelola data BLT-DD di desa.",
       "Prioritas: kualitas data, lalu skor SAW.",
       "Data: Firebase Auth + Cloud Firestore, akses berbasis role.",
+      "Kendala: waktu, Firebase belum ada, APK belum diuji di perangkat.",
+      "Pelajaran: kualitas data dulu, uji otomatis, status jujur.",
       "Skor hanya simulasi, bukan keputusan resmi.",
       "github.com/Bamsuti/BLT-DD-prioritas"
     ]

@@ -1,7 +1,7 @@
 {
   "voice": "id-ID-ArdiNeural",
   "rate": 0.95,
-  "totalSeconds": 307.16,
+  "totalSeconds": 375.416,
   "scenes": [
     {
       "id": "scene-01",
@@ -33,42 +33,44 @@
     {
       "id": "scene-03",
       "title": "Kebutuhan & Prioritas",
-      "audio": 46.2,
+      "audio": 61.848,
       "padding": 2,
-      "duration": 48.2,
+      "duration": 63.848,
       "captions": [
-        "Lima kebutuhan: login, CRUD, penilaian, skor SAW, responsif.",
-        "Prioritas 1: CRUD dan validasi formulir — data bersih.",
-        "Prioritas 2: penilaian tujuh kriteria dan skor SAW.",
-        "Pendukung: login, tampilan responsif, integrasi Firebase."
+        "Sembilan user story; lima utama: US-01, US-03, US-05, US-06, US-07.",
+        "US-01 Login agar hanya petugas berwenang yang masuk.",
+        "US-03 Tambah calon: ID unik, nama, dusun, tujuh nilai wajib.",
+        "US-05 Konfirmasi sebelum menghapus data.",
+        "US-06 Tujuh kriteria skala 1–5; US-07 peringkat skor.",
+        "Must: CRUD, validasi, penilaian, skor SAW."
       ]
     },
     {
       "id": "scene-04",
       "title": "Rancangan",
-      "audio": 39.552,
+      "audio": 44.784,
       "padding": 2,
-      "duration": 41.552,
+      "duration": 46.784,
       "captions": [
         "Alur: login → beranda → data calon → penilaian → hasil → keluar.",
         "Sitemap: lima halaman utama yang saling terhubung.",
-        "Wireframe: ringkasan, daftar calon, formulir, peringkat.",
-        "Layar sempit memakai navigasi bawah; layar lebar navigasi samping."
+        "Wireframe Figma: ringkasan, daftar calon, formulir, peringkat.",
+        "Implementasi mengikuti wireframe; navigasi menyesuaikan lebar layar."
       ]
     },
     {
       "id": "scene-05",
       "title": "Demo Prototipe",
-      "audio": 43.92,
+      "audio": 52.32,
       "padding": 2,
-      "duration": 45.92,
+      "duration": 54.32,
       "captions": [
         "Demo runtime: login dengan akun demo.",
         "Beranda: lima calon, tujuh kriteria, ringkasan skor.",
-        "Data calon: tambah, ubah, hapus.",
-        "Formulir kosong ditolak; pesan validasi muncul.",
-        "Penilaian menampilkan tujuh kriteria dan bobot demo.",
-        "Hasil: skor 0–100, urutan menurun, penjelasan rumus."
+        "Form kosong ditolak dengan pesan per kolom.",
+        "Isi ID, nama, dan dusun; simpan berhasil.",
+        "SnackBar muncul dan data baru tampil di daftar.",
+        "Penilaian dan hasil: skor 0–100, urutan menurun."
       ]
     },
     {
@@ -86,28 +88,29 @@
     {
       "id": "scene-07",
       "title": "Rencana Teknis & Data",
-      "audio": 48.408,
+      "audio": 68.736,
       "padding": 2,
-      "duration": 50.408,
+      "duration": 70.736,
       "captions": [
-        "Satu basis kode Flutter untuk Web dan Android.",
-        "UI lima halaman → model SAW → backend → Firebase.",
-        "Firestore: koleksi calon_penerima menyimpan tujuh nilai.",
-        "users menyimpan role admin/petugas; rules membatasi akses.",
+        "Satu basis kode Flutter; Firebase Spark untuk Auth, Firestore, Hosting.",
+        "Firestore: calon_penerima + users; rules berbasis role.",
+        "Rencana Pertemuan 9–15: Firebase, rules, Hosting, uji APK.",
         "Firebase belum terhubung; demo berjalan di memori."
       ]
     },
     {
       "id": "scene-08",
       "title": "Empat Jawaban & Penutup",
-      "audio": 43.44,
+      "audio": 62.088,
       "padding": 3,
-      "duration": 46.44,
+      "duration": 65.088,
       "captions": [
         "Masalah: pendataan dan penilaian tersebar serta tidak konsisten.",
         "Pengguna: petugas pengelola data BLT-DD di desa.",
         "Prioritas: kualitas data, lalu skor SAW.",
         "Data: Firebase Auth + Cloud Firestore, akses berbasis role.",
+        "Kendala: waktu, Firebase belum ada, APK belum diuji di perangkat.",
+        "Pelajaran: kualitas data dulu, uji otomatis, status jujur.",
         "Skor hanya simulasi, bukan keputusan resmi.",
         "github.com/Bamsuti/BLT-DD-prioritas"
       ]

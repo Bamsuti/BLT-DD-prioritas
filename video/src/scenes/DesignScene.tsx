@@ -45,6 +45,9 @@ export const DesignScene: React.FC<Props> = ({ scene, index, total }) => {
         <div style={{ marginTop: 12, fontSize: 46, fontWeight: 800, letterSpacing: -0.7 }}>
           User flow, sitemap, dan wireframe
         </div>
+        <div style={{ marginTop: 8, fontSize: 18, color: colors.muted }}>
+          Wireframe Figma — BLT-DD Prioritas · implementasi mengikuti susunan yang sama
+        </div>
 
         <div style={{ display: 'flex', gap: 44, marginTop: 24 }}>
           <div

@@ -148,6 +148,10 @@ export const ClosingScene: React.FC<Props> = ({ scene, index, total }) => {
         >
           Terima kasih.
         </div>
+        <div style={{ marginTop: 4, fontSize: 15, color: colors.muted, opacity: repo }}>
+          Kendala: waktu, project Firebase belum ada, APK belum diuji di perangkat.
+          Pelajaran: kualitas data dulu, uji otomatis, dan status jujur.
+        </div>
       </div>
     </SceneChrome>
   );
