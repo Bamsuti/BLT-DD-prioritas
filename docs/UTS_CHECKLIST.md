@@ -18,21 +18,21 @@ Setiap butir ketentuan proposal ada di `docs/proposal/PROPOSAL_UTS.pdf` dan juga
 
 | Ketentuan | Lokasi di proposal | Status |
 |---|---|---|
-| Problem statement | Bagian 2 "Latar belakang dan masalah" | Ada |
-| Persona pengguna | Bagian 5 "Persona pengguna utama" | Ada |
-| Minimal 5 user story | Bagian 6, sembilan user story (US-01 … US-09) dengan kriteria penerimaan | Ada, melebihi minimum |
-| Functional requirements | Bagian 7, K-01 … K-08 dalam tabel | Ada |
-| User flow | Bagian 8, diagram alur login → beranda → data calon → penilaian → hasil | Ada |
-| Sitemap | Bagian 9; versi Mermaid di [`docs/rancangan/SITEMAP.md`](rancangan/SITEMAP.md) | Ada |
-| Wireframe / tautan Figma | Bagian 10, lima SVG wireframe tertanam di PDF | Ada sebagai SVG |
-| Tech stack | Bagian 11 (Flutter, Dart, Firebase, GitHub Actions) | Ada |
-| Rancangan database Firestore | Bagian 12, koleksi `calon_penerima` dan `users` beserta field | Ada |
+| Problem statement | Bagian 1 "Problem Statement", termasuk ruang lingkup dan empat pertanyaan kunci | Ada |
+| Persona pengguna | Bagian 2 "Persona" | Ada |
+| Minimal 5 user story | Bagian 3 "User Story", sembilan user story (US-01 … US-09) dengan kriteria penerimaan | Ada, melebihi minimum |
+| Functional requirements | Bagian 4 "Kebutuhan Fungsional", K-01 … K-08 dalam tabel | Ada |
+| User flow | Bagian 5 "User Flow", alur login → beranda → data calon → penilaian → hasil | Ada |
+| Sitemap | Bagian 6 "Sitemap"; versi Mermaid di [`docs/rancangan/SITEMAP.md`](rancangan/SITEMAP.md) | Ada |
+| Wireframe / tautan Figma | Bagian 7 "Wireframe", lima SVG wireframe tertanam di PDF | Ada sebagai SVG |
+| Tech stack | Bagian 8 "Tech Stack" (Flutter, Dart, Firebase, GitHub Actions) | Ada |
+| Rancangan database Firestore | Bagian 9 "Rancangan Database Firestore", koleksi `calon_penerima` dan `users` beserta field | Ada |
 
 **Catatan kejujuran Figma:** proyek ini **tidak memakai Figma** karena tidak ada berkas Figma yang benar-benar dibuat. Wireframe asli berupa SVG di `docs/screenshots/` dan ditampilkan di PDF. Proposal menyatakan hal ini secara eksplisit; tidak ada tautan Figma yang dibuat-buat. SVG dapat diimpor ke Figma bila dosen meminta kanal tersebut.
 
 ## 3. Isi video
 
-Durasi total 5 menit 7 detik (307,16 detik) — di bawah batas 10 menit. Narasi dihasilkan Edge TTS `id-ID-ArdiNeural`; **SAW** ditulis SAW di layar dan diucapkan "Simple Additive Weighting" dalam narasi.
+Durasi total 5 menit 7 detik (307,18 detik) — di bawah batas 10 menit. Narasi dihasilkan Edge TTS `id-ID-ArdiNeural`; **SAW** ditulis SAW di layar dan diucapkan "Simple Additive Weighting" dalam narasi.
 
 | Waktu | Bagian yang diminta | Isi |
 |---|---|---|
