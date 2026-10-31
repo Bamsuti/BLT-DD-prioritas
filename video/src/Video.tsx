@@ -3,8 +3,11 @@ import { AbsoluteFill, Audio, Sequence, staticFile } from 'remotion';
 import timing from './audio-timing.json';
 import { IntroScene } from './scenes/IntroScene';
 import { ProblemScene } from './scenes/ProblemScene';
-import { TargetScene } from './scenes/TargetScene';
-import { ScopeScene } from './scenes/ScopeScene';
+import { NeedsScene } from './scenes/NeedsScene';
+import { DesignScene } from './scenes/DesignScene';
+import { DemoScene } from './scenes/DemoScene';
+import { ResponsiveScene } from './scenes/ResponsiveScene';
+import { TechScene } from './scenes/TechScene';
 import { ClosingScene } from './scenes/ClosingScene';
 import { colors, type SceneTiming } from './theme';
 
@@ -28,10 +31,16 @@ const renderScene = (scene: SceneTiming, index: number) => {
     case 'scene-02':
       return <ProblemScene {...props} />;
     case 'scene-03':
-      return <TargetScene {...props} />;
+      return <NeedsScene {...props} />;
     case 'scene-04':
-      return <ScopeScene {...props} />;
+      return <DesignScene {...props} />;
     case 'scene-05':
+      return <DemoScene {...props} />;
+    case 'scene-06':
+      return <ResponsiveScene {...props} />;
+    case 'scene-07':
+      return <TechScene {...props} />;
+    case 'scene-08':
       return <ClosingScene {...props} />;
     default:
       return null;

@@ -1,71 +1,115 @@
 {
   "voice": "id-ID-ArdiNeural",
   "rate": 0.95,
-  "totalSeconds": 119.24,
+  "totalSeconds": 307.16,
   "scenes": [
     {
       "id": "scene-01",
       "title": "Pembuka",
-      "audio": 10.272,
+      "audio": 24.576,
       "padding": 2,
-      "duration": 12.272,
+      "duration": 26.576,
       "captions": [
-        "BLT-DD Prioritas",
-        "Prototipe akademik penentuan prioritas calon penerima BLT-DD,",
-        "dibangun dengan Flutter dan Firebase."
+        "Nabhan Miqdad Mubarok · 23.01.55.0017 · Kelas A1",
+        "UTS Mobile and Web Application Development",
+        "Perancangan Aplikasi Penentuan Prioritas Calon Penerima BLT-DD",
+        "Berbasis Cross-Platform Menggunakan Flutter dan Firebase"
       ]
     },
     {
       "id": "scene-02",
-      "title": "Masalah",
-      "audio": 23.688,
+      "title": "Masalah & Pengguna",
+      "audio": 33.12,
       "padding": 2,
-      "duration": 25.688,
+      "duration": 35.12,
       "captions": [
-        "Data calon tersebar di beberapa berkas spreadsheet.",
+        "Data calon tersebar di beberapa spreadsheet.",
         "Penilaian manual dan perhitungan prioritas diulang dengan cara berbeda.",
         "Riwayat perubahan sulit ditelusuri.",
-        "Kriteria yang tidak konsisten membuat hasil sulit dipertanggungjawabkan.",
-        "Petugas butuh waktu lebih lama menyiapkan bahan musyawarah."
+        "Hasil sulit dipertanggungjawabkan; penyiapan musyawarah lebih lama.",
+        "Pengguna utama: petugas pengelola data BLT-DD di tingkat desa."
       ]
     },
     {
       "id": "scene-03",
-      "title": "Target",
-      "audio": 21.192,
+      "title": "Kebutuhan & Prioritas",
+      "audio": 46.2,
       "padding": 2,
-      "duration": 23.192,
+      "duration": 48.2,
       "captions": [
-        "Sasaran: petugas pengelola data BLT-DD di tingkat desa.",
-        "Lima halaman: login, beranda, data calon, penilaian, hasil prioritas.",
-        "Satu alur kerja konsisten, dari pendataan hingga peninjauan prioritas."
+        "Lima kebutuhan: login, CRUD, penilaian, skor SAW, responsif.",
+        "Prioritas 1: CRUD dan validasi formulir — data bersih.",
+        "Prioritas 2: penilaian tujuh kriteria dan skor SAW.",
+        "Pendukung: login, tampilan responsif, integrasi Firebase."
       ]
     },
     {
       "id": "scene-04",
-      "title": "Ruang Lingkup",
-      "audio": 33.264,
+      "title": "Rancangan",
+      "audio": 39.552,
       "padding": 2,
-      "duration": 35.264,
+      "duration": 41.552,
       "captions": [
-        "Lingkup: pengelolaan data calon dan validasi formulir.",
-        "Tujuh kriteria skala 1–5, skor SAW, dan pengurutan otomatis.",
-        "Tampilan responsif untuk web dan Android.",
-        "Firebase sudah disiapkan, tetapi belum terhubung; aplikasi berjalan di mode demo.",
-        "Di luar lingkup: pencairan dana dan integrasi pemerintah.",
-        "Juga di luar lingkup: data warga nyata dan keputusan resmi."
+        "Alur: login → beranda → data calon → penilaian → hasil → keluar.",
+        "Sitemap: lima halaman utama yang saling terhubung.",
+        "Wireframe: ringkasan, daftar calon, formulir, peringkat.",
+        "Layar sempit memakai navigasi bawah; layar lebar navigasi samping."
       ]
     },
     {
       "id": "scene-05",
-      "title": "Penutup",
-      "audio": 19.824,
-      "padding": 3,
-      "duration": 22.824,
+      "title": "Demo Prototipe",
+      "audio": 43.92,
+      "padding": 2,
+      "duration": 45.92,
       "captions": [
-        "Skor hanya bahan simulasi, bukan keputusan resmi.",
-        "Seluruh data demonstrasi bersifat sintetis.",
-        "Kode dan dokumentasi: GitHub Bamsuti, BLT-DD prioritas."
+        "Demo runtime: login dengan akun demo.",
+        "Beranda: lima calon, tujuh kriteria, ringkasan skor.",
+        "Data calon: tambah, ubah, hapus.",
+        "Formulir kosong ditolak; pesan validasi muncul.",
+        "Penilaian menampilkan tujuh kriteria dan bobot demo.",
+        "Hasil: skor 0–100, urutan menurun, penjelasan rumus."
+      ]
+    },
+    {
+      "id": "scene-06",
+      "title": "Tampilan Responsif",
+      "audio": 10.944,
+      "padding": 2,
+      "duration": 12.944,
+      "captions": [
+        "Layar sempit: navigasi berubah menjadi bar bawah.",
+        "Seluruh halaman tetap dapat diakses.",
+        "Kartu dan formulir menyesuaikan lebar layar."
+      ]
+    },
+    {
+      "id": "scene-07",
+      "title": "Rencana Teknis & Data",
+      "audio": 48.408,
+      "padding": 2,
+      "duration": 50.408,
+      "captions": [
+        "Satu basis kode Flutter untuk Web dan Android.",
+        "UI lima halaman → model SAW → backend → Firebase.",
+        "Firestore: koleksi calon_penerima menyimpan tujuh nilai.",
+        "users menyimpan role admin/petugas; rules membatasi akses.",
+        "Firebase belum terhubung; demo berjalan di memori."
+      ]
+    },
+    {
+      "id": "scene-08",
+      "title": "Empat Jawaban & Penutup",
+      "audio": 43.44,
+      "padding": 3,
+      "duration": 46.44,
+      "captions": [
+        "Masalah: pendataan dan penilaian tersebar serta tidak konsisten.",
+        "Pengguna: petugas pengelola data BLT-DD di desa.",
+        "Prioritas: kualitas data, lalu skor SAW.",
+        "Data: Firebase Auth + Cloud Firestore, akses berbasis role.",
+        "Skor hanya simulasi, bukan keputusan resmi.",
+        "github.com/Bamsuti/BLT-DD-prioritas"
       ]
     }
   ]

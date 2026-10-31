@@ -46,7 +46,7 @@ export const IntroScene: React.FC<Props> = ({ scene, index, total }) => {
               opacity: title,
             }}
           >
-            Prototipe Akademik · Flutter & Firebase
+            UTS · Mobile and Web Application Development
           </div>
           <div
             style={{
@@ -65,16 +65,16 @@ export const IntroScene: React.FC<Props> = ({ scene, index, total }) => {
           </div>
           <div
             style={{
-              marginTop: 26,
-              fontSize: 30,
+              marginTop: 24,
+              fontSize: 23,
               lineHeight: 1.45,
               color: colors.muted,
-              maxWidth: 720,
+              maxWidth: 780,
               opacity: title,
             }}
           >
-            Penentuan prioritas calon penerima bantuan langsung tunai dana desa
-            berbasis cross-platform.
+            Perancangan Aplikasi Penentuan Prioritas Calon Penerima BLT-DD
+            Berbasis Cross-Platform Menggunakan Flutter dan Firebase
           </div>
 
           <div style={{ display: 'flex', gap: 12, marginTop: 34, flexWrap: 'wrap' }}>
@@ -96,7 +96,7 @@ export const IntroScene: React.FC<Props> = ({ scene, index, total }) => {
           </div>
 
           <div style={{ marginTop: 20, fontSize: 18, color: colors.muted, letterSpacing: 0.2 }}>
-            Mobile and Web Application Development · Ganjil 2026/2027
+            Prototipe akademik · Flutter & Firebase · Ganjil 2026/2027
           </div>
         </div>
 

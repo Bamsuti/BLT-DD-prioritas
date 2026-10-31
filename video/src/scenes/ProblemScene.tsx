@@ -89,7 +89,7 @@ export const ProblemScene: React.FC<Props> = ({ scene, index, total }) => {
                 style={{
                   display: 'flex',
                   gap: 26,
-                  padding: '26px 30px',
+                  padding: '22px 30px',
                   borderRadius: 18,
                   background: 'rgba(255, 251, 248, 0.88)',
                   border: `1px solid ${colors.line}`,
@@ -132,6 +132,39 @@ export const ProblemScene: React.FC<Props> = ({ scene, index, total }) => {
               </div>
             );
           })}
+
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: 22,
+              padding: '18px 28px',
+              borderRadius: 18,
+              background: colors.ink,
+              color: '#FFF9F5',
+            }}
+          >
+            <div
+              style={{
+                fontSize: 13,
+                fontWeight: 800,
+                letterSpacing: 1.8,
+                color: '#E8B9A8',
+                width: 150,
+                flexShrink: 0,
+              }}
+            >
+              PENGGUNA UTAMA
+            </div>
+            <div>
+              <div style={{ fontSize: 24, fontWeight: 800 }}>
+                Petugas pengelola data BLT-DD di tingkat desa
+              </div>
+              <div style={{ marginTop: 4, fontSize: 17, color: '#D9C9C3' }}>
+                Mendata calon · memperbarui nilai · menyiapkan bahan musyawarah
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </SceneChrome>

@@ -5,18 +5,22 @@ import { colors, type SceneTiming } from '../theme';
 
 type Props = { scene: SceneTiming; index: number; total: number };
 
-const notes = [
+const answers = [
   {
-    title: 'Bahan simulasi',
-    body: 'Skor SAW hanya untuk peninjauan awal, bukan keputusan resmi penerima bantuan.',
+    question: 'Masalah apa yang diselesaikan?',
+    answer: 'Pendataan dan penilaian calon yang tersebar, manual, dan sulit ditelusuri.',
   },
   {
-    title: 'Data sintetis',
-    body: 'Seluruh data demonstrasi dibuat untuk prototipe dan bukan data warga nyata.',
+    question: 'Siapa pengguna utamanya?',
+    answer: 'Petugas pengelola data BLT-DD di tingkat desa.',
   },
   {
-    title: 'Sumber terbuka',
-    body: 'Kode, dokumentasi, dan hasil pengujian tersedia di repositori GitHub.',
+    question: 'Mengapa fitur ini diprioritaskan?',
+    answer: 'CRUD dan validasi menjaga kualitas data; skor SAW adalah inti penentuan urutan.',
+  },
+  {
+    question: 'Bagaimana data akan disimpan?',
+    answer: 'Firebase Authentication dan Cloud Firestore dengan akses berbasis role.',
   },
 ];
 
@@ -25,19 +29,14 @@ export const ClosingScene: React.FC<Props> = ({ scene, index, total }) => {
   const { fps } = useVideoConfig();
   const head = spring({ frame, fps, config: { damping: 200 } });
   const repo = spring({
-    frame: Math.max(0, frame - 20),
-    fps,
-    config: { damping: 200 },
-  });
-  const thanks = spring({
-    frame: Math.max(0, frame - 34),
+    frame: Math.max(0, frame - 26),
     fps,
     config: { damping: 200 },
   });
 
   return (
     <SceneChrome scene={scene} index={index} total={total}>
-      <div style={{ position: 'absolute', top: 186, left: 108, right: 108 }}>
+      <div style={{ position: 'absolute', top: 140, left: 108, right: 108 }}>
         <div
           style={{
             fontSize: 20,
@@ -48,71 +47,60 @@ export const ClosingScene: React.FC<Props> = ({ scene, index, total }) => {
             opacity: head,
           }}
         >
-          Penutup
+          Penutup · empat pertanyaan kunci
         </div>
         <div
           style={{
-            marginTop: 14,
-            fontSize: 62,
+            marginTop: 10,
+            fontSize: 46,
             fontWeight: 800,
-            letterSpacing: -1.2,
-            lineHeight: 1.14,
+            letterSpacing: -0.7,
             opacity: head,
-            transform: `translateY(${(1 - head) * 30}px)`,
+            transform: `translateY(${(1 - head) * 20}px)`,
           }}
         >
-          Bahan simulasi,
-          <br />
-          bukan keputusan resmi
+          Ringkasan jawaban
         </div>
 
-        <div style={{ display: 'flex', gap: 22, marginTop: 40 }}>
-          {notes.map((note, i) => {
+        <div
+          style={{
+            marginTop: 22,
+            display: 'grid',
+            gridTemplateColumns: '1fr 1fr',
+            gap: 18,
+          }}
+        >
+          {answers.map((item, i) => {
             const enter = spring({
-              frame: Math.max(0, frame - 10 - i * 8),
+              frame: Math.max(0, frame - 8 - i * 7),
               fps,
               config: { damping: 200 },
             });
             return (
               <div
-                key={note.title}
+                key={item.question}
                 style={{
-                  flex: 1,
-                  padding: '26px 28px',
+                  minHeight: 172,
+                  padding: '20px 24px',
                   borderRadius: 18,
-                  background: 'rgba(255, 251, 248, 0.88)',
-                  border: `1px solid ${colors.line}`,
+                  background: i === 0 ? 'rgba(243, 226, 229, 0.92)' : 'rgba(255, 251, 248, 0.9)',
+                  border: `1px solid ${i === 0 ? '#DDBFC5' : colors.line}`,
                   opacity: enter,
-                  transform: `translateY(${(1 - enter) * 26}px)`,
+                  transform: `translateY(${(1 - enter) * 24}px)`,
                 }}
               >
                 <div
                   style={{
-                    width: 34,
-                    height: 34,
-                    borderRadius: '50%',
-                    background: colors.maroonSoft,
-                    color: colors.maroon,
+                    fontSize: 15,
                     fontWeight: 800,
-                    fontSize: 17,
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    marginBottom: 16,
+                    letterSpacing: 1.2,
+                    color: colors.maroon,
                   }}
                 >
-                  {String(i + 1).padStart(2, '0')}
+                  {String(i + 1).padStart(2, '0')} · {item.question}
                 </div>
-                <div style={{ fontSize: 24, fontWeight: 800 }}>{note.title}</div>
-                <div
-                  style={{
-                    marginTop: 8,
-                    fontSize: 19,
-                    lineHeight: 1.5,
-                    color: colors.muted,
-                  }}
-                >
-                  {note.body}
+                <div style={{ marginTop: 8, fontSize: 23, fontWeight: 650, lineHeight: 1.4 }}>
+                  {item.answer}
                 </div>
               </div>
             );
@@ -121,49 +109,41 @@ export const ClosingScene: React.FC<Props> = ({ scene, index, total }) => {
 
         <div
           style={{
-            marginTop: 34,
+            marginTop: 20,
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between',
             gap: 24,
             opacity: repo,
-            transform: `translateY(${(1 - repo) * 20}px)`,
+            transform: `translateY(${(1 - repo) * 18}px)`,
           }}
         >
           <div
             style={{
-              padding: '16px 26px',
-              borderRadius: 14,
+              padding: '14px 24px',
+              borderRadius: 13,
               background: colors.ink,
               color: '#FFF9F5',
-              fontSize: 21,
+              fontSize: 19,
               fontWeight: 700,
-              letterSpacing: 0.2,
             }}
           >
             github.com/Bamsuti/BLT-DD-prioritas
           </div>
-          <div
-            style={{
-              fontSize: 20,
-              color: colors.muted,
-              textAlign: 'right',
-              lineHeight: 1.5,
-            }}
-          >
-            Nabhan Miqdad Mubarok · 23.01.55.0017
+          <div style={{ fontSize: 17, color: colors.muted, textAlign: 'right', lineHeight: 1.5 }}>
+            Skor hanya bahan simulasi, bukan keputusan resmi.
             <br />
-            Mobile and Web Application Development · 2026/2027
+            Nabhan Miqdad Mubarok · 23.01.55.0017 · Kelas A1
           </div>
         </div>
 
         <div
           style={{
-            marginTop: 26,
-            fontSize: 23,
-            fontWeight: 700,
+            marginTop: 14,
+            fontSize: 26,
+            fontWeight: 800,
             color: colors.maroon,
-            opacity: thanks,
+            opacity: repo,
           }}
         >
           Terima kasih.
