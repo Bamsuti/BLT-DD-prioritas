@@ -10,7 +10,7 @@ Dokumen ini memetakan setiap butir ketentuan UTS ke bukti yang benar-benar ada d
 | Proposal PDF | [`docs/proposal/PROPOSAL_UTS.pdf`](proposal/PROPOSAL_UTS.pdf) — 9 halaman | Selesai |
 | Repository GitHub | <https://github.com/Bamsuti/BLT-DD-prioritas> — README, kode, test, dokumen, riwayat commit bertahap | Selesai |
 
-Video juga dapat diputar langsung dari repository (raw GitHub) setelah commit terakhir. Tautan demo web: <https://bamsuti.github.io/BLT-DD-prioritas/>.
+Video dapat diunduh langsung dari repository (raw GitHub, terverifikasi HTTP 200 dengan ukuran 24.272.781 byte) dan diputar dengan pemutar video apa pun. Tautan demo web: <https://bamsuti.github.io/BLT-DD-prioritas/>.
 
 ## 2. Isi proposal
 
