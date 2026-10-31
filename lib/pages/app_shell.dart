@@ -96,7 +96,7 @@ class _AppShellState extends State<AppShell> {
   }
 
   Future<void> _openForm({Candidate? existing, bool validateOnOpen = false}) async {
-    await showDialog<void>(
+    final saved = await showDialog<Candidate>(
       context: context,
       builder: (_) => CandidateDialog(
         existing: existing,
@@ -104,6 +104,12 @@ class _AppShellState extends State<AppShell> {
         onSubmit: _saveCandidate,
         validateOnOpen: validateOnOpen,
       ),
+    );
+    if (!mounted || saved == null) return;
+    _message(
+      existing == null
+          ? 'Data ${saved.name} (${saved.simulationCode}) tersimpan.'
+          : 'Data ${saved.name} (${saved.simulationCode}) diperbarui.',
     );
   }
 

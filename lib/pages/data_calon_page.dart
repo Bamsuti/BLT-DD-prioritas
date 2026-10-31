@@ -204,7 +204,7 @@ class _CandidateDialogState extends State<CandidateDialog> {
     );
     try {
       await widget.onSubmit(candidate);
-      if (mounted) Navigator.of(context).pop();
+      if (mounted) Navigator.of(context).pop(candidate);
     } on BackendFailure catch (error) {
       _showError(error.message);
     } catch (_) {

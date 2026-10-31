@@ -277,6 +277,7 @@ void main() {
       await tester.tap(find.byKey(const Key('candidate-save')));
       await tester.pumpAndSettle();
 
+      expect(find.text('Data Calon Simulasi F (SIM-050) tersimpan.'), findsOneWidget);
       final afterAdd = await AppBackend.getCandidates();
       expect(
         afterAdd.any((candidate) => candidate.simulationCode == 'SIM-050'),
@@ -289,6 +290,10 @@ void main() {
       await tester.tap(find.byKey(const Key('candidate-save')));
       await tester.pumpAndSettle();
 
+      expect(
+        find.text('Data Calon Simulasi A Revisi (SIM-001) diperbarui.'),
+        findsOneWidget,
+      );
       final afterEdit = await AppBackend.getCandidates();
       expect(afterEdit.first.name, 'Calon Simulasi A Revisi');
       expect(find.text('Calon Simulasi A Revisi'), findsOneWidget);
@@ -311,6 +316,18 @@ void main() {
       await tester.tap(find.text('Hapus'));
       await tester.pumpAndSettle();
       expect(find.textContaining('SIM-001'), findsNothing);
+
+      for (var i = 0; i < 4; i++) {
+        await tester.tap(find.byTooltip('Hapus').first);
+        await tester.pumpAndSettle();
+        await tester.tap(find.text('Hapus'));
+        await tester.pumpAndSettle();
+      }
+      expect(find.text('Belum ada data'), findsOneWidget);
+      expect(
+        find.text('Klik "Tambah calon" untuk memasukkan data pertama.'),
+        findsOneWidget,
+      );
     });
 
     testWidgets('Nilai kriteria yang diubah memengaruhi skor', (tester) async {
