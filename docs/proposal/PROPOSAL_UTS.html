@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8" />
+<title>Proposal UTS — BLT-DD Prioritas</title>
+<style>
+  @page { size: A4; margin: 16mm 15mm 16mm 15mm; }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: "Segoe UI", Arial, sans-serif;
+    color: #241B1F;
+    font-size: 10.4pt;
+    line-height: 1.52;
+  }
+  h1, h2, h3 { color: #5A1220; margin: 0; }
+  h1 { font-size: 21pt; line-height: 1.2; }
+  h2 {
+    font-size: 15pt;
+    margin: 0 0 8px;
+    padding-bottom: 5px;
+    border-bottom: 2px solid #7A1C2E;
+  }
+  h3 { font-size: 11.5pt; margin: 14px 0 5px; color: #7A1C2E; }
+  p { margin: 6px 0 9px; }
+  ul, ol { margin: 5px 0 10px 20px; padding: 0; }
+  li { margin: 3px 0; }
+  a { color: #7A1C2E; text-decoration: none; }
+  .cover {
+    height: 258mm;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    page-break-after: always;
+  }
+  .cover-band {
+    background: #7A1C2E;
+    color: #FFF7F3;
+    padding: 30px 34px 26px;
+    border-radius: 10px;
+  }
+  .cover-band .kicker {
+    font-size: 9pt;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    opacity: .9;
+  }
+  .cover-band h1 { color: #FFF7F3; font-size: 24pt; margin-top: 12px; }
+  .cover-band .sub { margin-top: 10px; font-size: 12pt; line-height: 1.4; }
+  .cover-meta {
+    margin-top: 24px;
+    border: 1px solid #E2D5D0;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  .cover-meta table { margin: 0; }
+  .cover-meta td { border-bottom: 1px solid #E2D5D0; }
+  .cover-meta tr:last-child td { border-bottom: 0; }
+  .cover-foot { font-size: 9pt; color: #6E6064; line-height: 1.6; }
+  .section { page-break-before: always; }
+  .lead { font-size: 11pt; color: #4A3B40; }
+  .note {
+    margin: 10px 0;
+    padding: 10px 13px;
+    border-left: 4px solid #7A1C2E;
+    background: #FBF0DD;
+    font-size: 9.6pt;
+    line-height: 1.5;
+  }
+  .ok { border-left-color: #2E6B4F; background: #EAF3EE; }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 8px 0 12px;
+    font-size: 9.2pt;
+  }
+  th {
+    background: #7A1C2E;
+    color: #FFF7F3;
+    text-align: left;
+    padding: 6px 7px;
+    font-weight: 600;
+  }
+  td {
+    border: 1px solid #E2D5D0;
+    padding: 5px 7px;
+    vertical-align: top;
+  }
+  tr { page-break-inside: avoid; }
+  tbody tr:nth-child(even) td { background: #FBF7F4; }
+  .flow {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin: 10px 0;
+  }
+  .flow span.step {
+    padding: 7px 10px;
+    border-radius: 7px;
+    background: #F3E2E5;
+    border: 1px solid #DDBFC5;
+    font-weight: 600;
+    font-size: 9pt;
+    color: #5A1220;
+  }
+  .flow span.arrow { color: #7A1C2E; font-weight: 700; }
+  .tree { margin: 8px 0 12px 0; padding: 10px 14px; background: #FBF7F4; border: 1px solid #E2D5D0; border-radius: 8px; }
+  .tree div { margin: 5px 0; }
+  .tree .lvl2 { margin-left: 24px; }
+  .tree .lvl3 { margin-left: 48px; color: #6E6064; }
+  .wire-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 8px;
+  }
+  .wire {
+    border: 1px solid #E2D5D0;
+    border-radius: 7px;
+    padding: 6px;
+    page-break-inside: avoid;
+  }
+  .wire img { width: 100%; display: block; border-radius: 4px; }
+  .wire .cap { font-size: 8.2pt; color: #6E6064; margin-top: 4px; }
+  .schema {
+    font-family: Consolas, "Courier New", monospace;
+    font-size: 8.8pt;
+    background: #241B1F;
+    color: #FFF7F3;
+    padding: 12px 14px;
+    border-radius: 8px;
+    white-space: pre-wrap;
+    line-height: 1.55;
+  }
+  .small { font-size: 8.8pt; color: #6E6064; }
+  .stamp {
+    display: inline-block;
+    padding: 3px 8px;
+    border-radius: 999px;
+    background: #FBF0DD;
+    color: #8A5A1F;
+    font-size: 8.5pt;
+    font-weight: 600;
+  }
+  .stamp.ok { background: #EAF3EE; color: #2E6B4F; }
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .box { border: 1px solid #E2D5D0; border-radius: 8px; padding: 10px 12px; page-break-inside: avoid; }
+  .box h3 { margin-top: 0; }
+  .database table { font-size: 8.6pt; }
+  .database td { padding: 4px 6px; }
+  .database h3 { margin: 9px 0 4px; }
+</style>
+</head>
+<body>
+
+<section class="cover">
+  <div>
+    <div class="cover-band">
+      <div class="kicker">Proposal Ringkas · Ujian Tengah Semester</div>
+      <h1>BLT-DD Prioritas</h1>
+      <div class="sub">
+        Perancangan Aplikasi Penentuan Prioritas Calon Penerima BLT-DD
+        Berbasis Cross-Platform Menggunakan Flutter dan Firebase
+      </div>
+    </div>
+
+    <div class="cover-meta">
+      <table>
+        <tr><th style="width:28%">Mahasiswa</th><td>Nabhan Miqdad Mubarok</td></tr>
+        <tr><th>NIM</th><td>23.01.55.0017</td></tr>
+        <tr><th>Kelas</th><td>A1</td></tr>
+        <tr><th>Mata kuliah</th><td>Mobile and Web Application Development</td></tr>
+        <tr><th>Periode</th><td>Ganjil 2026/2027</td></tr>
+        <tr><th>Repository</th><td><a href="https://github.com/Bamsuti/BLT-DD-prioritas">github.com/Bamsuti/BLT-DD-prioritas</a></td></tr>
+        <tr><th>Demo web</th><td><a href="https://bamsuti.github.io/BLT-DD-prioritas/">bamsuti.github.io/BLT-DD-prioritas</a></td></tr>
+        <tr><th>Video</th><td><a href="https://github.com/Bamsuti/BLT-DD-prioritas/raw/main/docs/video/blt-dd-prioritas-promo.mp4">docs/video/blt-dd-prioritas-promo.mp4</a></td></tr>
+        <tr><th>Tanggal</th><td>31 Oktober 2026</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="cover-foot">
+    <strong>Status jujur:</strong> prototipe berjalan di mode demo dengan data sintetis.
+    Firebase Authentication dan Cloud Firestore sudah disiapkan di kode, tetapi belum
+    dihubungkan ke project nyata dan belum diuji. Skor SAW hanya bahan simulasi, bukan
+    keputusan resmi penerima bantuan. Tidak ada data warga nyata dalam repository ini.
+  </div>
+</section>
+
+<section>
+  <h2>1. Problem Statement</h2>
+  <p class="lead">
+    Pendataan calon penerima BLT-DD dan penilaian tujuh kriteria kerentanan masih
+    sering dilakukan dengan beberapa berkas spreadsheet yang terpisah. Cara ini
+    menyulitkan pembaruan data, menyulitkan penelusuran riwayat perubahan, dan
+    membuka ruang perbedaan perhitungan antar petugas.
+  </p>
+  <p>
+    Ketika tujuh kriteria tidak diterapkan dengan urutan dan bobot yang sama,
+    perbandingan antar calon sulit dipertanggungjawabkan. Petugas juga membutuhkan
+    waktu lebih lama untuk menyiapkan bahan musyawarah desa. Prototipe ini
+    menyatukan pendataan calon, validasi formulir, penilaian tujuh kriteria, dan
+    peninjauan urutan prioritas dalam satu alur kerja yang konsisten.
+  </p>
+
+  <h3>Ruang lingkup</h3>
+  <table>
+    <thead><tr><th style="width:50%">Termasuk</th><th>Di luar lingkup</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>Login petugas, CRUD data calon, validasi formulir, tujuh kriteria skala 1–5, skor SAW, pengurutan, tampilan responsif Web/Android.</td>
+        <td>Pencairan dana, integrasi sistem pemerintah, data warga nyata, keputusan resmi penerima bantuan, dan verifikasi lapangan.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="note">
+    <strong>Batasan akademik.</strong> Bobot 20/15/15/15/10/10/15, skala 1–5, dan arah
+    benefit masih asumsi demo. Seluruh nama dan nilai dalam aplikasi adalah data
+    sintetis (<code>Calon Simulasi A–E</code>, <code>SIM-001–SIM-005</code>).
+  </div>
+
+  <h3>Empat pertanyaan kunci</h3>
+  <div class="two-col">
+    <div class="box"><h3>1. Masalah apa yang diselesaikan?</h3><p>Pendataan dan penilaian calon yang tersebar, manual, serta sulit ditelusuri.</p></div>
+    <div class="box"><h3>2. Siapa pengguna utamanya?</h3><p>Petugas pengelola data BLT-DD di tingkat desa.</p></div>
+    <div class="box"><h3>3. Mengapa fitur ini diprioritaskan?</h3><p>CRUD dan validasi menjaga kualitas data; penilaian dan skor SAW adalah inti penentuan urutan.</p></div>
+    <div class="box"><h3>4. Bagaimana data disimpan?</h3><p>Firebase Authentication untuk sesi, Cloud Firestore untuk data calon, dengan security rules berbasis role.</p></div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>2. Persona</h2>
+  <table>
+    <tr><th style="width:24%">Nama persona</th><td>Petugas Pengelola Data BLT-DD (label peran, bukan orang nyata)</td></tr>
+    <tr><th>Konteks</th><td>Pemerintah desa; pengelolaan data calon dan penyiapan bahan peninjauan prioritas.</td></tr>
+    <tr><th>Tujuan</th><td>Mengelola daftar calon dengan struktur konsisten, memperbarui nilai, meninjau skor dan urutan, serta mengetahui status mode data.</td></tr>
+    <tr><th>Masalah</th><td>Data tersebar; perbandingan manual memakan waktu; dasar penilaian dan perubahan nilai sulit diperiksa.</td></tr>
+    <tr><th>Kebutuhan</th><td>Login dengan pesan kesalahan; CRUD; satu formulir tujuh kriteria; skor dan ranking dari nilai tersimpan; peringatan hasil simulasi.</td></tr>
+  </table>
+  <div class="note">
+    Persona ini adalah asumsi awal berdasarkan ruang lingkup UTS. Dokumen ini tidak
+    menyatakan wawancara, observasi lapangan, atau usability test telah dilakukan.
+    Kebutuhan dan istilah perlu dikonfirmasi dengan petugas berwenang sebelum
+    pemakaian nyata.
+  </div>
+
+  <h2 style="margin-top:18px">3. User Story</h2>
+  <table>
+    <thead><tr><th style="width:9%">ID</th><th style="width:47%">User story</th><th>Kriteria penerimaan</th></tr></thead>
+    <tbody>
+      <tr><td>US-01</td><td>Sebagai petugas, saya ingin login agar dapat membuka halaman pengelolaan.</td><td>Email kosong/format salah ditolak; kata sandi minimal 6 karakter; kredensial salah memberi pesan; login berhasil menuju Beranda.</td></tr>
+      <tr><td>US-02</td><td>Sebagai petugas, saya ingin melihat ringkasan agar mengetahui kondisi daftar.</td><td>Jumlah calon dari data termuat; jumlah kriteria tujuh; pintasan membuka halaman benar.</td></tr>
+      <tr><td>US-03</td><td>Sebagai petugas, saya ingin menambah calon agar data terkelola.</td><td>ID simulasi, nama, dusun, dan tujuh nilai wajib; ID duplikat ditolak; setelah simpan calon tampil.</td></tr>
+      <tr><td>US-04</td><td>Sebagai petugas, saya ingin mengubah calon agar koreksi data terlihat.</td><td>Form memuat nilai lama; setelah simpan daftar menampilkan perubahan; ID dokumen tidak berubah.</td></tr>
+      <tr><td>US-05</td><td>Sebagai petugas, saya ingin konfirmasi sebelum menghapus.</td><td>Batal mempertahankan data; Hapus menghilangkan data setelah operasi berhasil; error ditampilkan.</td></tr>
+      <tr><td>US-06</td><td>Sebagai petugas, saya ingin mengisi kriteria agar calon dibandingkan konsisten.</td><td>Tujuh dropdown skala 1–5; field wajib; perubahan disimpan melalui Simpan.</td></tr>
+      <tr><td>US-07</td><td>Sebagai petugas, saya ingin melihat ranking agar dapat meninjau skor.</td><td>Skor dihitung dari nilai dan bobot; ranking menurun; hasil bertanda simulasi/bukan keputusan resmi.</td></tr>
+      <tr><td>US-08</td><td>Sebagai petugas, saya ingin memakai aplikasi di web dan ponsel.</td><td>Layar sempit memakai NavigationBar; lebar memakai NavigationRail; seluruh menu bisa dibuka.</td></tr>
+      <tr><td>US-09</td><td>Sebagai petugas, saya ingin keluar agar sesi tidak tetap aktif.</td><td>SignOut dipanggil di Firebase; mode demo menghapus sesi lokal; pengguna kembali ke Login.</td></tr>
+    </tbody>
+  </table>
+  <p class="small">Status: jalur mode demo US-01 sampai US-08 diuji otomatis (24 test lulus). Jalur Firebase pada US-01 dan US-09 belum diuji karena project belum dikonfigurasi.</p>
+</section>
+
+<section class="section">
+  <h2>4. Kebutuhan Fungsional</h2>
+  <table>
+    <thead><tr><th style="width:8%">Kode</th><th style="width:36%">Kebutuhan</th><th style="width:22%">Fitur</th><th>Bukti pemeriksaan</th></tr></thead>
+    <tbody>
+      <tr><td>K-01</td><td>Login dan mengetahui login gagal</td><td>Validasi email/password, loading, error, logout</td><td>6 test login/logout (mode demo)</td></tr>
+      <tr><td>K-02</td><td>Ringkasan kondisi data</td><td>Jumlah calon/kriteria, pintasan</td><td>Ringkasan dihitung dari data; screenshot runtime</td></tr>
+      <tr><td>K-03</td><td>Mengelola calon</td><td>Tambah, lihat, ubah, hapus, konfirmasi</td><td>4 test CRUD/validasi (mode demo)</td></tr>
+      <tr><td>K-04</td><td>Mengisi tujuh nilai konsisten</td><td>Dropdown skala 1–5, field wajib</td><td>Test model kriteria dan validator</td></tr>
+      <tr><td>K-05</td><td>Kode simulasi unik</td><td>ID simulasi wajib dan cek duplikat</td><td>Test ID duplikat</td></tr>
+      <tr><td>K-06</td><td>Meninjau hasil</td><td>Normalisasi, pembobotan, pengurutan</td><td>5 test model + screenshot</td></tr>
+      <tr><td>K-07</td><td>Akses pada layar berbeda</td><td>NavigationBar dan NavigationRail</td><td>2 test viewport 420/1280 px + screenshot 390 px</td></tr>
+      <tr><td>K-08</td><td>Mengetahui status data</td><td>Status Demo/Firebase, pesan error</td><td>Label demo tampil; jalur Firebase belum diuji</td></tr>
+    </tbody>
+  </table>
+  <p class="small">Kebutuhan dipetakan ke halaman dan bukti di <code>docs/rancangan/KEBUTUHAN.md</code>. Matriks pengujian lengkap ada di <code>docs/PENGUJIAN.md</code>.</p>
+</section>
+
+<section class="section">
+  <h2>5. User Flow</h2>
+  <div class="flow">
+    <span class="step">Login</span><span class="arrow">→</span>
+    <span class="step">Beranda</span><span class="arrow">→</span>
+    <span class="step">Data Calon</span><span class="arrow">→</span>
+    <span class="step">Penilaian</span><span class="arrow">→</span>
+    <span class="step">Hasil</span><span class="arrow">→</span>
+    <span class="step">Keluar</span>
+  </div>
+  <ul>
+    <li><strong>Login gagal:</strong> email kosong/format salah atau kredensial salah menampilkan pesan dan tetap di Login.</li>
+    <li><strong>Login berhasil:</strong> membuka Beranda dengan ringkasan dari data termuat.</li>
+    <li><strong>CRUD:</strong> Data Calon membuka dialog tambah/ubah yang sama; hapus selalu meminta konfirmasi.</li>
+    <li><strong>Penilaian:</strong> pengguna mengubah tujuh nilai; skor dihitung ulang dari nilai tersimpan.</li>
+    <li><strong>Hasil:</strong> urutan menurun dengan penjelasan rumus dan pengingat bahwa hasil hanya simulasi.</li>
+  </ul>
+  <p class="small">Rincian langkah dan kondisi gagal: <code>docs/rancangan/USER_FLOW.md</code>.</p>
+
+  <h2 style="margin-top:18px">6. Sitemap</h2>
+  <div class="tree">
+    <div><strong>Login</strong> — autentikasi dan status mode</div>
+    <div class="lvl2">└─ <strong>Beranda / App Shell</strong> — ringkasan dan pintasan</div>
+    <div class="lvl3">├─ Data Calon Penerima — daftar, tambah, ubah, hapus</div>
+    <div class="lvl3">│&nbsp;&nbsp;├─ Dialog tambah/ubah calon</div>
+    <div class="lvl3">│&nbsp;&nbsp;└─ Dialog konfirmasi hapus</div>
+    <div class="lvl3">├─ Penilaian &amp; Prioritas — tujuh kriteria dan bobot</div>
+    <div class="lvl3">└─ Hasil Prioritas — skor dan peringkat</div>
+    <div class="lvl2">└─ Keluar — mengakhiri sesi dan kembali ke Login</div>
+  </div>
+  <p class="small">Sitemap lengkap: <code>docs/rancangan/SITEMAP.md</code>.</p>
+</section>
+
+<section class="section">
+  <h2>7. Wireframe</h2>
+  <p>
+    Wireframe disediakan sebagai lima SVG di <code>docs/screenshots/</code>. Gambar
+    ini adalah rancangan awal, bukan screenshot runtime. Proyek ini tidak memakai
+    Figma; SVG dapat diimpor ke Figma bila diperlukan. Screenshot implementasi
+    aktual tersedia di <code>docs/screenshots/runtime/</code>.
+  </p>
+  <div class="wire-grid">
+    <div class="wire"><img src="../screenshots/01-login-wireframe.svg" alt="Wireframe Login"><div class="cap">Login — autentikasi dan status mode</div></div>
+    <div class="wire"><img src="../screenshots/02-beranda-wireframe.svg" alt="Wireframe Beranda"><div class="cap">Beranda — ringkasan dan pintasan</div></div>
+    <div class="wire"><img src="../screenshots/03-data-calon-wireframe.svg" alt="Wireframe Data Calon"><div class="cap">Data Calon — daftar dan aksi CRUD</div></div>
+    <div class="wire"><img src="../screenshots/04-penilaian-wireframe.svg" alt="Wireframe Penilaian"><div class="cap">Penilaian — tujuh kriteria dan bobot</div></div>
+  </div>
+  <div style="margin-top:10px; max-width:49%">
+    <div class="wire"><img src="../screenshots/05-hasil-prioritas-wireframe.svg" alt="Wireframe Hasil"><div class="cap">Hasil Prioritas — peringkat dan penjelasan rumus</div></div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>8. Tech Stack</h2>
+  <table>
+    <thead><tr><th style="width:24%">Lapisan</th><th style="width:38%">Teknologi</th><th>Keterangan</th></tr></thead>
+    <tbody>
+      <tr><td>Aplikasi</td><td>Flutter 3.47.7 / Dart 3.13.5, Material 3</td><td>Satu basis kode untuk Web dan Android; responsif pada breakpoint 760 px.</td></tr>
+      <tr><td>Model &amp; perhitungan</td><td>Dart murni</td><td>Tujuh kriteria, normalisasi, bobot, skor SAW, ranking, dan tie-break.</td></tr>
+      <tr><td>Autentikasi</td><td>Firebase Authentication</td><td>Email/Password; kode aktif hanya bila konfigurasi <code>--dart-define</code> lengkap. Belum diuji dengan project nyata.</td></tr>
+      <tr><td>Database</td><td>Cloud Firestore + Security Rules</td><td>Koleksi <code>calon_penerima</code> dan <code>users</code>; rules berbasis role. Belum diuji di Emulator Suite.</td></tr>
+      <tr><td>Backend mode demo</td><td>Penyimpanan di memori</td><td>Data contoh dimuat ulang saat aplikasi dibuka; dipakai untuk demo publik.</td></tr>
+      <tr><td>CI/CD</td><td>GitHub Actions, GitHub Pages</td><td>Analyze, 24 test, build Web, deploy Pages; build APK debug juga berhasil di CI.</td></tr>
+      <tr><td>Dokumentasi video</td><td>Remotion 4, React 19, TypeScript 5.9, Edge TTS</td><td>Video 1920×1080, narasi Bahasa Indonesia, tanpa musik.</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Alur data</h3>
+  <p>
+    <code>AppShell</code> memuat daftar calon dari <code>AppBackend</code> → halaman
+    menerima <code>List&lt;Candidate&gt;</code> → form mengirim <code>Candidate</code>
+    kembali → backend menyimpan (memori atau Firestore) → daftar dimuat ulang →
+    skor dihitung ulang oleh <code>rankCandidates()</code>.
+  </p>
+
+  <h3>Rumus skor demo</h3>
+  <div class="schema">rᵢⱼ = xᵢⱼ / 5
+Vᵢ  = Σ (wⱼ × rᵢⱼ)   untuk tujuh kriteria
+Skor = Vᵢ × 100</div>
+  <p class="small">Nilai lebih tinggi berarti kondisi lebih rentan; seluruh kriteria diperlakukan sebagai benefit pada demo. Bobot belum divalidasi dengan ketentuan resmi.</p>
+</section>
+
+<section class="section database">
+  <h2>9. Rancangan Database Firestore</h2>
+  <p>
+    Untuk menjaga alur CRUD awal tetap sederhana, data calon dan tujuh nilai
+    kriteria disimpan dalam satu dokumen. Skor dihitung di klien saat halaman
+    hasil dibuka dan belum disimpan sebagai snapshot historis.
+  </p>
+
+  <h3>Koleksi <code>calon_penerima</code></h3>
+  <table>
+    <thead><tr><th style="width:24%">Field</th><th style="width:22%">Jenis</th><th>Keterangan</th></tr></thead>
+    <tbody>
+      <tr><td><code>idSimulasi</code></td><td>string</td><td>Kode unik dalam daftar termuat, mis. SIM-001.</td></tr>
+      <tr><td><code>namaLabel</code></td><td>string</td><td>Label calon fiktif, bukan data warga.</td></tr>
+      <tr><td><code>dusun</code></td><td>string</td><td>Dusun/kelompok simulasi.</td></tr>
+      <tr><td><code>catatan</code></td><td>string (opsional)</td><td>Maksimum 200 karakter pada form.</td></tr>
+      <tr><td><code>scores.C1</code> … <code>scores.C7</code></td><td>integer 1–5</td><td>Tujuh nilai kriteria.</td></tr>
+      <tr><td><code>createdAt</code></td><td>timestamp</td><td>Server timestamp saat dibuat (jalur Firebase).</td></tr>
+      <tr><td><code>updatedAt</code></td><td>timestamp</td><td>Server timestamp saat diubah (jalur Firebase).</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Koleksi <code>users</code></h3>
+  <table>
+    <thead><tr><th style="width:24%">Field</th><th style="width:22%">Jenis</th><th>Keterangan</th></tr></thead>
+    <tbody>
+      <tr><td>ID dokumen</td><td>string</td><td>UID dari Firebase Authentication.</td></tr>
+      <tr><td><code>role</code></td><td>string</td><td><code>admin</code> atau <code>petugas</code>; dibaca security rules.</td></tr>
+      <tr><td><code>nama</code></td><td>string (opsional)</td><td>Nama petugas; tidak dibaca klien saat ini.</td></tr>
+      <tr><td><code>createdAt</code></td><td>timestamp</td><td>Opsional.</td></tr>
+    </tbody>
+  </table>
+  <div class="note">
+    Dokumen <code>users</code> dibuat manual oleh administrator melalui Console/jalur
+    tepercaya. Rules menetapkan <code>allow write: if false</code> untuk koleksi ini,
+    sehingga user tidak dapat menaikkan role sendiri. Rules masih draft dan wajib
+    diuji di lingkungan non-produksi.
+  </div>
+
+  <h3>Koleksi rancangan fase berikutnya</h3>
+  <table>
+    <thead><tr><th style="width:24%">Koleksi</th><th style="width:40%">Field utama</th><th>Status</th></tr></thead>
+    <tbody>
+      <tr><td><code>penilaian</code></td><td>calonId, nilaiKriteria, penilaiUid, updatedAt</td><td>Belum digunakan; nilai masih nested di calon.</td></tr>
+      <tr><td><code>kriteria_bobot</code></td><td>kode, nama, bobot, arah, versi</td><td>Belum digunakan; bobot konstanta model.</td></tr>
+      <tr><td><code>hasil_prioritas</code></td><td>calonId, skorAkhir, peringkat, periode, versiBobot</td><td>Belum digunakan; hasil dihitung saat tampilan dibuka.</td></tr>
+      <tr><td><code>riwayat_proses</code></td><td>aksi, pelakuUid, waktu, ringkasan</td><td>Opsional, belum digunakan.</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Keamanan dan privasi</h3>
+  <ul>
+    <li>Tidak ada password, private key, token, atau service account di repository.</li>
+    <li><code>firestore.rules</code> tidak membuka akses publik; hanya user terautentikasi dengan role <code>admin</code>/<code>petugas</code> yang boleh mengakses data operasional.</li>
+    <li>Data contoh memakai label fiktif, bukan NIK atau data warga nyata.</li>
+  </ul>
+</section>
+
+<section class="section">
+  <h2>10. Status Pengujian dan Verifikasi</h2>
+  <table>
+    <thead><tr><th style="width:32%">Pemeriksaan</th><th style="width:28%">Perintah/Bukti</th><th>Status</th></tr></thead>
+    <tbody>
+      <tr><td>Analisis statis</td><td><code>flutter analyze</code></td><td><span class="stamp ok">No issues found</span></td></tr>
+      <tr><td>Test otomatis</td><td><code>flutter test</code></td><td><span class="stamp ok">24 test lulus</span></td></tr>
+      <tr><td>Build Web</td><td><code>flutter build web</code></td><td><span class="stamp ok">Berhasil</span></td></tr>
+      <tr><td>Screenshot runtime</td><td>Chrome headless terhadap build Web</td><td><span class="stamp ok">14 file (7 halaman × 2 viewport)</span></td></tr>
+      <tr><td>Deploy web</td><td>GitHub Actions → GitHub Pages</td><td><span class="stamp ok">Aktif, halaman login merespons 200</span></td></tr>
+      <tr><td>Build Android</td><td>CI <code>flutter build apk --debug</code></td><td><span class="stamp ok">Berhasil dibangun</span> · belum dijalankan di perangkat</td></tr>
+      <tr><td>Video presentasi</td><td>Remotion + Edge TTS</td><td><span class="stamp ok">5 menit 7 detik, 1080p</span></td></tr>
+      <tr><td>Firebase Auth/Firestore</td><td>—</td><td><span class="stamp">Belum diuji</span> — project belum dikonfigurasi</td></tr>
+      <tr><td>Firestore rules</td><td>Emulator Suite</td><td><span class="stamp">Belum diuji/deploy</span></td></tr>
+      <tr><td>Firebase Hosting</td><td>—</td><td><span class="stamp">Belum di-deploy</span></td></tr>
+    </tbody>
+  </table>
+  <p class="small">
+    CI: <a href="https://github.com/Bamsuti/BLT-DD-prioritas/actions">github.com/Bamsuti/BLT-DD-prioritas/actions</a>.
+    Matriks 15+ skenario: <code>docs/PENGUJIAN.md</code>.
+  </p>
+
+  <h2 style="margin-top:18px">11. Tautan</h2>
+  <table>
+    <tr><th style="width:24%">Repository</th><td><a href="https://github.com/Bamsuti/BLT-DD-prioritas">https://github.com/Bamsuti/BLT-DD-prioritas</a></td></tr>
+    <tr><th>Demo web</th><td><a href="https://bamsuti.github.io/BLT-DD-prioritas/">https://bamsuti.github.io/BLT-DD-prioritas/</a> (mode demo)</td></tr>
+    <tr><th>Video</th><td><a href="https://github.com/Bamsuti/BLT-DD-prioritas/raw/main/docs/video/blt-dd-prioritas-promo.mp4">https://github.com/Bamsuti/BLT-DD-prioritas/raw/main/docs/video/blt-dd-prioritas-promo.mp4</a></td></tr>
+    <tr><th>Wireframe</th><td><code>docs/screenshots/*-wireframe.svg</code> — Figma tidak digunakan</td></tr>
+    <tr><th>Screenshot</th><td><code>docs/screenshots/runtime/</code></td></tr>
+    <tr><th>Panduan Firebase</th><td><code>docs/firebase/SETUP_FIREBASE.md</code></td></tr>
+  </table>
+
+  <div class="note ok">
+    <strong>Kesimpulan.</strong> Prototipe memenuhi alur lima halaman, CRUD, validasi
+    formulir, tujuh kriteria, skor SAW, tampilan responsif, dokumentasi rancangan, dan
+    bukti pengujian mode demo. Integrasi Firebase, pengujian perangkat Android, dan
+    validasi bobot masih menjadi pekerjaan berikutnya dan tidak diklaim selesai.
+  </div>
+</section>
+
+</body>
+</html>

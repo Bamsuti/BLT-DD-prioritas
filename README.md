@@ -18,6 +18,8 @@ Prototipe akademik untuk mencatat data simulasi calon penerima BLT-DD, menilai t
 | Periode | Ganjil 2026/2027 |
 | Repository | https://github.com/Bamsuti/BLT-DD-prioritas |
 | Demo web | https://bamsuti.github.io/BLT-DD-prioritas/ |
+| Proposal UTS | [docs/proposal/PROPOSAL_UTS.pdf](docs/proposal/PROPOSAL_UTS.pdf) |
+| Video presentasi | [docs/video/blt-dd-prioritas-promo.mp4](docs/video/blt-dd-prioritas-promo.mp4) |
 | Versi aplikasi | 1.0.0+1 |
 
 ## Masalah dan tujuan
@@ -95,15 +97,26 @@ Screenshot diambil dari **build Web yang benar-benar dijalankan** (Flutter Web +
 
 Wireframe rancangan awal tetap disimpan sebagai SVG di `docs/screenshots/` dan bukan bukti runtime.
 
+## Proposal UTS
+
+Proposal lengkap tersedia sebagai PDF 9 halaman: [docs/proposal/PROPOSAL_UTS.pdf](docs/proposal/PROPOSAL_UTS.pdf). Isinya mencakup identitas, latar belakang dan masalah, ruang lingkup, persona, sembilan user story, kebutuhan fungsional K-01–K-08, user flow, sitemap, lima wireframe, tech stack, rumus SAW, rancangan Firestore, keamanan, status verifikasi, dan tautan.
+
+- Sumber HTML: [docs/proposal/PROPOSAL_UTS.html](docs/proposal/PROPOSAL_UTS.html)
+- Sitemap versi Mermaid: [docs/rancangan/SITEMAP.md](docs/rancangan/SITEMAP.md)
+- Peta kesesuaian butir UTS: [docs/UTS_CHECKLIST.md](docs/UTS_CHECKLIST.md)
+
+**Catatan Figma:** proyek ini tidak memakai Figma karena tidak ada berkas Figma yang dibuat. Wireframe berupa SVG di `docs/screenshots/`, termasuk yang tertanam di proposal. Tautan Figma tidak dicantumkan karena belum ada; SVG dapat diimpor ke Figma bila diwajibkan.
+
 ## Video penjelasan
 
-Video 16:9 berdurasi 1 menit 59 detik menjelaskan masalah, target pengguna, dan ruang lingkup prototipe dengan narasi Bahasa Indonesia.
+Video 16:9 berdurasi 5 menit 7 detik, di bawah batas 10 menit, menjelaskan masalah, pengguna utama, prioritas fitur, desain, demo prototipe, rencana teknis, dan empat pertanyaan wajib.
 
-- Berkas: [docs/video/blt-dd-prioritas-promo.mp4](docs/video/blt-dd-prioritas-promo.mp4) (±10,2 MB)
+- Berkas: [docs/video/blt-dd-prioritas-promo.mp4](docs/video/blt-dd-prioritas-promo.mp4)
 - Spesifikasi: 1920×1080, 30 fps, H.264 + AAC, suara Edge TTS `id-ID-ArdiNeural`, tanpa musik
-- Sumber dan cara render: `video/` (Remotion); rincian di [docs/VIDEO.md](docs/VIDEO.md)
+- Isi per babak dan rincian produksi: [docs/VIDEO.md](docs/VIDEO.md)
+- Sumber dan cara render: `video/` (Remotion)
 
-Video memakai screenshot runtime mode demo. Firebase belum terhubung ke proyek nyata dan seluruh skor bersifat simulasi.
+Bagian demo memakai rekaman runtime aplikasi yang benar-benar dijalankan (login → beranda → data calon → validasi form → penilaian → hasil), bukan mockup. Firebase belum terhubung ke proyek nyata dan seluruh skor bersifat simulasi.
 
 ## Arsitektur dan struktur proyek
 
@@ -230,7 +243,7 @@ Lingkungan: Windows, Flutter 3.47.7 stable, Dart 3.13.5.
 | Test otomatis | `flutter test` | **24 test, semua lulus** |
 | Build Web | `flutter build web` | **Berhasil** |
 | Screenshot runtime | Chrome headless terhadap build Web | **14 file** (7 halaman × 2 viewport) |
-| Video penjelasan | `npm run render` di `video/` | **Berhasil**; 119,3 detik, 1920×1080, audio AAC terverifikasi |
+| Video penjelasan | `npm run render` di `video/` | **Berhasil**; 5 menit 7 detik, 1920×1080, audio AAC terverifikasi |
 | Deploy web (GitHub Pages) | Workflow `Deploy Web to GitHub Pages` | **Berhasil**; halaman publik merespons 200 dan tampilan login terverifikasi |
 | Build Android | GitHub Actions `flutter build apk --debug` | **Berhasil**; belum dijalankan di perangkat |
 | Firebase Auth/Firestore | — | **Belum diuji** (project belum dikonfigurasi) |
@@ -252,7 +265,8 @@ Matriks skenario lengkap beserta status per skenario: [docs/PENGUJIAN.md](docs/P
 | Test otomatis | 24/24 lulus |
 | Build Web | Berhasil |
 | Screenshot runtime | Tersedia dan diambil dari build Web |
-| Video penjelasan | Dirender 29 Oktober 2026; 1:59, 1080p, narasi Edge TTS, tanpa musik |
+| Video penjelasan | Dirender 31 Oktober 2026; 5:07, 1080p, delapan babak, narasi Edge TTS, demo runtime asli, tanpa musik |
+| Proposal UTS | PDF 9 halaman dengan persona, sembilan user story, kebutuhan, user flow, sitemap, wireframe, tech stack, dan rancangan Firestore |
 | Deploy web | GitHub Pages aktif 29 Oktober 2026; aplikasi berjalan mode demo |
 | Scaffold Android | Tersedia (Gradle Kotlin DSL, `minSdk` mengikuti Flutter, izin INTERNET) |
 | Build Android | APK debug berhasil dibangun di GitHub Actions; belum diuji di perangkat/emulator |
@@ -275,10 +289,13 @@ Rincian: [docs/ROADMAP.md](docs/ROADMAP.md).
 
 ## Dokumentasi
 
+- [Proposal UTS (PDF)](docs/proposal/PROPOSAL_UTS.pdf)
+- [Checklist kesesuaian UTS](docs/UTS_CHECKLIST.md)
 - [Identitas, kebutuhan, dan keterlacakan](docs/rancangan/KEBUTUHAN.md)
 - [Persona](docs/rancangan/PERSONA.md)
 - [User story](docs/rancangan/USER_STORY.md)
 - [User flow](docs/rancangan/USER_FLOW.md)
+- [Sitemap](docs/rancangan/SITEMAP.md)
 - [Wireframe](docs/rancangan/WIREFRAME.md)
 - [Rancangan database](docs/rancangan/DATABASE.md)
 - [Panduan Firebase](docs/firebase/SETUP_FIREBASE.md)

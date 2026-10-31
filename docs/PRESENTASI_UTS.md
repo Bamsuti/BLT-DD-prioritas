@@ -4,11 +4,11 @@ Dokumen ini adalah skenario demonstrasi. Status di bawah mencerminkan apa yang *
 
 ## 1. Proposal — masalah, pengguna, scope
 
-Buka `README.md` dan `docs/rancangan/KEBUTUHAN.md`. Jelaskan bahwa prototipe menggabungkan alur data calon, penilaian tujuh kriteria, dan peninjauan skor. Petugas pengelola data BLT-DD adalah persona asumsi awal yang perlu divalidasi. Tegaskan batasan: tidak menangani pencairan dana, tidak terintegrasi ke sistem pemerintah, tidak memakai data warga nyata, dan tidak menggantikan musyawarah. Video ringkas masalah, target, dan scope tersedia di `docs/video/blt-dd-prioritas-promo.mp4` (rincian di `docs/VIDEO.md`).
+Buka [docs/proposal/PROPOSAL_UTS.pdf](proposal/PROPOSAL_UTS.pdf). Jelaskan latar belakang masalah, persona petugas pengelola data BLT-DD, sembilan user story, kebutuhan K-01–K-08, user flow, sitemap, lima wireframe, tech stack, dan rancangan Firestore. Tegaskan batasan: tidak menangani pencairan dana, tidak terintegrasi ke sistem pemerintah, tidak memakai data warga nyata, dan tidak menggantikan musyawarah. Peta kesesuaian butir UTS ada di [docs/UTS_CHECKLIST.md](UTS_CHECKLIST.md).
 
 ## 2. Desain
 
-Buka `PERSONA.md`, `USER_STORY.md`, `USER_FLOW.md`, `WIREFRAME.md`, lalu `docs/screenshots/runtime/`. Tunjukkan lima halaman, alur login berhasil/gagal, validasi form, dan hubungan kebutuhan dengan fitur. Wireframe SVG adalah rancangan awal; screenshot di `runtime/` adalah bukti implementasi. Wawancara pengguna belum diklaim dilakukan.
+Buka `PERSONA.md`, `USER_STORY.md`, `USER_FLOW.md`, `SITEMAP.md`, `WIREFRAME.md`, lalu `docs/screenshots/runtime/`. Tunjukkan lima halaman, alur login berhasil/gagal, validasi form, dan hubungan kebutuhan dengan fitur. Wireframe SVG adalah rancangan awal; screenshot di `runtime/` adalah bukti implementasi. Wawancara pengguna belum diklaim dilakukan, dan proyek tidak memakai Figma.
 
 ## 3. Demo Flutter
 
@@ -43,6 +43,7 @@ Buka repository GitHub, `README.md`, `lib/`, `test/`, `docs/`, `firestore.rules`
 
 - 24 test otomatis lulus (`flutter test`);
 - build Web berhasil dan screenshot runtime tersedia;
+- proposal PDF sembilan halaman dan video 5:07 tersedia di `docs/`;
 - kode Firebase bersyarat dan belum diuji dengan project nyata;
 - tidak ada kredensial, token, atau data warga di repository.
 
@@ -52,7 +53,9 @@ Buka repository GitHub, `README.md`, `lib/`, `test/`, `docs/`, `firestore.rules`
 - [x] `flutter pub get`, `flutter analyze`, `flutter test` dijalankan; hasil dicatat di `docs/PENGUJIAN.md`.
 - [x] Build Web berhasil.
 - [x] Screenshot runtime diambil dari build Web (desktop dan mobile).
-- [x] Video penjelasan masalah, target, dan scope dirender (1:59, 1080p, narasi TTS).
+- [x] Proposal UTS PDF lengkap (masalah, persona, sembilan user story, kebutuhan, user flow, sitemap, wireframe, tech stack, Firestore).
+- [x] Video presentasi delapan babak dirender (5:07, 1080p, narasi TTS, demo runtime asli).
+- [x] Video menjawab empat pertanyaan wajib (masalah, pengguna, prioritas, penyimpanan data).
 - [x] Build web diterbitkan di GitHub Pages dan halaman login terverifikasi terbuka.
 - [x] Skenario uji mode demo diisi hasil aktual.
 - [x] Bobot dan interpretasi ditandai sebagai simulasi.
