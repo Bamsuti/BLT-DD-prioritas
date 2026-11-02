@@ -6,11 +6,11 @@ Dokumen ini memetakan setiap butir ketentuan UTS ke bukti yang benar-benar ada d
 
 | Keluaran | Bukti | Status |
 |---|---|---|
-| Video presentasi maksimal 10 menit dan dapat dibuka dosen | [`docs/video/blt-dd-prioritas-promo.mp4`](video/blt-dd-prioritas-promo.mp4), 6 menit 15 detik, 1080p, narasi Bahasa Indonesia; [YouTube](https://youtu.be/AnvDqdBBxeM) | Selesai |
+| Video presentasi maksimal 10 menit dan dapat dibuka dosen | [`docs/video/blt-dd-prioritas-promo.mp4`](video/blt-dd-prioritas-promo.mp4), 6 menit 15 detik, 1080p, narasi Bahasa Indonesia; [video GitHub](https://github.com/Bamsuti/BLT-DD-prioritas/blob/main/docs/video/blt-dd-prioritas-promo.mp4) | Selesai |
 | Proposal PDF | [`docs/proposal/PROPOSAL_UTS.pdf`](proposal/PROPOSAL_UTS.pdf) — 11 halaman | Selesai |
 | Repository GitHub | <https://github.com/Bamsuti/BLT-DD-prioritas> — README, kode, test, dokumen, riwayat commit bertahap | Selesai |
 
-Video dapat diunduh langsung dari repository (raw GitHub) dan diputar dengan pemutar video apa pun. Versi terbaru di repository berdurasi 6:15 (rekaman form valid + SnackBar); tautan YouTube <https://youtu.be/AnvDqdBBxeM> masih memuat versi 5:07 sebelumnya dan perlu diunggah ulang oleh mahasiswa karena proses unggah tidak dapat dilakukan dari lingkungan ini. Tautan demo web: <https://bamsuti.github.io/BLT-DD-prioritas/>.
+Video dapat diunduh langsung dari repository (raw GitHub) dan diputar dengan pemutar video apa pun. Versi terbaru di repository berdurasi 6:15 (rekaman form valid + SnackBar) dan dapat diputar melalui halaman GitHub. Tautan YouTube sebelumnya (youtu.be/AnvDqdBBxeM) tidak lagi dapat dibuka saat diperiksa 2 November 2026, sehingga proposal dan README memakai tautan repository. Tautan demo web: <https://bamsuti.github.io/BLT-DD-prioritas/>.
 
 ### 1.1 Isi README repository
 
@@ -125,13 +125,14 @@ Video hasil render ada di `docs/video/blt-dd-prioritas-promo.mp4`; proposal di `
 
 Berkas UTS diunggah mahasiswa melalui **E-Learning UNISBANK** paling lambat **Kamis, 5 November 2026, 23.59 WIB**. Pengunggahan ke E-Learning tidak dilakukan dari lingkungan ini; yang disiapkan adalah proposal PDF, video MP4, dan repository publik.
 
-Tautan diperiksa tanpa sesi login (curl tanpa kredensial, 1 November 2026):
+Tautan diperiksa tanpa sesi login (curl tanpa kredensial, 2 November 2026):
 
 | Tautan | Hasil |
 |---|---|
 | <https://github.com/Bamsuti/BLT-DD-prioritas> | HTTP 200 |
 | <https://bamsuti.github.io/BLT-DD-prioritas/> | HTTP 200 |
-| <https://youtu.be/AnvDqdBBxeM> | HTTP 200 (versi 5:07; perlu unggah ulang) |
+| <https://github.com/Bamsuti/BLT-DD-prioritas/blob/main/docs/video/blt-dd-prioritas-promo.mp4> | HTTP 200 (video 6:15 dapat diputar/diunduh) |
+| <https://youtu.be/AnvDqdBBxeM> | Tidak tersedia — video unavailable, 2 November 2026 |
 | <https://www.figma.com/make/xnbomh0HD3xaMEtZ0ehUwh/BLT-DD-Prioritas-Wireframe?t=xP6ZZ7tKgaItZh19-1> | HTTP 200 |
 | Raw MP4 `docs/video/blt-dd-prioritas-promo.mp4` | HTTP 200 |
 | <https://github.com/Bamsuti/BLT-DD-prioritas/actions> | HTTP 200 |

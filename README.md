@@ -19,7 +19,7 @@ Prototipe akademik untuk mencatat data simulasi calon penerima BLT-DD, menilai t
 | Repository | https://github.com/Bamsuti/BLT-DD-prioritas |
 | Demo web | https://bamsuti.github.io/BLT-DD-prioritas/ |
 | Proposal UTS | [docs/proposal/PROPOSAL_UTS.pdf](docs/proposal/PROPOSAL_UTS.pdf) |
-| Video presentasi | [YouTube](https://youtu.be/AnvDqdBBxeM) · [MP4 6:15](docs/video/blt-dd-prioritas-promo.mp4) |
+| Video presentasi | [Video 6:15 (GitHub)](https://github.com/Bamsuti/BLT-DD-prioritas/blob/main/docs/video/blt-dd-prioritas-promo.mp4) · [unduh MP4](docs/video/blt-dd-prioritas-promo.mp4) |
 | Wireframe | [Figma](https://www.figma.com/make/xnbomh0HD3xaMEtZ0ehUwh/BLT-DD-Prioritas-Wireframe?t=xP6ZZ7tKgaItZh19-1) · [lima SVG](docs/rancangan/WIREFRAME.md) |
 | Versi aplikasi | 1.0.0+1 |
 
@@ -114,8 +114,7 @@ Proposal lengkap tersedia sebagai PDF 11 halaman: [docs/proposal/PROPOSAL_UTS.pd
 
 Video 16:9 berdurasi 6 menit 15 detik, di bawah batas 10 menit, menjelaskan masalah, pengguna utama, prioritas fitur, desain, demo prototipe (termasuk form kosong ditolak, data valid disimpan, SnackBar, dan baris baru tampil), rencana teknis termasuk rencana Pertemuan 9–15, serta empat pertanyaan wajib.
 
-- Berkas terbaru: [docs/video/blt-dd-prioritas-promo.mp4](docs/video/blt-dd-prioritas-promo.mp4) — 6:15, 1080p
-- YouTube: [https://youtu.be/AnvDqdBBxeM](https://youtu.be/AnvDqdBBxeM) — tautan publik; masih memuat versi 5:07 dan perlu diunggah ulang dengan versi terbaru
+- Video: [putar di GitHub](https://github.com/Bamsuti/BLT-DD-prioritas/blob/main/docs/video/blt-dd-prioritas-promo.mp4) · [unduh MP4](docs/video/blt-dd-prioritas-promo.mp4) — 6:15, 1080p. Tautan YouTube sebelumnya tidak lagi tersedia; video resmi ada di repository.
 - Spesifikasi: 1920×1080, 30 fps, H.264 + AAC, suara Edge TTS `id-ID-ArdiNeural`, tanpa musik
 - Isi per babak dan rincian produksi: [docs/VIDEO.md](docs/VIDEO.md)
 - Sumber dan cara render: `video/` (Remotion)
