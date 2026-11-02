@@ -65,7 +65,7 @@ Buka repository GitHub, `README.md`, `lib/`, `test/`, `docs/`, `firestore.rules`
 - [x] Build Web berhasil.
 - [x] Screenshot runtime diambil dari build Web (desktop dan mobile).
 - [x] Proposal UTS PDF lengkap (masalah, persona, sembilan user story, kebutuhan, user flow, sitemap, wireframe, tech stack, Firestore).
-- [x] Video presentasi delapan babak dirender (6:15, 1080p, narasi TTS, demo runtime asli termasuk form valid + SnackBar); video diputar dari tautan repository GitHub karena tautan YouTube sebelumnya tidak lagi tersedia.
+- [x] Video presentasi delapan babak dirender (6:15, 1080p, narasi TTS, demo runtime asli termasuk form valid + SnackBar); video tersedia di YouTube <https://youtu.be/HNK0bMPqo08> dan di repository.
 - [x] Video menjawab empat pertanyaan wajib (masalah, pengguna, prioritas, penyimpanan data).
 - [x] Build web diterbitkan di GitHub Pages dan halaman login terverifikasi terbuka.
 - [x] Skenario uji mode demo diisi hasil aktual.

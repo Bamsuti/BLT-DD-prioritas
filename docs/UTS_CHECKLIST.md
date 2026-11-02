@@ -10,7 +10,7 @@ Dokumen ini memetakan setiap butir ketentuan UTS ke bukti yang benar-benar ada d
 | Proposal PDF | [`docs/proposal/PROPOSAL_UTS.pdf`](proposal/PROPOSAL_UTS.pdf) — 11 halaman | Selesai |
 | Repository GitHub | <https://github.com/Bamsuti/BLT-DD-prioritas> — README, kode, test, dokumen, riwayat commit bertahap | Selesai |
 
-Video dapat diunduh langsung dari repository (raw GitHub) dan diputar dengan pemutar video apa pun. Versi terbaru di repository berdurasi 6:15 (rekaman form valid + SnackBar) dan dapat diputar melalui halaman GitHub. Tautan YouTube sebelumnya (youtu.be/AnvDqdBBxeM) tidak lagi dapat dibuka saat diperiksa 2 November 2026, sehingga proposal dan README memakai tautan repository. Tautan demo web: <https://bamsuti.github.io/BLT-DD-prioritas/>.
+Video tersedia di YouTube (<https://youtu.be/HNK0bMPqo08>) dan dapat diunduh langsung dari repository (raw GitHub). Versi terbaru berdurasi 6:15 (rekaman form valid + SnackBar). Tautan YouTube lama (youtu.be/AnvDqdBBxeM) tidak lagi dapat dibuka; tautan pengganti diperiksa 2 November 2026. Tautan demo web: <https://bamsuti.github.io/BLT-DD-prioritas/>.
 
 ### 1.1 Isi README repository
 
@@ -132,7 +132,7 @@ Tautan diperiksa tanpa sesi login (curl tanpa kredensial, 2 November 2026):
 | <https://github.com/Bamsuti/BLT-DD-prioritas> | HTTP 200 |
 | <https://bamsuti.github.io/BLT-DD-prioritas/> | HTTP 200 |
 | <https://github.com/Bamsuti/BLT-DD-prioritas/blob/main/docs/video/blt-dd-prioritas-promo.mp4> | HTTP 200 (video 6:15 dapat diputar/diunduh) |
-| <https://youtu.be/AnvDqdBBxeM> | Tidak tersedia — video unavailable, 2 November 2026 |
+| <https://youtu.be/HNK0bMPqo08> | HTTP 200 (oEmbed dan thumbnail tersedia, 2 November 2026) |
 | <https://www.figma.com/make/xnbomh0HD3xaMEtZ0ehUwh/BLT-DD-Prioritas-Wireframe?t=xP6ZZ7tKgaItZh19-1> | HTTP 200 |
 | Raw MP4 `docs/video/blt-dd-prioritas-promo.mp4` | HTTP 200 |
 | <https://github.com/Bamsuti/BLT-DD-prioritas/actions> | HTTP 200 |
