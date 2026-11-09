@@ -105,7 +105,7 @@ Screenshot diambil dari **build Web yang benar-benar dijalankan** (Flutter Web +
 | Daftar ditolak: email terpakai | ![Email terpakai](docs/screenshots/runtime/10-daftar-email-terpakai.png) | — |
 | Masuk berhasil | ![Masuk berhasil](docs/screenshots/runtime/12-login-berhasil-beranda.png) | — |
 | Akun baru langsung di Beranda | ![Daftar berhasil](docs/screenshots/runtime/13-daftar-baru-beranda.png) | — |
-| Pengguna terdaftar di Firebase Console | ![Console Users](docs/screenshots/runtime/19-firebase-console-users.png) | — |
+| Empat akun terdaftar di Firebase Console | ![Console Users](docs/screenshots/runtime/19-firebase-console-users.png) | — |
 | Mode Firebase: daftar akun baru | ![Firebase daftar](docs/screenshots/runtime/21-firebase-daftar-baru-beranda.png) | — |
 | Mode Firebase: sesi bertahan setelah refresh | ![Firebase sesi](docs/screenshots/runtime/22-firebase-refresh-sesi-bertahan.png) | — |
 | Akun otomatis saat masuk (mode demo) | ![Akun otomatis](docs/screenshots/runtime/27-akun-otomatis-beranda.png) | — |

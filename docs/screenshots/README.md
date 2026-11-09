@@ -38,7 +38,7 @@ Bukti mode Firebase nyata (project `bltdd-prioritas-6f007`, paket Spark, Authent
 
 | File | Kasus (matriks A2 di docs/PENGUJIAN.md) |
 |---|---|
-| `19-firebase-console-users.png` | FB-0 — daftar pengguna di Firebase Console: akun petugas hasil pendaftaran aplikasi |
+| `19-firebase-console-users.png` | FB-0 — daftar pengguna di Firebase Console (9 November 2026): empat akun hasil pendaftaran aplikasi, termasuk `petugas.otomatis@…` dari FB-8 |
 | `20-firebase-halaman-masuk.png` | FB-1 — halaman masuk mode Firebase (chip "Firebase", gaya baru tanpa keterangan akun demo) |
 | `21-firebase-daftar-baru-beranda.png` | FB-2 — pendaftaran akun baru langsung ke Beranda dengan SnackBar |
 | `22-firebase-refresh-sesi-bertahan.png` | FB-3 — sesi bertahan setelah muat ulang halaman (pemulihan `authStateChanges()`) |
@@ -50,7 +50,7 @@ Bukti mode Firebase nyata (project `bltdd-prioritas-6f007`, paket Spark, Authent
 | `31-firebase-lupa-sandi-dialog.png` | FB-9 — dialog lupa kata sandi dengan email terisi |
 | `32-firebase-lupa-sandi-terkirim.png` | FB-9 — SnackBar "Tautan atur ulang kata sandi telah dikirim…" hasil `sendPasswordResetEmail` sungguhan |
 
-`19` adalah tangkapan layar Firebase Console (Authentication → Users) dari browser; `20`–`26` dan `30`–`32` diambil dari build Web dengan konfigurasi Firebase nyata melalui `--dart-define`. Gambar `20`–`26` dan `30`–`32` berasal dari pengulangan alur setelah halaman ditata ulang memakai akun `petugas.desa.c@bltdd-prioritas.test`; akun `petugas.otomatis@bltdd-prioritas.test` pada FB-8 dibuat otomatis oleh aplikasi.
+`19` adalah tangkapan layar Firebase Console (Authentication → Users) pada 9 November 2026, dipotong dari sesi browser pemilik project sehingga menampilkan seluruh empat akun yang tersimpan (`petugas.desa@…`, `petugas.desa.b@…`, `petugas.desa.c@…`, dan `petugas.otomatis@…`) beserta label paket Spark; `20`–`26` dan `30`–`32` diambil dari build Web dengan konfigurasi Firebase nyata melalui `--dart-define`. Gambar `20`–`26` dan `30`–`32` berasal dari pengulangan alur setelah halaman ditata ulang memakai akun `petugas.desa.c@bltdd-prioritas.test`; akun `petugas.otomatis@bltdd-prioritas.test` pada FB-8 dibuat otomatis oleh aplikasi.
 
 Cara menghasilkan ulang:
 
