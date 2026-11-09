@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -42,9 +44,27 @@ class AppBackend {
   static String? firebaseInitError;
   static bool _demoSignedIn = false;
   static List<Candidate> _demoData = demoCandidates();
+  // Akun tambahan hasil pendaftaran pada mode demo; hilang saat aplikasi
+  // ditutup karena tidak tersimpan di Firebase.
+  static final Map<String, String> _demoAccounts = {};
+  static final StreamController<bool> _sessionState =
+      StreamController<bool>.broadcast();
 
   static bool get hasSession =>
       firebaseReady ? FirebaseAuth.instance.currentUser != null : _demoSignedIn;
+
+  /// Kabar setiap kali status login berubah.
+  ///
+  /// Mode Firebase memakai `authStateChanges()` sehingga pemulihan sesi dan
+  /// keluar terdeteksi otomatis. Mode demo mengirim peristiwa saat masuk atau
+  /// keluar; nilai terkini dipakai sebagai `initialData` oleh pemakainya.
+  static Stream<bool> sessionChanges() {
+    if (firebaseReady) {
+      return FirebaseAuth.instance.authStateChanges()
+          .map((user) => user != null);
+    }
+    return _sessionState.stream;
+  }
 
   static Future<void> initialize() async {
     firebaseInitError = null;
@@ -72,8 +92,13 @@ class AppBackend {
       );
       return;
     }
-    if (email.trim().toLowerCase() == demoEmail && password == demoPassword) {
+    final key = email.trim().toLowerCase();
+    final demoMatch =
+        key == demoEmail && password == demoPassword;
+    final registeredMatch = _demoAccounts[key] == password;
+    if (demoMatch || registeredMatch) {
       _demoSignedIn = true;
+      _sessionState.add(true);
       return;
     }
     throw const AuthFailure(
@@ -81,11 +106,33 @@ class AppBackend {
     );
   }
 
+  /// Membuat akun baru lalu langsung menganggap pengguna sudah masuk.
+  ///
+  /// Mode Firebase memakai pendaftaran Email/Password. Mode demo menyimpan
+  /// akun simulasi di memori agar alur pendaftaran tetap dapat dicoba.
+  static Future<void> register(String email, String password) async {
+    if (firebaseReady) {
+      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: email.trim(),
+        password: password,
+      );
+      return;
+    }
+    final key = email.trim().toLowerCase();
+    if (key == demoEmail || _demoAccounts.containsKey(key)) {
+      throw const AuthFailure('Email sudah terdaftar. Silakan masuk.');
+    }
+    _demoAccounts[key] = password;
+    _demoSignedIn = true;
+    _sessionState.add(true);
+  }
+
   static Future<void> signOut() async {
     if (firebaseReady) {
       await FirebaseAuth.instance.signOut();
     } else {
       _demoSignedIn = false;
+      _sessionState.add(false);
     }
   }
 
@@ -151,5 +198,6 @@ class AppBackend {
     firebaseInitError = null;
     _demoSignedIn = false;
     _demoData = demoCandidates();
+    _demoAccounts.clear();
   }
 }
