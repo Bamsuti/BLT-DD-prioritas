@@ -4,7 +4,7 @@ Dokumen ini adalah skenario demonstrasi. Status di bawah mencerminkan apa yang *
 
 ## 1. Proposal — masalah, pengguna, scope
 
-Buka [docs/proposal/PROPOSAL_UTS.pdf](proposal/PROPOSAL_UTS.pdf). Jelaskan latar belakang masalah, persona petugas pengelola data BLT-DD, sembilan user story, kebutuhan K-01–K-08, user flow, sitemap, lima wireframe, tech stack, dan rancangan Firestore. Tegaskan batasan: tidak menangani pencairan dana, tidak terintegrasi ke sistem pemerintah, tidak memakai data warga nyata, dan tidak menggantikan musyawarah. Peta kesesuaian butir UTS ada di [docs/UTS_CHECKLIST.md](UTS_CHECKLIST.md).
+Buka [docs/proposal/PROPOSAL_UTS.pdf](proposal/PROPOSAL_UTS.pdf) (berkas unggahan bernama formal `BLT-DD Prioritas 2026-Nabhan Miqdad Mubarok-23.01.55.0017-A1.pdf` berisi sama). Jelaskan latar belakang masalah, persona petugas pengelola data BLT-DD, sembilan user story, kebutuhan K-01–K-08, user flow, sitemap, lima wireframe, tech stack, dan rancangan Firestore. Tegaskan batasan: tidak menangani pencairan dana, tidak terintegrasi ke sistem pemerintah, tidak memakai data warga nyata, dan tidak menggantikan musyawarah. Peta kesesuaian butir UTS ada di [docs/UTS_CHECKLIST.md](UTS_CHECKLIST.md).
 
 ## 2. Desain
 

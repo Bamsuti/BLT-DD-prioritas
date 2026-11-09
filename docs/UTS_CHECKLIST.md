@@ -7,7 +7,7 @@ Dokumen ini memetakan setiap butir ketentuan UTS ke bukti yang benar-benar ada d
 | Keluaran | Bukti | Status |
 |---|---|---|
 | Video presentasi maksimal 10 menit dan dapat dibuka dosen | [`docs/video/blt-dd-prioritas-promo.mp4`](video/blt-dd-prioritas-promo.mp4), 6 menit 15 detik, 1080p, narasi Bahasa Indonesia; [video GitHub](https://github.com/Bamsuti/BLT-DD-prioritas/blob/main/docs/video/blt-dd-prioritas-promo.mp4) | Selesai |
-| Proposal PDF | [`docs/proposal/PROPOSAL_UTS.pdf`](proposal/PROPOSAL_UTS.pdf) — 11 halaman | Selesai |
+| Proposal PDF | [`docs/proposal/PROPOSAL_UTS.pdf`](proposal/PROPOSAL_UTS.pdf) — 11 halaman; berkas unggahan bernama formal `BLT-DD Prioritas 2026-Nabhan Miqdad Mubarok-23.01.55.0017-A1.pdf` (beserta `.docx`) berisi sama dan tersimpan di folder yang sama | Selesai |
 | Repository GitHub | <https://github.com/Bamsuti/BLT-DD-prioritas> — README, kode, test, dokumen, riwayat commit bertahap | Selesai |
 
 Video tersedia di YouTube (<https://youtu.be/HNK0bMPqo08>) dan dapat diunduh langsung dari repository (raw GitHub). Versi terbaru berdurasi 6:15 (rekaman form valid + SnackBar). Tautan YouTube lama (youtu.be/AnvDqdBBxeM) tidak lagi dapat dibuka; tautan pengganti diperiksa 2 November 2026. Tautan demo web: <https://bamsuti.github.io/BLT-DD-prioritas/>.
