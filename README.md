@@ -2,7 +2,7 @@
 
 Prototipe akademik untuk mencatat data simulasi calon penerima BLT-DD, menilai tujuh kriteria kerentanan, lalu meninjau urutan prioritas. Satu basis kode Flutter dijalankan sebagai aplikasi Web dan Android.
 
-> **Status jujur:** aplikasi berjalan dalam **mode demo** (data di memori) dan sudah diuji otomatis dengan `flutter analyze` + `flutter test`. Sejak minggu 9, halaman masuk dilengkapi **pendaftaran akun sederhana** dan perpindahan halaman mengikuti status login (`authStateChanges()` di mode Firebase). Integrasi Firebase Authentication dan Cloud Firestore tersedia di kode, tetapi **belum dihubungkan ke project Firebase nyata dan belum diuji**. Firebase Hosting belum di-deploy. APK debug berhasil dibangun melalui GitHub Actions, tetapi belum dijalankan di perangkat/emulator. Semua nama calon dan nilai adalah data sintetis; skor bukan keputusan resmi penerima bantuan.
+> **Status jujur:** aplikasi berjalan dalam **mode demo** (data di memori) dan sudah diuji otomatis dengan `flutter analyze` + `flutter test`. Sejak minggu 9, halaman masuk dilengkapi **pendaftaran akun** dan perpindahan halaman mengikuti status login (`authStateChanges()`). Project Firebase `bltdd-prioritas-6f007` (paket Spark gratis) sudah dibuat, Authentication Email/Password aktif, dan alur masuk/daftar/keluar/pemulihan sesi **diuji nyata** (7 kasus, lihat [docs/PENGUJIAN.md](docs/PENGUJIAN.md) tabel A2). Cloud Firestore belum dibuat sehingga isi Beranda pada mode Firebase masih memuat (lingkup minggu 10). Firebase Hosting belum di-deploy. APK debug berhasil dibangun melalui GitHub Actions, tetapi belum dijalankan di perangkat/emulator. Semua nama calon dan nilai adalah data sintetis; skor bukan keputusan resmi penerima bantuan.
 
 **Akses demo web:** https://bamsuti.github.io/BLT-DD-prioritas/ — diterbitkan melalui GitHub Pages, berjalan dalam mode demo dengan akun `demo@blt-dd.local` / `demo123`.
 
@@ -41,7 +41,7 @@ Ruang lingkup dibatasi pada:
 | Login petugas | Validasi email/kata sandi, indikator proses, pesan gagal, logout | Berfungsi di mode demo, diuji otomatis |
 | Daftar akun petugas (minggu 9) | Mode daftar dengan kolom ulangi kata sandi; akun baru langsung masuk; email terpakai dan kata sandi lemah ditolak dengan pesan Bahasa Indonesia | Berfungsi di mode demo, diuji otomatis + Chrome headless |
 | Cek status login (minggu 9) | Halaman mengikuti aliran status sesi (`StreamBuilder` + `authStateChanges()` di Firebase); keluar dan pendaftaran otomatis mengganti halaman tanpa Navigator | Berfungsi di mode demo, diuji otomatis + Chrome headless |
-| Login Firebase | Email/Password via Firebase Authentication saat konfigurasi tersedia; sesi tersimpan dipulihkan; pesan kesalahan Bahasa Indonesia | Kode siap; belum diuji tanpa project Firebase nyata |
+| Login Firebase | Email/Password via Firebase Authentication; sesi tersimpan dipulihkan; pesan kesalahan Bahasa Indonesia | Berfungsi; diuji nyata pada project `bltdd-prioritas-6f007` (7 kasus, tabel A2) |
 | Mode demo eksplisit | Akun lokal sintetis, label "Mode demo" pada layar | Berfungsi, diuji otomatis |
 | Beranda | Jumlah calon, jumlah kriteria, jumlah hasil dihitung dari data termuat; pintasan navigasi | Berfungsi |
 | Data calon (CRUD) | Tambah, lihat, ubah, hapus dengan dialog konfirmasi | Berfungsi di mode demo, diuji otomatis |
@@ -49,7 +49,7 @@ Ruang lingkup dibatasi pada:
 | Penilaian | Tujuh kriteria + bobot demo + tombol isi nilai | Berfungsi |
 | Hasil prioritas | Skor 0–100, urut menurun, penjelasan rumus, disclaimer | Berfungsi |
 | Navigasi responsif | `NavigationBar` (< 760 px) dan `NavigationRail` (≥ 760 px) | Berfungsi, diuji otomatis |
-| Firebase Auth + Firestore | Kode siap, aktif hanya bila konfigurasi `--dart-define` lengkap dan inisialisasi sukses | Belum diuji dengan project nyata |
+| Firebase Auth + Firestore | Auth aktif saat `--dart-define` lengkap dan sudah diuji nyata; Firestore belum dibuat sehingga data calon masih mode demo | Auth diuji nyata; Firestore menunggu minggu 10 |
 
 ## Tujuh kriteria dan bobot demo
 
@@ -103,6 +103,9 @@ Screenshot diambil dari **build Web yang benar-benar dijalankan** (Flutter Web +
 | Daftar ditolak: email terpakai | ![Email terpakai](docs/screenshots/runtime/10-daftar-email-terpakai.png) | — |
 | Masuk berhasil | ![Masuk berhasil](docs/screenshots/runtime/12-login-berhasil-beranda.png) | — |
 | Akun baru langsung di Beranda | ![Daftar berhasil](docs/screenshots/runtime/13-daftar-baru-beranda.png) | — |
+| Pengguna terdaftar di Firebase Console | ![Console Users](docs/screenshots/runtime/19-firebase-console-users.png) | — |
+| Mode Firebase: daftar akun baru | ![Firebase daftar](docs/screenshots/runtime/21-firebase-daftar-baru-beranda.png) | — |
+| Mode Firebase: sesi bertahan setelah refresh | ![Firebase sesi](docs/screenshots/runtime/22-firebase-refresh-sesi-bertahan.png) | — |
 
 Wireframe rancangan awal tetap disimpan sebagai SVG di `docs/screenshots/` dan bukan bukti runtime.
 
@@ -233,7 +236,9 @@ Jika konfigurasi tidak lengkap atau inisialisasi gagal, aplikasi tetap berjalan 
 
 Untuk web publik di GitHub Pages, workflow membaca nilai yang sama dari repository secrets (`FIREBASE_API_KEY`, `FIREBASE_APP_ID`, `FIREBASE_MESSAGING_SENDER_ID`, `FIREBASE_PROJECT_ID`, `FIREBASE_AUTH_DOMAIN`, `FIREBASE_STORAGE_BUCKET`). Tanpa secrets, build publik tetap mode demo. Tambahkan juga `bamsuti.github.io` ke Authorized domains di Firebase Authentication.
 
-**Yang belum dilakukan:** project Firebase belum dibuat/dihubungkan, Email/Password belum diaktifkan untuk aplikasi ini, akun uji dan role belum dibuat, rules belum diuji di Emulator Suite, dan Hosting belum di-deploy.
+**Sudah dilakukan (minggu 9):** project `bltdd-prioritas-6f007` dibuat pada paket Spark gratis, Authentication Email/Password diaktifkan, aplikasi dibangun dengan nilai `--dart-define` di atas, dan alur masuk/daftar/keluar/pemulihan sesi diuji nyata (tabel A2 di [docs/PENGUJIAN.md](docs/PENGUJIAN.md)). Nilai konfigurasi tidak disimpan di repo — disuntikkan saat build, sehingga tetap aman.
+
+**Yang belum dilakukan:** Firestore belum dibuat (data calon masih mode demo pada build Firebase), secrets Pages untuk demo publik belum diisi, akun petugas belum diberi role di `users/{uid}`, rules belum diuji di Emulator Suite, dan Hosting belum di-deploy.
 
 ## Keamanan dan privasi
 
@@ -254,14 +259,15 @@ Seluruh pengujian dijalankan mandiri oleh pembuat: test otomatis dan screenshot 
 | Analisis statis | `flutter analyze` | **No issues found** |
 | Test otomatis | `flutter test` | **28 test, semua lulus** |
 | Build Web | `flutter build web` | **Berhasil** |
-| Screenshot runtime | Chrome headless terhadap build Web dan demo live | **26 file** (14 utama + 2 bukti SnackBar/hasil + 10 bukti masuk/daftar minggu 9) |
+| Screenshot runtime | Chrome headless terhadap build Web dan demo live | **34 file** (14 utama + 2 bukti SnackBar/hasil + 10 bukti masuk/daftar minggu 9 + 8 bukti Firebase) |
 | Uji masuk/daftar (minggu 9) | Chrome headless mengisi form login/daftar pada build Web biasa | **11/11 kasus sesuai harapan** (MD-1 s.d. MD-11) |
+| Uji mode Firebase nyata (minggu 9) | Chrome headless terhadap build Web dengan `--dart-define` Firebase | **7/7 kasus sesuai harapan** (FB-1 s.d. FB-7); akun terdaftar diverifikasi di Console |
 | Video penjelasan | `npm run render` di `video/` | **Berhasil**; 6 menit 15 detik, 1920×1080, audio AAC terverifikasi |
 | Uji live GitHub Pages | Chrome headless ke demo publik | **Berhasil**; form kosong ditolak per kolom, SnackBar "tersimpan", dan baris SIM-006 tampil |
 | Deploy web (GitHub Pages) | Workflow `Deploy Web to GitHub Pages` | **Berhasil**; halaman publik merespons 200 dan tampilan login terverifikasi |
 | Build Android | GitHub Actions `flutter build apk --debug` | **Berhasil**; belum dijalankan di perangkat |
-| Firebase Auth/Firestore | — | **Belum diuji** (project belum dikonfigurasi) |
-| Login Firebase | Build dengan `--dart-define` atau secrets Pages | **Kode siap; belum diuji** tanpa project nyata |
+| Firebase Auth | Build dengan `--dart-define` project `bltdd-prioritas-6f007` | **Diuji nyata**; 7/7 kasus (daftar, masuk, keluar, sesi bertahan, 2 pesan galat) |
+| Firebase Firestore | — | **Belum dibuat/diuji** (lingkup minggu 10) |
 | Firebase Hosting | — | **Belum di-deploy** |
 
 CI: [GitHub Actions](https://github.com/Bamsuti/BLT-DD-prioritas/actions) menjalankan analyze, 28 test, build Web, dan build APK debug pada setiap push ke `main`. Hasil terbaru dapat dilihat langsung di halaman Actions.
@@ -277,7 +283,7 @@ Matriks skenario lengkap beserta status per skenario: [docs/PENGUJIAN.md](docs/P
 | Kode inti, form, navigasi | Selesai, `flutter analyze` bersih |
 | Mode demo in-memory | Berfungsi, diuji otomatis |
 | Test otomatis | 28/28 lulus |
-| Masuk dan daftar (minggu 9) | Selesai; mode demo diuji otomatis + Chrome headless (11 kasus); mode Firebase menunggu project |
+| Masuk dan daftar (minggu 9) | Selesai; mode demo diuji otomatis + Chrome headless (11 kasus) dan mode Firebase nyata (7 kasus, tabel A2) |
 | Build Web | Berhasil |
 | Screenshot runtime | Tersedia dan diambil dari build Web |
 | Video penjelasan | Dirender 1 November 2026; 6:15, 1080p, delapan babak, narasi Edge TTS, demo runtime asli (validasi + SnackBar), tanpa musik |
@@ -285,15 +291,15 @@ Matriks skenario lengkap beserta status per skenario: [docs/PENGUJIAN.md](docs/P
 | Deploy web | GitHub Pages aktif 29 Oktober 2026; aplikasi berjalan mode demo |
 | Scaffold Android | Tersedia (Gradle Kotlin DSL, `minSdk` mengikuti Flutter, izin INTERNET) |
 | Build Android | APK debug berhasil dibangun di GitHub Actions; belum diuji di perangkat/emulator |
-| Firebase Auth + Firestore | Kode siap; belum dihubungkan/diuji |
-| Login Firebase | Alur Email/Password, pemulihan sesi, dan pesan error siap; menunggu project Firebase milik pengguna |
+| Firebase Auth + Firestore | Auth terhubung ke `bltdd-prioritas-6f007` dan diuji nyata (A2); Firestore belum dibuat |
+| Login Firebase | Alur Email/Password, pemulihan sesi, dan pesan error lulus uji nyata; akun terdaftar terverifikasi di Console |
 | Firestore rules | Draft; belum diuji/deploy |
 | CI GitHub Actions | Berjalan pada setiap push: analyze, 28 test, build Web, build APK debug |
 | Firebase Hosting | Belum di-deploy |
 
 ## Roadmap
 
-1. Membuat project Firebase, mengaktifkan Email/Password, dan menguji Auth + CRUD di Emulator Suite.
+1. Membuat Firestore, menguji CRUD + rules di Emulator Suite (project dan Auth Email/Password sudah selesai pada minggu 9).
 2. Menguji rules (user tanpa role, role petugas, akses tulis `users`).
 3. Build dan uji APK di perangkat/emulator Android.
 4. Deploy Firebase Hosting setelah build Web final.

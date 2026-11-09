@@ -31,6 +31,21 @@ Bukti alur masuk/daftar minggu 9 (diambil dari build Web biasa tanpa mode dokume
 
 Semua gambar memakai data simulasi bawaan (`SIM-001`–`SIM-005`) pada mode demo. Skala perangkat 2× agar teks tajam.
 
+Bukti mode Firebase nyata (project `bltdd-prioritas-6f007`, paket Spark, Authentication Email/Password; viewport 1280×800 melalui Chrome headless dengan pohon semantik):
+
+| File | Kasus (matriks A2 di docs/PENGUJIAN.md) |
+|---|---|
+| `19-firebase-console-users.png` | FB-0 — daftar pengguna di Firebase Console: akun petugas hasil pendaftaran aplikasi |
+| `20-firebase-halaman-masuk.png` | FB-1 — halaman masuk mode Firebase (chip "Firebase", tanpa kotak info demo) |
+| `21-firebase-daftar-baru-beranda.png` | FB-2 — pendaftaran akun baru langsung ke Beranda dengan SnackBar |
+| `22-firebase-refresh-sesi-bertahan.png` | FB-3 — sesi bertahan setelah muat ulang halaman (pemulihan `authStateChanges()`) |
+| `23-firebase-keluar-kembali-masuk.png` | FB-4 — keluar mengakhiri sesi Firebase |
+| `24-firebase-masuk-kembali-beranda.png` | FB-5 — masuk kembali dengan akun terdaftar membuka Beranda |
+| `25-firebase-daftar-email-terpakai.png` | FB-6 — email yang sudah terdaftar ditolak (SnackBar "Email sudah terdaftar. Silakan masuk.") |
+| `26-firebase-kata-sandi-salah.png` | FB-7 — kata sandi salah ditolak (SnackBar "Email atau kata sandi tidak sesuai.") |
+
+`19` adalah tangkapan layar Firebase Console (Authentication → Users) dari browser; `20`–`26` diambil dari build Web dengan konfigurasi Firebase nyata melalui `--dart-define`.
+
 Cara menghasilkan ulang:
 
 ```bash

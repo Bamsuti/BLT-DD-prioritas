@@ -14,7 +14,7 @@ Seluruh pengujian fungsional dijalankan **mandiri oleh pembuat proyek**: test ot
 | Perangkat uji Web | Chrome headless (puppeteer-core 25), viewport 1280×800 dan 390×844, DPR 2 |
 | Uji live Pages | Chrome headless 1280×800 terhadap <https://bamsuti.github.io/BLT-DD-prioritas/>, 1 November 2026 |
 | Android SDK | Tidak tersedia lokal; build APK dijalankan di GitHub Actions (ubuntu-latest) |
-| Project Firebase | Tidak tersedia |
+| Project Firebase | `bltdd-prioritas-6f007` (paket Spark gratis, Authentication Email/Password aktif); konfigurasi disuntikkan saat build via `--dart-define` dan tidak disimpan di repo |
 | Pelaksana uji | Pembuat proyek (mandiri), tanpa penguji eksternal atau petugas desa |
 
 ## Ringkasan hasil
@@ -26,10 +26,12 @@ Seluruh pengujian fungsional dijalankan **mandiri oleh pembuat proyek**: test ot
 | Build Web | `flutter build web --dart-define=SCREENSHOT_MODE=true` | `√ Built build\web` |
 | Screenshot runtime | `tools/capture_screenshots.js` + tangkapan live Pages | 26 PNG (7 halaman × desktop/mobile + SnackBar, hasil enam calon, dan 10 bukti masuk/daftar minggu 9) |
 | Uji masuk/daftar (minggu 9) | Chrome headless mengisi form login/daftar pada build Web biasa | 11/11 kasus sesuai harapan (tabel A1) |
+| Uji mode Firebase nyata (minggu 9) | Chrome headless terhadap build Web dengan `--dart-define` Firebase | 7/7 kasus sesuai harapan (tabel A2); 1 akun petugas terdaftar nyata di Authentication |
 | Build Android | `flutter build apk --debug` di GitHub Actions | Berhasil (run #7); belum dijalankan di perangkat |
 | CI | GitHub Actions run #7 | Semua langkah berhasil |
 | Uji live Pages | Chrome headless ke demo publik | Form kosong ditolak per kolom; SnackBar "Data Calon Simulasi Enam (SIM-006) tersimpan." dan baris baru tampil; SIM-006 masuk peringkat hasil |
-| Firebase Auth/Firestore | — | Tidak diuji (project belum dikonfigurasi) |
+| Firebase Auth | `createUserWithEmailAndPassword`, `signInWithEmailAndPassword`, `authStateChanges()` | Diuji nyata terhadap project `bltdd-prioritas-6f007` (tabel A2) |
+| Firebase Firestore | — | Belum dibuat/diuji (lingkup minggu 10; minggu 9 hanya Authentication) |
 
 Contoh keluaran terminal yang tercatat:
 
@@ -52,7 +54,7 @@ No issues found! (ran in 68.6s)
 | T-04 | Kredensial demo salah | Tetap di Login + SnackBar pesan gagal | **Lulus** | Test `Menampilkan pesan ketika kredensial demo salah` |
 | T-05 | Login demo benar | Beranda terbuka, sesi aktif | **Lulus** | Test `Login demo berhasil membuka Beranda` |
 | T-06 | Logout | Sesi berakhir dan kembali ke Login | **Lulus** | Test `Keluar mengakhiri sesi dan kembali ke Login` |
-| T-07 | Kredensial Firebase salah | Pesan error Firebase, tetap di Login | **Belum diuji** | Butuh project Firebase aktif |
+| T-07 | Kredensial Firebase salah | Pesan error Firebase, tetap di Login | **Lulus** | A2 FB-7 — SnackBar "Email atau kata sandi tidak sesuai." dari kode `invalid-credential`; `26-firebase-kata-sandi-salah.png` |
 | T-08 | Indikator loading saat login | Tombol menampilkan spinner dan nonaktif | **Belum diuji otomatis** | Terlihat di kode; perlu uji manual dengan latensi |
 
 ### A1. Tabel uji masuk dan daftar (minggu 9, 11 kasus)
@@ -73,7 +75,23 @@ Minggu 9 menambahkan alur pendaftaran akun dan cek status login melalui StreamBu
 | MD-10 | Daftar akun baru | Mode daftar, email baru yang valid | SnackBar "Akun berhasil dibuat. Selamat datang di BLT-DD Prioritas." dan langsung berada di Beranda | **Lulus (mode demo)** | Widget test `Daftar akun demo baru langsung membuka Beranda`; `13-daftar-baru-beranda.png` |
 | MD-11 | Muat ulang halaman di mode demo | Tekan refresh pada browser saat sesi demo aktif | Kembali ke halaman masuk karena sesi demo tidak disimpan | **Lulus (perilaku terdokumentasi)** | `18-refresh-demo-kembali-masuk.png`; muatan ulang kedua memastikan form bersih |
 
-Catatan: MD-2 sampai MD-10 juga ditutup oleh test otomatis sehingga total test kini 28. Kasus MD-5, MD-10, dan MD-11 diuji pada mode demo — akun pendaftaran disimpan di memori aplikasi. Pada mode Firebase, pendaftaran memakai `createUserWithEmailAndPassword` dan pemulihan sesi memakai `authStateChanges()`; keduanya belum diuji karena project Firebase belum tersedia (lihat bagian E).
+Catatan: MD-2 sampai MD-10 juga ditutup oleh test otomatis sehingga total test kini 28. Kasus MD-5, MD-10, dan MD-11 diuji pada mode demo — akun pendaftaran disimpan di memori aplikasi. Padanannya pada mode Firebase nyata diuji pada tabel A2 di bawah.
+
+### A2. Tabel uji mode Firebase nyata (minggu 9, 7 kasus)
+
+Setelah project `bltdd-prioritas-6f007` dibuat (paket Spark gratis) dan Authentication Email/Password diaktifkan, aplikasi dibangun ulang dengan konfigurasi Firebase nyata melalui `--dart-define` (apiKey, appId, messagingSenderId, projectId, authDomain, storageBucket — tidak disimpan di repo). Tujuh kasus berikut dijalankan pada build tersebut melalui Chrome headless 1280×800; pendaftaran dan masuk benar-benar menyentuh server Firebase, dan bukti akun terdaftar diverifikasi di Firebase Console (Authentication → Users).
+
+| No | Kasus | Langkah | Hasil yang diharapkan | Status | Bukti |
+|---|---|---|---|---|---|
+| FB-1 | Halaman masuk mode Firebase | Buka aplikasi tanpa `SIMULASI_DEMO` | Chip "Firebase" tampil, kotak info demo tidak ada | **Lulus** | `20-firebase-halaman-masuk.png` |
+| FB-2 | Daftar akun baru | Mode daftar, email baru + kata sandi | `createUserWithEmailAndPassword` sukses, SnackBar "Akun berhasil dibuat…", langsung di Beranda | **Lulus** | `21-firebase-daftar-baru-beranda.png`; akun terlihat di `19-firebase-console-users.png` |
+| FB-3 | Sesi bertahan setelah muat ulang | Tekan refresh saat sesi aktif | `authStateChanges()` memulihkan sesi; tetap di Beranda tanpa login ulang | **Lulus** | `22-firebase-refresh-sesi-bertahan.png` |
+| FB-4 | Keluar dari sesi | Tekan Keluar di Beranda | `signOut()` berjalan, kembali ke halaman masuk | **Lulus** | `23-firebase-keluar-kembali-masuk.png` |
+| FB-5 | Masuk dengan akun terdaftar | Email + kata sandi benar | Beranda terbuka | **Lulus** | `24-firebase-masuk-kembali-beranda.png` |
+| FB-6 | Daftar dengan email yang sudah terpakai | Mode daftar, email akun yang sudah ada | SnackBar "Email sudah terdaftar. Silakan masuk." (kode `email-already-in-use`) | **Lulus** | `25-firebase-daftar-email-terpakai.png` |
+| FB-7 | Masuk dengan kata sandi salah | Email benar, kata sandi salah | SnackBar "Email atau kata sandi tidak sesuai." (kode `invalid-credential`) | **Lulus** | `26-firebase-kata-sandi-salah.png` |
+
+Catatan A2: isi Beranda pada mode Firebase menampilkan indikator pemuatan karena Firestore belum dibuat — sumber data calon masih mode demo; pembuatan Firestore adalah lingkup minggu 10. Kasus FB-1 dan FB-3 memakai akun `petugas.desa.b@…` hasil pendaftaran FB-2; tangkapan layar Console menampilkan akun `petugas.desa@…` yang didaftarkan langsung dari perangkat sebelumnya, sehingga keduanya menjadi bukti bahwa pendaftaran dari aplikasi benar-benar membuat pengguna di server.
 
 ### B. Data calon (CRUD dan validasi)
 
@@ -132,7 +150,7 @@ Catatan: F-1, F-2, F-3, F-4, F-5, F-6, F-7 dijalankan melalui test otomatis; F-1
 
 | ID | Skenario | Hasil yang diharapkan | Status | Bukti |
 |---|---|---|---|---|
-| T-30 | Inisialisasi Firebase | Label "Mode Firebase" dan login Firebase | **Belum diuji** | Project belum dibuat |
+| T-30 | Inisialisasi Firebase | Label "Mode Firebase" dan login Firebase | **Lulus (Auth)** | Project `bltdd-prioritas-6f007`; chip "Firebase" tampil (FB-1) dan alur masuk/daftar/sesi nyata lulus (A2 FB-1–FB-7) |
 | T-31 | CRUD Firestore | Perubahan terlihat di Console | **Belum diuji** | Butuh project + role user |
 | T-32 | Rules menolak user tanpa role | Permission denied | **Belum diuji** | Butuh Emulator Suite |
 | T-33 | Rules menolak tulis `users` dari client | Permission denied | **Belum diuji** | Butuh Emulator Suite |
@@ -150,8 +168,8 @@ Catatan: F-1, F-2, F-3, F-4, F-5, F-6, F-7 dijalankan melalui test otomatis; F-1
 - Screenshot runtime berasal dari Chrome headless, bukan emulator Android.
 - APK debug dibangun di CI, tetapi belum diinstal atau dijalankan pada perangkat/emulator.
 - Tidak ada pengujian aksesibilitas (screen reader), pengujian beban, atau pengujian keamanan dinamis.
-- Pendaftaran akun diuji pada mode demo (akun tersimpan di memori dan hilang saat halaman dimuat ulang). Pendaftaran lewat Firebase Auth, pesan error asli Firebase, dan pemulihan sesi `authStateChanges()` belum diuji karena project/kredensial belum tersedia pada sesi ini.
-- Firebase, rules, dan Hosting belum diuji karena tidak ada project/kredensial pada sesi ini.
+- Pendaftaran akun pada mode demo tersimpan di memori dan hilang saat halaman dimuat ulang; padanannya pada Firebase nyata sudah diuji (A2), tetapi pengelolaan akun lanjutan (reset kata sandi, verifikasi email) belum.
+- Isi Beranda pada mode Firebase menampilkan indikator pemuatan karena Firestore belum dibuat (lingkup minggu 10); Firestore, rules, dan Hosting belum diuji.
 - Pengujian bersifat verifikasi fungsional mandiri, bukan validasi lapangan; tidak ada pengujian oleh petugas desa dan hasilnya tidak menunggu pengujian tersebut.
 
 ## Cara mengulang pengujian

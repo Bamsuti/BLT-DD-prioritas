@@ -1,13 +1,13 @@
 # Panduan Mengaktifkan Firebase
 
-Status saat repository diperbarui: build Web dan mode demo sudah berjalan serta diuji otomatis, tetapi integrasi Firebase **belum dikonfigurasi atau diuji** dengan project nyata. Jangan mengirim password akun atau private key lewat chat dan jangan memasukkannya ke GitHub.
+Status saat repository diperbarui (minggu 9): project **`bltdd-prioritas-6f007`** sudah dibuat pada paket Spark gratis, Authentication Email/Password sudah aktif, dan alur masuk/daftar/keluar/pemulihan sesi **sudah diuji nyata** dengan build `--dart-define` (tabel A2 di `docs/PENGUJIAN.md`). Yang belum: Firestore belum dibuat, secrets Pages belum diisi, rules belum diuji di Emulator Suite, Hosting belum di-deploy. Jangan mengirim password akun atau private key lewat chat dan jangan memasukkannya ke GitHub.
 
 ## Persiapan Firebase
-1. Buat/pilih Firebase project pada akun pemilik proyek.
-2. Aktifkan Authentication → Sign-in method → Email/Password.
-3. Daftarkan aplikasi Web dan catat client config dari Firebase Console.
-4. Jika akan menguji Android, daftarkan aplikasi Android dengan application ID `com.example.blt_dd_prioritas` (lihat `android/app/build.gradle.kts`). Ganti application ID bila perlu sebelum rilis.
-5. Buat Cloud Firestore dalam mode/lokasi yang sesuai, lalu terapkan `firestore.rules` setelah diuji di Emulator Suite.
+1. [x] Buat/pilih Firebase project pada akun pemilik proyek — `bltdd-prioritas-6f007` (paket Spark, tanpa billing).
+2. [x] Aktifkan Authentication → Sign-in method → Email/Password.
+3. [x] Daftarkan aplikasi Web dan catat client config dari Firebase Console.
+4. [ ] Jika akan menguji Android, daftarkan aplikasi Android dengan application ID `com.example.blt_dd_prioritas` (lihat `android/app/build.gradle.kts`). Ganti application ID bila perlu sebelum rilis.
+5. [ ] Buat Cloud Firestore dalam mode/lokasi yang sesuai, lalu terapkan `firestore.rules` setelah diuji di Emulator Suite.
 
 ## Konfigurasi runtime
 Kode membaca opsi melalui dart-define. Nilai diperlukan berasal dari Firebase Console sendiri:
@@ -35,7 +35,7 @@ Halaman masuk memiliki tautan "Belum punya akun? Daftar" untuk membuat akun baru
 3. Email yang sudah terdaftar ditolak dengan pesan "Email sudah terdaftar. Silakan masuk." dan kata sandi terlalu lemah ditolak dengan pesan dari Firebase ("Kata sandi terlalu lemah, minimal 6 karakter.").
 4. Akun yang dibuat muncul di Firebase Console → Authentication → Users dan bisa langsung dipakai untuk masuk kembali.
 
-Catatan: pada mode demo, pendaftaran disimulasikan di memori sehingga akun baru hilang saat halaman dimuat ulang. Peran (role) tetap dikelola lewat dokumen `users/{uid}` seperti bagian berikut — pendaftaran tidak otomatis memberi akses data Firestore.
+Catatan: pada mode demo, pendaftaran disimulasikan di memori sehingga akun baru hilang saat halaman dimuat ulang. Pada mode Firebase nyata, seluruh alur di atas sudah diuji (FB-2 pendaftaran, FB-6 email terpakai ditolak) dan akun terdaftar terverifikasi di Console → Authentication → Users (`19-firebase-console-users.png`). Peran (role) tetap dikelola lewat dokumen `users/{uid}` seperti bagian berikut — pendaftaran tidak otomatis memberi akses data Firestore.
 
 ## Aktivasi pada web GitHub Pages
 Build publik di https://bamsuti.github.io/BLT-DD-prioritas/ memakai nilai dari repository secrets. Selama secrets belum diisi, build tetap berjalan dalam mode demo.
@@ -71,14 +71,14 @@ firestore.rules mengizinkan akses pada data operasional kepada user terautentika
 `flutter build web` sudah berhasil pada mode demo. Setelah build dengan konfigurasi Firebase yang tepat, pasang Firebase CLI, login, pilih project, inisialisasi Hosting ke `build/web`, periksa konfigurasi SPA (`firebase.json` sudah memiliki rewrite ke `index.html`), lalu deploy. Buka URL yang dikeluarkan CLI dan uji login, CRUD, refresh, navigasi, dan rules. Firebase Hosting belum di-deploy dari sesi ini; tidak ada URL deployment yang diklaim.
 
 ## Checklist aktivasi
-- [ ] Label aplikasi menunjukkan Mode Firebase aktif.
-- [ ] Login berhasil dengan akun uji Firebase.
-- [ ] Kredensial salah ditolak.
-- [ ] Pendaftaran akun baru berhasil dan akun muncul di Console → Authentication → Users.
-- [ ] Pendaftaran dengan email yang sudah terdaftar ditolak.
-- [ ] Logout mengakhiri sesi.
-- [ ] Sesi dipulihkan saat halaman dimuat ulang.
-- [ ] CRUD calon berhasil dan terlihat di Console.
+- [x] Label aplikasi menunjukkan Mode Firebase aktif. (A2 FB-1)
+- [x] Login berhasil dengan akun uji Firebase. (A2 FB-5)
+- [x] Kredensial salah ditolak. (A2 FB-7)
+- [x] Pendaftaran akun baru berhasil dan akun muncul di Console → Authentication → Users. (A2 FB-2, bukti `19-firebase-console-users.png`)
+- [x] Pendaftaran dengan email yang sudah terdaftar ditolak. (A2 FB-6)
+- [x] Logout mengakhiri sesi. (A2 FB-4)
+- [x] Sesi dipulihkan saat halaman dimuat ulang. (A2 FB-3)
+- [ ] CRUD calon berhasil dan terlihat di Console. (Firestore belum dibuat)
 - [ ] User tanpa dokumen role tidak dapat mengelola data.
 - [ ] Rules diuji dalam lingkungan non-produksi terlebih dahulu.
 - [ ] Kegagalan jaringan ditinjau.
