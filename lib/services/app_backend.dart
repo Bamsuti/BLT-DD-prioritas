@@ -84,26 +84,57 @@ class AppBackend {
     }
   }
 
-  static Future<void> signIn(String email, String password) async {
+  /// Memproses masuk dan mengembalikan `true` bila akun baru dibuat otomatis.
+  ///
+  /// Firebase menyamarkan "email belum terdaftar" dan "kata sandi salah"
+  /// menjadi `invalid-credential`. Karena itu setelah gagal masuk dicoba
+  /// pendaftaran: bila berhasil, akun dibuat otomatis; bila ditolak dengan
+  /// `email-already-in-use`, akun memang ada dan kata sandinya salah.
+  /// Mode demo memakai mekanisme yang sama dengan pendaftaran akun demo.
+  static Future<bool> signIn(String email, String password) async {
     if (firebaseReady) {
-      await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: email.trim(),
-        password: password,
-      );
-      return;
+      try {
+        await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: email.trim(),
+          password: password,
+        );
+        return false;
+      } on FirebaseAuthException catch (error) {
+        if (error.code != 'invalid-credential' &&
+            error.code != 'user-not-found') {
+          rethrow;
+        }
+      }
+      try {
+        await FirebaseAuth.instance.createUserWithEmailAndPassword(
+          email: email.trim(),
+          password: password,
+        );
+        return true;
+      } on FirebaseAuthException catch (error) {
+        if (error.code == 'email-already-in-use') {
+          throw const AuthFailure('Email atau kata sandi tidak sesuai.');
+        }
+        rethrow;
+      }
     }
     final key = email.trim().toLowerCase();
-    final demoMatch =
-        key == demoEmail && password == demoPassword;
-    final registeredMatch = _demoAccounts[key] == password;
-    if (demoMatch || registeredMatch) {
+    final stored = _demoAccounts[key];
+    if (stored != null || key == demoEmail) {
+      final cocok =
+          key == demoEmail ? password == demoPassword : stored == password;
+      if (!cocok) {
+        throw const AuthFailure('Email atau kata sandi tidak sesuai.');
+      }
       _demoSignedIn = true;
       _sessionState.add(true);
-      return;
+      return false;
     }
-    throw const AuthFailure(
-      'Mode demo aktif. Gunakan akun demo yang tertera pada halaman login.',
-    );
+    // Email belum terdaftar: akun demo dibuat otomatis seperti pendaftaran.
+    _demoAccounts[key] = password;
+    _demoSignedIn = true;
+    _sessionState.add(true);
+    return true;
   }
 
   /// Membuat akun baru lalu langsung menganggap pengguna sudah masuk.

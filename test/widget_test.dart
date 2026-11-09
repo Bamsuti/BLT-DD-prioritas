@@ -132,14 +132,34 @@ void main() {
       await AppBackend.signOut();
       expect(AppBackend.hasSession, isFalse);
     });
+
+    test('Masuk dengan email belum terdaftar membuat akun otomatis', () async {
+      final akunBaru =
+          await AppBackend.signIn('petugas-otomatis@desa.id', 'sandi123');
+      expect(akunBaru, isTrue);
+      expect(AppBackend.hasSession, isTrue);
+
+      await AppBackend.signOut();
+      final masukLagi =
+          await AppBackend.signIn('petugas-otomatis@desa.id', 'sandi123');
+      expect(masukLagi, isFalse);
+      expect(AppBackend.hasSession, isTrue);
+
+      await AppBackend.signOut();
+      await expectLater(
+        AppBackend.signIn('petugas-otomatis@desa.id', 'sandi-salah'),
+        throwsA(isA<AuthFailure>()),
+      );
+      expect(AppBackend.hasSession, isFalse);
+    });
   });
 
   group('Login', () {
-    testWidgets('Menampilkan judul, tombol masuk, dan akun demo', (tester) async {
+    testWidgets('Menampilkan judul, tombol masuk, dan chip mode demo',
+        (tester) async {
       await tester.pumpWidget(const BLTDDApp());
       expect(find.text('BLT-DD Prioritas'), findsOneWidget);
       expect(find.text('Masuk'), findsOneWidget);
-      expect(find.textContaining('demo@blt-dd.local'), findsOneWidget);
       expect(find.text('Mode demo'), findsOneWidget);
     });
 
@@ -169,14 +189,46 @@ void main() {
       expect(find.text('Kata sandi minimal 6 karakter.'), findsOneWidget);
     });
 
-    testWidgets('Menampilkan pesan ketika kredensial demo salah', (tester) async {
+    testWidgets('Membuat akun otomatis saat masuk dengan email baru',
+        (tester) async {
       await tester.pumpWidget(const BLTDDApp());
-      await tester.enterText(find.byKey(const Key('login-email')), 'salah@desa.id');
-      await tester.enterText(find.byKey(const Key('login-password')), 'password123');
+      await tester.enterText(find.byKey(const Key('login-email')),
+          'petugas-otomatis@desa.id');
+      await tester.enterText(
+          find.byKey(const Key('login-password')), 'sandi123');
       await tester.tap(find.byKey(const Key('login-submit')));
       await tester.pumpAndSettle();
+      expect(find.text('Ringkasan pengelolaan calon penerima'), findsOneWidget);
+      expect(AppBackend.hasSession, isTrue);
+    });
+
+    testWidgets('Menolak kata sandi salah untuk akun demo', (tester) async {
+      await tester.pumpWidget(const BLTDDApp());
+      await tester.enterText(
+          find.byKey(const Key('login-email')), AppBackend.demoEmail);
+      await tester.enterText(
+          find.byKey(const Key('login-password')), 'salah123');
+      await tester.tap(find.byKey(const Key('login-submit')));
+      await tester.pumpAndSettle();
+      expect(find.text('Email atau kata sandi tidak sesuai.'), findsOneWidget);
+      expect(AppBackend.hasSession, isFalse);
+    });
+
+    testWidgets('Lupa kata sandi membuka dialog dan menjelaskan mode demo',
+        (tester) async {
+      await tester.pumpWidget(const BLTDDApp());
+      await tester.enterText(
+          find.byKey(const Key('login-email')), 'petugas@desa.id');
+      await tester.tap(find.byKey(const Key('login-forgot')));
+      await tester.pumpAndSettle();
+      expect(find.text('Atur ulang kata sandi'), findsOneWidget);
+
+      await tester.enterText(
+          find.byKey(const Key('reset-email')), 'petugas@desa.id');
+      await tester.tap(find.byKey(const Key('reset-submit')));
+      await tester.pumpAndSettle();
       expect(
-        find.text('Mode demo aktif. Gunakan akun demo yang tertera pada halaman login.'),
+        find.textContaining('Mode demo tidak dapat mengirim email'),
         findsOneWidget,
       );
     });
@@ -199,6 +251,7 @@ void main() {
     testWidgets('Mode daftar menolak ulangi kata sandi yang tidak sama',
         (tester) async {
       await tester.pumpWidget(const BLTDDApp());
+      await tester.ensureVisible(find.byKey(const Key('login-toggle')));
       await tester.tap(find.byKey(const Key('login-toggle')));
       await tester.pumpAndSettle();
       expect(find.text('Daftar'), findsOneWidget);
@@ -219,6 +272,7 @@ void main() {
     testWidgets('Daftar akun demo baru langsung membuka Beranda',
         (tester) async {
       await tester.pumpWidget(const BLTDDApp());
+      await tester.ensureVisible(find.byKey(const Key('login-toggle')));
       await tester.tap(find.byKey(const Key('login-toggle')));
       await tester.pumpAndSettle();
 
@@ -239,6 +293,7 @@ void main() {
     testWidgets('Daftar dengan email yang sudah dipakai ditolak',
         (tester) async {
       await tester.pumpWidget(const BLTDDApp());
+      await tester.ensureVisible(find.byKey(const Key('login-toggle')));
       await tester.tap(find.byKey(const Key('login-toggle')));
       await tester.pumpAndSettle();
 
@@ -261,6 +316,7 @@ void main() {
     testWidgets('Akun hasil pendaftaran dapat dipakai masuk kembali',
         (tester) async {
       await tester.pumpWidget(const BLTDDApp());
+      await tester.ensureVisible(find.byKey(const Key('login-toggle')));
       await tester.tap(find.byKey(const Key('login-toggle')));
       await tester.pumpAndSettle();
       await tester.enterText(
@@ -276,6 +332,11 @@ void main() {
       await tester.tap(find.byTooltip('Keluar'));
       await tester.pumpAndSettle();
       expect(AppBackend.hasSession, isFalse);
+
+      // Snackbar pendaftaran masih tampil dan menutupi tombol masuk;
+      // majukan waktu uji hingga snackbar menghilang.
+      await tester.pump(const Duration(seconds: 5));
+      await tester.pumpAndSettle();
 
       await tester.enterText(
           find.byKey(const Key('login-email')), 'petugas-baru@desa.id');
