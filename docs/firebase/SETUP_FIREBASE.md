@@ -26,6 +26,17 @@ Untuk build Web, jalankan flutter build web dengan dart-define yang sama. Ganti 
 
 Login memakai Firebase Authentication (Email/Password) saat konfigurasi lengkap. Sesi tersimpan dipulihkan sebelum halaman awal ditentukan, sehingga pengguna yang sudah login tidak kembali ke halaman Login saat memuat ulang. Pesan kesalahan seperti domain belum diizinkan, metode belum aktif, atau API key salah ditampilkan dalam Bahasa Indonesia.
 
+## Pendaftaran akun petugas (minggu 9)
+
+Halaman masuk memiliki tautan "Belum punya akun? Daftar" untuk membuat akun baru tanpa perlu menambahkan akun dari Console:
+
+1. Buka mode daftar, isi email, kata sandi (minimal 6 karakter), dan ulangi kata sandi.
+2. Kode memanggil `createUserWithEmailAndPassword`; jika berhasil, pengguna langsung masuk ke Beranda karena halaman mengikuti aliran `authStateChanges()`.
+3. Email yang sudah terdaftar ditolak dengan pesan "Email sudah terdaftar. Silakan masuk." dan kata sandi terlalu lemah ditolak dengan pesan dari Firebase ("Kata sandi terlalu lemah, minimal 6 karakter.").
+4. Akun yang dibuat muncul di Firebase Console → Authentication → Users dan bisa langsung dipakai untuk masuk kembali.
+
+Catatan: pada mode demo, pendaftaran disimulasikan di memori sehingga akun baru hilang saat halaman dimuat ulang. Peran (role) tetap dikelola lewat dokumen `users/{uid}` seperti bagian berikut — pendaftaran tidak otomatis memberi akses data Firestore.
+
 ## Aktivasi pada web GitHub Pages
 Build publik di https://bamsuti.github.io/BLT-DD-prioritas/ memakai nilai dari repository secrets. Selama secrets belum diisi, build tetap berjalan dalam mode demo.
 
@@ -63,7 +74,10 @@ firestore.rules mengizinkan akses pada data operasional kepada user terautentika
 - [ ] Label aplikasi menunjukkan Mode Firebase aktif.
 - [ ] Login berhasil dengan akun uji Firebase.
 - [ ] Kredensial salah ditolak.
+- [ ] Pendaftaran akun baru berhasil dan akun muncul di Console → Authentication → Users.
+- [ ] Pendaftaran dengan email yang sudah terdaftar ditolak.
 - [ ] Logout mengakhiri sesi.
+- [ ] Sesi dipulihkan saat halaman dimuat ulang.
 - [ ] CRUD calon berhasil dan terlihat di Console.
 - [ ] User tanpa dokumen role tidak dapat mengelola data.
 - [ ] Rules diuji dalam lingkungan non-produksi terlebih dahulu.

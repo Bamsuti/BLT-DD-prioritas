@@ -2,7 +2,7 @@
 
 Prototipe akademik untuk mencatat data simulasi calon penerima BLT-DD, menilai tujuh kriteria kerentanan, lalu meninjau urutan prioritas. Satu basis kode Flutter dijalankan sebagai aplikasi Web dan Android.
 
-> **Status jujur:** aplikasi berjalan dalam **mode demo** (data di memori) dan sudah diuji otomatis dengan `flutter analyze` + `flutter test`. Integrasi Firebase Authentication dan Cloud Firestore tersedia di kode, tetapi **belum dihubungkan ke project Firebase nyata dan belum diuji**. Firebase Hosting belum di-deploy. APK debug berhasil dibangun melalui GitHub Actions, tetapi belum dijalankan di perangkat/emulator. Semua nama calon dan nilai adalah data sintetis; skor bukan keputusan resmi penerima bantuan.
+> **Status jujur:** aplikasi berjalan dalam **mode demo** (data di memori) dan sudah diuji otomatis dengan `flutter analyze` + `flutter test`. Sejak minggu 9, halaman masuk dilengkapi **pendaftaran akun sederhana** dan perpindahan halaman mengikuti status login (`authStateChanges()` di mode Firebase). Integrasi Firebase Authentication dan Cloud Firestore tersedia di kode, tetapi **belum dihubungkan ke project Firebase nyata dan belum diuji**. Firebase Hosting belum di-deploy. APK debug berhasil dibangun melalui GitHub Actions, tetapi belum dijalankan di perangkat/emulator. Semua nama calon dan nilai adalah data sintetis; skor bukan keputusan resmi penerima bantuan.
 
 **Akses demo web:** https://bamsuti.github.io/BLT-DD-prioritas/ — diterbitkan melalui GitHub Pages, berjalan dalam mode demo dengan akun `demo@blt-dd.local` / `demo123`.
 
@@ -39,6 +39,8 @@ Ruang lingkup dibatasi pada:
 | Fitur | Keterangan | Status |
 |---|---|---|
 | Login petugas | Validasi email/kata sandi, indikator proses, pesan gagal, logout | Berfungsi di mode demo, diuji otomatis |
+| Daftar akun petugas (minggu 9) | Mode daftar dengan kolom ulangi kata sandi; akun baru langsung masuk; email terpakai dan kata sandi lemah ditolak dengan pesan Bahasa Indonesia | Berfungsi di mode demo, diuji otomatis + Chrome headless |
+| Cek status login (minggu 9) | Halaman mengikuti aliran status sesi (`StreamBuilder` + `authStateChanges()` di Firebase); keluar dan pendaftaran otomatis mengganti halaman tanpa Navigator | Berfungsi di mode demo, diuji otomatis + Chrome headless |
 | Login Firebase | Email/Password via Firebase Authentication saat konfigurasi tersedia; sesi tersimpan dipulihkan; pesan kesalahan Bahasa Indonesia | Kode siap; belum diuji tanpa project Firebase nyata |
 | Mode demo eksplisit | Akun lokal sintetis, label "Mode demo" pada layar | Berfungsi, diuji otomatis |
 | Beranda | Jumlah calon, jumlah kriteria, jumlah hasil dihitung dari data termuat; pintasan navigasi | Berfungsi |
@@ -97,6 +99,10 @@ Screenshot diambil dari **build Web yang benar-benar dijalankan** (Flutter Web +
 | Validasi form | ![Validasi desktop](docs/screenshots/runtime/07-form-validasi-desktop.png) | ![Validasi mobile](docs/screenshots/runtime/07-form-validasi-mobile.png) |
 | Simpan berhasil (SnackBar) | ![SnackBar desktop](docs/screenshots/runtime/08-form-snackbar-desktop.png) | — |
 | Hasil dengan data baru | ![Hasil enam calon](docs/screenshots/runtime/09-hasil-enam-calon-desktop.png) | — |
+| Mode daftar (minggu 9) | ![Mode daftar](docs/screenshots/runtime/09-login-mode-daftar.png) | — |
+| Daftar ditolak: email terpakai | ![Email terpakai](docs/screenshots/runtime/10-daftar-email-terpakai.png) | — |
+| Masuk berhasil | ![Masuk berhasil](docs/screenshots/runtime/12-login-berhasil-beranda.png) | — |
+| Akun baru langsung di Beranda | ![Daftar berhasil](docs/screenshots/runtime/13-daftar-baru-beranda.png) | — |
 
 Wireframe rancangan awal tetap disimpan sebagai SVG di `docs/screenshots/` dan bukan bukti runtime.
 
@@ -139,7 +145,7 @@ lib/
 │   └── hasil_prioritas_page.dart
 ├── services/app_backend.dart  # mode demo + Firebase Auth/Firestore
 └── widgets/app_widgets.dart   # SummaryCard, SectionCard, InfoBanner, dll.
-test/widget_test.dart          # 24 pengujian otomatis
+test/widget_test.dart          # 28 pengujian otomatis
 tools/capture_screenshots.js   # skrip screenshot runtime
 video/                         # sumber video Remotion + narasi Edge TTS
 docs/                          # rancangan, Firebase, pengujian, presentasi
@@ -153,14 +159,15 @@ Alur data: `AppShell` memuat daftar calon dari `AppBackend` → halaman menerima
 ## Alur pengguna
 
 ```
-Login → Beranda → Data Calon Penerima → Penilaian & Prioritas → Hasil Prioritas → Keluar
+Login / Daftar → Beranda → Data Calon Penerima → Penilaian & Prioritas → Hasil Prioritas → Keluar
 ```
 
+- Belum punya akun petugas: beralih ke mode daftar melalui tautan "Belum punya akun? Daftar", mengisi email, kata sandi, dan ulangi kata sandi, lalu akun baru langsung membuka Beranda.
 - Login gagal menampilkan pesan validasi atau pesan autentikasi dan tetap di halaman Login.
 - Login berhasil membuka Beranda dengan ringkasan yang dihitung dari data termuat.
 - CRUD calon memakai dialog form yang sama untuk tambah dan ubah.
 - Hapus selalu meminta konfirmasi dan menampilkan pesan berhasil/gagal.
-- Keluar memanggil `signOut` dan kembali ke Login.
+- Keluar memanggil `signOut` dan kembali ke Login; halaman berganti otomatis karena mengikuti status login.
 
 Rincian ada di [docs/rancangan/USER_FLOW.md](docs/rancangan/USER_FLOW.md).
 
@@ -245,9 +252,10 @@ Seluruh pengujian dijalankan mandiri oleh pembuat: test otomatis dan screenshot 
 | Pemeriksaan | Perintah | Hasil |
 |---|---|---|
 | Analisis statis | `flutter analyze` | **No issues found** |
-| Test otomatis | `flutter test` | **24 test, semua lulus** |
+| Test otomatis | `flutter test` | **28 test, semua lulus** |
 | Build Web | `flutter build web` | **Berhasil** |
-| Screenshot runtime | Chrome headless terhadap build Web dan demo live | **16 file** (14 utama + 2 bukti SnackBar/hasil) |
+| Screenshot runtime | Chrome headless terhadap build Web dan demo live | **26 file** (14 utama + 2 bukti SnackBar/hasil + 10 bukti masuk/daftar minggu 9) |
+| Uji masuk/daftar (minggu 9) | Chrome headless mengisi form login/daftar pada build Web biasa | **11/11 kasus sesuai harapan** (MD-1 s.d. MD-11) |
 | Video penjelasan | `npm run render` di `video/` | **Berhasil**; 6 menit 15 detik, 1920×1080, audio AAC terverifikasi |
 | Uji live GitHub Pages | Chrome headless ke demo publik | **Berhasil**; form kosong ditolak per kolom, SnackBar "tersimpan", dan baris SIM-006 tampil |
 | Deploy web (GitHub Pages) | Workflow `Deploy Web to GitHub Pages` | **Berhasil**; halaman publik merespons 200 dan tampilan login terverifikasi |
@@ -256,9 +264,9 @@ Seluruh pengujian dijalankan mandiri oleh pembuat: test otomatis dan screenshot 
 | Login Firebase | Build dengan `--dart-define` atau secrets Pages | **Kode siap; belum diuji** tanpa project nyata |
 | Firebase Hosting | — | **Belum di-deploy** |
 
-CI: [GitHub Actions](https://github.com/Bamsuti/BLT-DD-prioritas/actions) menjalankan analyze, 24 test, build Web, dan build APK debug pada setiap push ke `main`. Hasil terbaru dapat dilihat langsung di halaman Actions.
+CI: [GitHub Actions](https://github.com/Bamsuti/BLT-DD-prioritas/actions) menjalankan analyze, 28 test, build Web, dan build APK debug pada setiap push ke `main`. Hasil terbaru dapat dilihat langsung di halaman Actions.
 
-Cakupan 24 test otomatis: tujuh kriteria & total bobot, rentang skor, urutan ranking, tie-break, serialisasi dan kontrak field Firestore, CRUD mode demo, penolakan ID duplikat, login demo salah/benar, validasi email & kata sandi, logout, navigasi lebar/sempit, validasi form, tambah/ubah/hapus, SnackBar data tersimpan, empty state "Belum ada data", perubahan nilai memengaruhi skor, dan mode dokumentasi.
+Cakupan 28 test otomatis: tujuh kriteria & total bobot, rentang skor, urutan ranking, tie-break, serialisasi dan kontrak field Firestore, CRUD mode demo, penolakan ID duplikat, login demo salah/benar, validasi email & kata sandi, pendaftaran akun (ulangi kata sandi tidak sama, email sudah dipakai, akun baru langsung masuk, akun baru dipakai masuk kembali), logout, navigasi lebar/sempit, validasi form, tambah/ubah/hapus, SnackBar data tersimpan, empty state "Belum ada data", perubahan nilai memengaruhi skor, dan mode dokumentasi.
 
 Matriks skenario lengkap beserta status per skenario: [docs/PENGUJIAN.md](docs/PENGUJIAN.md).
 
@@ -268,7 +276,8 @@ Matriks skenario lengkap beserta status per skenario: [docs/PENGUJIAN.md](docs/P
 |---|---|
 | Kode inti, form, navigasi | Selesai, `flutter analyze` bersih |
 | Mode demo in-memory | Berfungsi, diuji otomatis |
-| Test otomatis | 24/24 lulus |
+| Test otomatis | 28/28 lulus |
+| Masuk dan daftar (minggu 9) | Selesai; mode demo diuji otomatis + Chrome headless (11 kasus); mode Firebase menunggu project |
 | Build Web | Berhasil |
 | Screenshot runtime | Tersedia dan diambil dari build Web |
 | Video penjelasan | Dirender 1 November 2026; 6:15, 1080p, delapan babak, narasi Edge TTS, demo runtime asli (validasi + SnackBar), tanpa musik |
@@ -279,7 +288,7 @@ Matriks skenario lengkap beserta status per skenario: [docs/PENGUJIAN.md](docs/P
 | Firebase Auth + Firestore | Kode siap; belum dihubungkan/diuji |
 | Login Firebase | Alur Email/Password, pemulihan sesi, dan pesan error siap; menunggu project Firebase milik pengguna |
 | Firestore rules | Draft; belum diuji/deploy |
-| CI GitHub Actions | Berjalan pada setiap push: analyze, 24 test, build Web, build APK debug |
+| CI GitHub Actions | Berjalan pada setiap push: analyze, 28 test, build Web, build APK debug |
 | Firebase Hosting | Belum di-deploy |
 
 ## Roadmap
