@@ -38,7 +38,7 @@ Halaman masuk memiliki tautan "Belum punya akun? Daftar" untuk membuat akun baru
 Catatan: pada mode demo, pendaftaran disimulasikan di memori sehingga akun baru hilang saat halaman dimuat ulang. Pada mode Firebase nyata, seluruh alur di atas sudah diuji (FB-2 pendaftaran, FB-6 email terpakai ditolak) dan akun terdaftar terverifikasi di Console → Authentication → Users (`19-firebase-console-users.png`). Peran (role) tetap dikelola lewat dokumen `users/{uid}` seperti bagian berikut — pendaftaran tidak otomatis memberi akses data Firestore.
 
 ## Aktivasi pada web GitHub Pages
-Build publik di https://bamsuti.github.io/BLT-DD-prioritas/ memakai nilai dari repository secrets. Selama secrets belum diisi, build tetap berjalan dalam mode demo.
+Build publik di https://bamsuti.github.io/BLT-DD-prioritas/ memakai nilai dari repository secrets. Keenam secrets (`FIREBASE_API_KEY`, `FIREBASE_APP_ID`, `FIREBASE_MESSAGING_SENDER_ID`, `FIREBASE_PROJECT_ID`, `FIREBASE_AUTH_DOMAIN`, `FIREBASE_STORAGE_BUCKET`) telah diisi pada 10 November 2026 dan workflow dipicu ulang (run `42661733692`); build publik kini terverifikasi memuat konfigurasi Firebase nyata dan akun terdaftar dapat masuk. Bila secrets kosong, build kembali berjalan dalam mode demo.
 
 1. Buka Settings → Secrets and variables → Actions pada repository.
 2. Tambahkan secrets berikut dengan nilai dari Firebase Console (Project settings → Your apps → Web app):

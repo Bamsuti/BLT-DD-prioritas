@@ -50,7 +50,7 @@ Belum selesai: project Firebase nyata (Spark), Auth + role, pengujian rules di E
 
 ## 4. Repository dan bukti
 
-Buka repository GitHub, `README.md`, `lib/`, `test/`, `docs/`, `firestore.rules`, dan riwayat commit. Demo web tersedia di https://bamsuti.github.io/BLT-DD-prioritas/ (mode demo, bukan Firebase). Tunjukkan bahwa:
+Buka repository GitHub, `README.md`, `lib/`, `test/`, `docs/`, `firestore.rules`, dan riwayat commit. Demo web tersedia di https://bamsuti.github.io/BLT-DD-prioritas/ (sejak 10 November 2026 memakai Firebase Authentication project `bltdd-prioritas-6f007`; data calon tetap simulasi karena Firestore menyusul minggu 10). Tunjukkan bahwa:
 
 - 24 test otomatis lulus (`flutter test`);
 - build Web berhasil dan screenshot runtime tersedia;

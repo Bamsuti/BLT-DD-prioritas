@@ -4,7 +4,7 @@ Prototipe akademik untuk mencatat data simulasi calon penerima BLT-DD, menilai t
 
 > **Status jujur:** aplikasi berjalan dalam **mode demo** (data di memori) dan sudah diuji otomatis dengan `flutter analyze` + `flutter test`. Sejak minggu 9, halaman masuk dilengkapi **pendaftaran akun** dan perpindahan halaman mengikuti status login (`authStateChanges()`). Setelah itu halaman masuk/daftar **ditata ulang** (gradasi merah marun dan kartu krem), **akun dibuat otomatis** ketika pengguna masuk dengan email yang belum terdaftar (mekanisme sama dengan pendaftaran), dan tautan **Lupa kata sandi** berfungsi — Firebase mengirim tautan atur ulang sungguhan, mode demo menjelaskan keterbatasannya. Project Firebase `bltdd-prioritas-6f007` (paket Spark gratis) sudah dibuat, Authentication Email/Password aktif, dan alur masuk/daftar/keluar/pemulihan sesi/akun otomatis/lupa kata sandi **diuji nyata** (9 kasus, lihat [docs/PENGUJIAN.md](docs/PENGUJIAN.md) tabel A2). Cloud Firestore belum dibuat sehingga isi Beranda pada mode Firebase masih memuat (lingkup minggu 10). Firebase Hosting belum di-deploy. APK debug berhasil dibangun melalui GitHub Actions, tetapi belum dijalankan di perangkat/emulator. Semua nama calon dan nilai adalah data sintetis; skor bukan keputusan resmi penerima bantuan.
 
-**Akses demo web:** https://bamsuti.github.io/BLT-DD-prioritas/ — diterbitkan melalui GitHub Pages, berjalan dalam mode demo dengan akun `demo@blt-dd.local` / `demo123`.
+**Akses web:** https://bamsuti.github.io/BLT-DD-prioritas/ — diterbitkan melalui GitHub Pages. Sejak 10 November 2026, build publik terhubung ke **Firebase Authentication** project `bltdd-prioritas-6f007`: masuk dengan akun terdaftar (mis. `petugas.desa.b@bltdd-prioritas.test`), dan email yang belum terdaftar otomatis dibuatkan akun. Data calon tetap simulasi sampai Firestore dibuat (minggu 10), sehingga Beranda pada mode Firebase masih memuat.
 
 ## Identitas proyek
 
@@ -17,7 +17,7 @@ Prototipe akademik untuk mencatat data simulasi calon penerima BLT-DD, menilai t
 | Mata kuliah | Mobile and Web Application Development |
 | Periode | Ganjil 2026/2027 |
 | Repository | https://github.com/Bamsuti/BLT-DD-prioritas |
-| Demo web | https://bamsuti.github.io/BLT-DD-prioritas/ |
+| Web publik | https://bamsuti.github.io/BLT-DD-prioritas/ |
 | Proposal UTS | [docs/proposal/PROPOSAL_UTS.pdf](docs/proposal/PROPOSAL_UTS.pdf) |
 | Video presentasi | [YouTube](https://youtu.be/HNK0bMPqo08) · [MP4 6:15](docs/video/blt-dd-prioritas-promo.mp4) |
 | Wireframe | [Figma](https://www.figma.com/make/xnbomh0HD3xaMEtZ0ehUwh/BLT-DD-Prioritas-Wireframe?t=xP6ZZ7tKgaItZh19-1) · [lima SVG](docs/rancangan/WIREFRAME.md) |
@@ -243,7 +243,7 @@ flutter run -d chrome \
 
 Jika konfigurasi tidak lengkap atau inisialisasi gagal, aplikasi tetap berjalan di mode demo dan menampilkan label yang sesuai. Panduan lengkap: [docs/firebase/SETUP_FIREBASE.md](docs/firebase/SETUP_FIREBASE.md).
 
-Untuk web publik di GitHub Pages, workflow membaca nilai yang sama dari repository secrets (`FIREBASE_API_KEY`, `FIREBASE_APP_ID`, `FIREBASE_MESSAGING_SENDER_ID`, `FIREBASE_PROJECT_ID`, `FIREBASE_AUTH_DOMAIN`, `FIREBASE_STORAGE_BUCKET`). Tanpa secrets, build publik tetap mode demo. Tambahkan juga `bamsuti.github.io` ke Authorized domains di Firebase Authentication.
+Untuk web publik di GitHub Pages, workflow membaca nilai yang sama dari repository secrets (`FIREBASE_API_KEY`, `FIREBASE_APP_ID`, `FIREBASE_MESSAGING_SENDER_ID`, `FIREBASE_PROJECT_ID`, `FIREBASE_AUTH_DOMAIN`, `FIREBASE_STORAGE_BUCKET`). Keenam secrets telah diisi pada 10 November 2026 sehingga build publik berjalan pada Firebase Authentication nyata; tanpa secrets, build kembali ke mode demo. Tambahkan juga `bamsuti.github.io` ke Authorized domains di Firebase Authentication bila memakai alur OAuth atau email link.
 
 **Sudah dilakukan (minggu 9):** project `bltdd-prioritas-6f007` dibuat pada paket Spark gratis, Authentication Email/Password diaktifkan, aplikasi dibangun dengan nilai `--dart-define` di atas, dan alur masuk/daftar/keluar/pemulihan sesi diuji nyata (tabel A2 di [docs/PENGUJIAN.md](docs/PENGUJIAN.md)). Nilai konfigurasi tidak disimpan di repo — disuntikkan saat build, sehingga tetap aman.
 
@@ -297,7 +297,7 @@ Matriks skenario lengkap beserta status per skenario: [docs/PENGUJIAN.md](docs/P
 | Screenshot runtime | Tersedia dan diambil dari build Web |
 | Video penjelasan | Dirender 1 November 2026; 6:15, 1080p, delapan babak, narasi Edge TTS, demo runtime asli (validasi + SnackBar), tanpa musik |
 | Proposal UTS | PDF dengan persona, sembilan user story, kebutuhan **Must/Should**, user flow, sitemap, wireframe, tech stack Firebase Spark, rancangan Firestore, dan jawaban Q5–Q7 |
-| Deploy web | GitHub Pages aktif 29 Oktober 2026; aplikasi berjalan mode demo |
+| Deploy web | GitHub Pages aktif; sejak 10 November 2026 build publik terhubung Firebase Authentication (`bltdd-prioritas-6f007`) |
 | Scaffold Android | Tersedia (Gradle Kotlin DSL, `minSdk` mengikuti Flutter, izin INTERNET) |
 | Build Android | APK debug berhasil dibangun di GitHub Actions; belum diuji di perangkat/emulator |
 | Firebase Auth + Firestore | Auth terhubung ke `bltdd-prioritas-6f007` dan diuji nyata (A2); Firestore belum dibuat |
