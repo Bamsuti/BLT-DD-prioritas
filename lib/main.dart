@@ -16,6 +16,12 @@ Future<void> main() async {
       ? int.tryParse(Uri.base.queryParameters['page'] ?? '')
       : null;
 
+  // Pohon semantik diaktifkan lewat ?semantics=1 agar aplikasi dapat diuji
+  // dengan pembaca layar dan otomasi berbasis aksesibilitas.
+  if (Uri.base.queryParameters.containsKey('semantics')) {
+    WidgetsBinding.instance.ensureSemantics();
+  }
+
   runApp(BLTDDApp(screenshotPage: page));
 }
 
@@ -32,9 +38,6 @@ class BLTDDApp extends StatefulWidget {
 }
 
 class _BLTDDAppState extends State<BLTDDApp> {
-  late bool _signedIn =
-      widget.screenshotPage != null || AppBackend.hasSession;
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -45,22 +48,32 @@ class _BLTDDAppState extends State<BLTDDApp> {
     );
   }
 
+  /// Halaman mengikuti status login terkini.
+  ///
+  /// Mode Firebase memakai `authStateChanges()`, sehingga pemulihan sesi saat
+  /// aplikasi dimuat ulang dan penekanan tombol Keluar otomatis mengganti
+  /// halaman tanpa Navigator. `initialData` menutup jeda sebelum peristiwa
+  /// pertama tiba agar tidak ada kedipan indikator.
   Widget _buildHome() {
     final page = widget.screenshotPage;
     if (page == null) {
-      return _signedIn
-          ? AppShell(onLogout: () => setState(() => _signedIn = false))
-          : LoginPage(onLoginSuccess: () => setState(() => _signedIn = true));
+      return StreamBuilder<bool>(
+        stream: AppBackend.sessionChanges(),
+        initialData: AppBackend.hasSession,
+        builder: (context, snapshot) {
+          final masuk = snapshot.data ?? false;
+          return masuk ? const AppShell() : const LoginPage();
+        },
+      );
     }
     if (page <= 0) {
-      return LoginPage(onLoginSuccess: () {});
+      return const LoginPage();
     }
     final initialIndex = page >= 5 ? 1 : (page - 1).clamp(0, 3);
     return AppShell(
       initialIndex: initialIndex,
       openCandidateDialog: page == 5 || page == 6,
       validateFormOnOpen: page == 6,
-      onLogout: () {},
     );
   }
 }

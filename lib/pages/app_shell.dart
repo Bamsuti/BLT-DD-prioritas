@@ -19,13 +19,11 @@ class AppShell extends StatefulWidget {
     this.initialIndex = 0,
     this.openCandidateDialog = false,
     this.validateFormOnOpen = false,
-    required this.onLogout,
   });
 
   final int initialIndex;
   final bool openCandidateDialog;
   final bool validateFormOnOpen;
-  final VoidCallback onLogout;
 
   @override
   State<AppShell> createState() => _AppShellState();
@@ -159,7 +157,7 @@ class _AppShellState extends State<AppShell> {
     } catch (_) {
       // Sesi lokal tetap diakhiri walau pemanggilan Firebase gagal.
     }
-    if (mounted) widget.onLogout();
+    // Halaman berganti otomatis karena mengikuti status login.
   }
 
   void _message(String text) {

@@ -5,15 +5,16 @@ import 'package:blt_dd_prioritas/core/theme.dart';
 import 'package:blt_dd_prioritas/services/app_backend.dart';
 import 'package:blt_dd_prioritas/widgets/app_widgets.dart';
 
-/// Halaman login petugas.
+/// Halaman masuk dan daftar akun petugas.
 ///
-/// Memakai Firebase Authentication bila konfigurasi tersedia. Tanpa
-/// konfigurasi, halaman ini menjalankan mode demo dengan akun sintetis dan
-/// memberi label yang jelas bahwa ini bukan autentikasi Firebase.
+/// Satu halaman melayani dua mode; [_modeDaftar] menentukan kolom ulangi kata
+/// sandi serta aksi tombol. Memakai Firebase Authentication bila konfigurasi
+/// tersedia. Tanpa konfigurasi, halaman ini menjalankan mode demo dengan akun
+/// sintetis dan memberi label yang jelas bahwa ini bukan autentikasi Firebase.
+/// Penggantian halaman setelah berhasil masuk ditangani pemeriksaan status
+/// login pada [AppBackend.sessionChanges], bukan Navigator.
 class LoginPage extends StatefulWidget {
-  const LoginPage({super.key, required this.onLoginSuccess});
-
-  final VoidCallback onLoginSuccess;
+  const LoginPage({super.key});
 
   @override
   State<LoginPage> createState() => _LoginPageState();
@@ -23,6 +24,8 @@ class _LoginPageState extends State<LoginPage> {
   final _form = GlobalKey<FormState>();
   final _email = TextEditingController();
   final _password = TextEditingController();
+  final _confirmPassword = TextEditingController();
+  bool _modeDaftar = false;
   bool _showPassword = false;
   bool _loading = false;
 
@@ -30,27 +33,45 @@ class _LoginPageState extends State<LoginPage> {
   void dispose() {
     _email.dispose();
     _password.dispose();
+    _confirmPassword.dispose();
     super.dispose();
   }
 
-  Future<void> _login() async {
+  Future<void> _submit() async {
     if (!_form.currentState!.validate()) return;
     setState(() => _loading = true);
     try {
-      await AppBackend.signIn(_email.text, _password.text);
-      if (mounted) widget.onLoginSuccess();
+      if (_modeDaftar) {
+        await AppBackend.register(_email.text, _password.text);
+        _showMessage('Akun berhasil dibuat. Selamat datang di BLT-DD Prioritas.');
+      } else {
+        await AppBackend.signIn(_email.text, _password.text);
+      }
+      // Halaman berganti otomatis mengikuti status login.
     } on FirebaseAuthException catch (error) {
-      _showError(_authMessage(error.code));
+      _showMessage(_authMessage(error.code));
     } on AuthFailure catch (error) {
-      _showError(error.message);
+      _showMessage(error.message);
     } catch (_) {
-      _showError('Login gagal. Periksa koneksi dan konfigurasi Firebase.');
+      _showMessage(
+        _modeDaftar
+            ? 'Pendaftaran gagal. Periksa koneksi dan konfigurasi Firebase.'
+            : 'Login gagal. Periksa koneksi dan konfigurasi Firebase.',
+      );
     } finally {
       if (mounted) setState(() => _loading = false);
     }
   }
 
-  void _showError(String message) {
+  void _toggleMode() {
+    setState(() {
+      _modeDaftar = !_modeDaftar;
+      _confirmPassword.clear();
+      _loading = false;
+    });
+  }
+
+  void _showMessage(String message) {
     if (!mounted) return;
     ScaffoldMessenger.of(context)
       ..hideCurrentSnackBar()
@@ -65,6 +86,10 @@ class _LoginPageState extends State<LoginPage> {
         return 'Email atau kata sandi tidak sesuai.';
       case 'invalid-email':
         return 'Format email tidak valid.';
+      case 'email-already-in-use':
+        return 'Email sudah terdaftar. Silakan masuk.';
+      case 'weak-password':
+        return 'Kata sandi terlalu lemah, minimal 6 karakter.';
       case 'user-disabled':
         return 'Akun ini dinonaktifkan. Hubungi admin.';
       case 'too-many-requests':
@@ -81,7 +106,7 @@ class _LoginPageState extends State<LoginPage> {
       case 'web-storage-unsupported':
         return 'Browser memblokir penyimpanan sesi. Aktifkan penyimpanan situs.';
       default:
-        return 'Login gagal. Periksa akun dan konfigurasi Firebase.';
+        return 'Proses autentikasi gagal. Periksa akun dan konfigurasi Firebase.';
     }
   }
 
@@ -130,9 +155,11 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                       ),
                       const SizedBox(height: 8),
-                      const Text(
-                        'Prototipe pengelolaan dan penilaian calon penerima bantuan desa.',
-                        style: TextStyle(color: AppColors.muted, height: 1.45),
+                      Text(
+                        _modeDaftar
+                            ? 'Buat akun petugas baru untuk mengelola dan menilai calon penerima bantuan desa.'
+                            : 'Prototipe pengelolaan dan penilaian calon penerima bantuan desa.',
+                        style: const TextStyle(color: AppColors.muted, height: 1.45),
                       ),
                       const SizedBox(height: 20),
                       ModeChip(firebaseReady: firebaseReady),
@@ -161,7 +188,9 @@ class _LoginPageState extends State<LoginPage> {
                         key: const Key('login-password'),
                         controller: _password,
                         obscureText: !_showPassword,
-                        textInputAction: TextInputAction.done,
+                        textInputAction: _modeDaftar
+                            ? TextInputAction.next
+                            : TextInputAction.done,
                         decoration: InputDecoration(
                           labelText: 'Kata sandi',
                           prefixIcon: const Icon(Icons.lock_outline),
@@ -186,12 +215,37 @@ class _LoginPageState extends State<LoginPage> {
                           }
                           return null;
                         },
-                        onFieldSubmitted: (_) => _login(),
+                        onFieldSubmitted: (_) {
+                          if (!_modeDaftar) _submit();
+                        },
                       ),
+                      if (_modeDaftar) ...[
+                        const SizedBox(height: 14),
+                        TextFormField(
+                          key: const Key('login-confirm'),
+                          controller: _confirmPassword,
+                          obscureText: !_showPassword,
+                          textInputAction: TextInputAction.done,
+                          decoration: const InputDecoration(
+                            labelText: 'Ulangi kata sandi',
+                            prefixIcon: Icon(Icons.lock_reset_outlined),
+                          ),
+                          validator: (value) {
+                            if ((value ?? '').isEmpty) {
+                              return 'Ulangi kata sandi wajib diisi.';
+                            }
+                            if (value != _password.text) {
+                              return 'Ulangi kata sandi tidak sama.';
+                            }
+                            return null;
+                          },
+                          onFieldSubmitted: (_) => _submit(),
+                        ),
+                      ],
                       const SizedBox(height: 20),
                       FilledButton(
                         key: const Key('login-submit'),
-                        onPressed: _loading ? null : _login,
+                        onPressed: _loading ? null : _submit,
                         style: FilledButton.styleFrom(
                           padding: const EdgeInsets.symmetric(vertical: 16),
                         ),
@@ -204,10 +258,20 @@ class _LoginPageState extends State<LoginPage> {
                                   color: Colors.white,
                                 ),
                               )
-                            : const Text('Masuk'),
+                            : Text(_modeDaftar ? 'Daftar' : 'Masuk'),
+                      ),
+                      const SizedBox(height: 8),
+                      TextButton(
+                        key: const Key('login-toggle'),
+                        onPressed: _loading ? null : _toggleMode,
+                        child: Text(
+                          _modeDaftar
+                              ? 'Sudah punya akun? Masuk'
+                              : 'Belum punya akun? Daftar',
+                        ),
                       ),
                       if (!firebaseReady) ...[
-                        const SizedBox(height: 16),
+                        const SizedBox(height: 8),
                         Container(
                           padding: const EdgeInsets.all(12),
                           decoration: BoxDecoration(
@@ -217,10 +281,12 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                           child: Text(
                             AppBackend.firebaseInitError == null
-                                ? 'Mode demo aktif. Gunakan email '
-                                      'demo@blt-dd.local dan kata sandi demo123. '
-                                      'Akun ini bukan Firebase Authentication dan data '
-                                      'hanya tersimpan selama aplikasi berjalan.'
+                                ? 'Mode demo aktif. Masuk dengan email '
+                                      'demo@blt-dd.local dan kata sandi demo123, '
+                                      'atau coba pendaftaran akun baru. Akun '
+                                      'pendaftaran hanya tersimpan selama '
+                                      'aplikasi berjalan dan bukan Firebase '
+                                      'Authentication.'
                                 : 'Konfigurasi Firebase gagal diinisialisasi, '
                                       'sehingga aplikasi berjalan di mode demo. '
                                       'Periksa nilai --dart-define dan domain yang '

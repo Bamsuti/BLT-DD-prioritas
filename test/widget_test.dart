@@ -195,6 +195,96 @@ void main() {
       expect(find.text('Masuk'), findsOneWidget);
       expect(AppBackend.hasSession, isFalse);
     });
+
+    testWidgets('Mode daftar menolak ulangi kata sandi yang tidak sama',
+        (tester) async {
+      await tester.pumpWidget(const BLTDDApp());
+      await tester.tap(find.byKey(const Key('login-toggle')));
+      await tester.pumpAndSettle();
+      expect(find.text('Daftar'), findsOneWidget);
+
+      await tester.enterText(
+          find.byKey(const Key('login-email')), 'petugas-baru@desa.id');
+      await tester.enterText(
+          find.byKey(const Key('login-password')), 'sandi123');
+      await tester.enterText(
+          find.byKey(const Key('login-confirm')), 'sandi456');
+      await tester.ensureVisible(find.byKey(const Key('login-submit')));
+      await tester.tap(find.byKey(const Key('login-submit')));
+      await tester.pumpAndSettle();
+      expect(find.text('Ulangi kata sandi tidak sama.'), findsOneWidget);
+      expect(AppBackend.hasSession, isFalse);
+    });
+
+    testWidgets('Daftar akun demo baru langsung membuka Beranda',
+        (tester) async {
+      await tester.pumpWidget(const BLTDDApp());
+      await tester.tap(find.byKey(const Key('login-toggle')));
+      await tester.pumpAndSettle();
+
+      await tester.enterText(
+          find.byKey(const Key('login-email')), 'petugas-baru@desa.id');
+      await tester.enterText(
+          find.byKey(const Key('login-password')), 'sandi123');
+      await tester.enterText(
+          find.byKey(const Key('login-confirm')), 'sandi123');
+      await tester.ensureVisible(find.byKey(const Key('login-submit')));
+      await tester.tap(find.byKey(const Key('login-submit')));
+      await tester.pumpAndSettle();
+
+      expect(find.text('Ringkasan pengelolaan calon penerima'), findsOneWidget);
+      expect(AppBackend.hasSession, isTrue);
+    });
+
+    testWidgets('Daftar dengan email yang sudah dipakai ditolak',
+        (tester) async {
+      await tester.pumpWidget(const BLTDDApp());
+      await tester.tap(find.byKey(const Key('login-toggle')));
+      await tester.pumpAndSettle();
+
+      await tester.enterText(
+          find.byKey(const Key('login-email')), AppBackend.demoEmail);
+      await tester.enterText(
+          find.byKey(const Key('login-password')), 'password123');
+      await tester.enterText(
+          find.byKey(const Key('login-confirm')), 'password123');
+      await tester.ensureVisible(find.byKey(const Key('login-submit')));
+      await tester.tap(find.byKey(const Key('login-submit')));
+      await tester.pumpAndSettle();
+      expect(
+        find.text('Email sudah terdaftar. Silakan masuk.'),
+        findsOneWidget,
+      );
+      expect(AppBackend.hasSession, isFalse);
+    });
+
+    testWidgets('Akun hasil pendaftaran dapat dipakai masuk kembali',
+        (tester) async {
+      await tester.pumpWidget(const BLTDDApp());
+      await tester.tap(find.byKey(const Key('login-toggle')));
+      await tester.pumpAndSettle();
+      await tester.enterText(
+          find.byKey(const Key('login-email')), 'petugas-baru@desa.id');
+      await tester.enterText(
+          find.byKey(const Key('login-password')), 'sandi123');
+      await tester.enterText(
+          find.byKey(const Key('login-confirm')), 'sandi123');
+      await tester.ensureVisible(find.byKey(const Key('login-submit')));
+      await tester.tap(find.byKey(const Key('login-submit')));
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.byTooltip('Keluar'));
+      await tester.pumpAndSettle();
+      expect(AppBackend.hasSession, isFalse);
+
+      await tester.enterText(
+          find.byKey(const Key('login-email')), 'petugas-baru@desa.id');
+      await tester.enterText(
+          find.byKey(const Key('login-password')), 'sandi123');
+      await tester.tap(find.byKey(const Key('login-submit')));
+      await tester.pumpAndSettle();
+      expect(find.text('Ringkasan pengelolaan calon penerima'), findsOneWidget);
+    });
   });
 
   group('Navigasi', () {
