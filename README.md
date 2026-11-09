@@ -207,6 +207,17 @@ Akun demo lokal:
 
 Akun ini hanya berlaku pada mode demo dan bukan Firebase Authentication. Jangan memakai kata sandi ini untuk akun nyata. Kotak keterangan akun demo pada halaman masuk dihapus, tetapi akun tersebut tetap berfungsi. Selain itu, masuk dengan email lain yang belum terdaftar pada mode demo otomatis membuat akun demo baru dengan kata sandi yang diketik.
 
+### Akses localhost (menjalankan salinan sendiri)
+
+`localhost` berarti komputer tempat server dijalankan — GitHub Pages hanya menayangkan https://bamsuti.github.io/BLT-DD-prioritas/ dan tidak dapat menyediakan link localhost untuk pengunjung. Untuk menayangkan salinan sendiri di komputer Anda:
+
+```bash
+flutter build web --release
+npx http-server build/web -p 8080 -c-1
+```
+
+Lalu buka http://localhost:8080/. Tanpa `--dart-define`, build berjalan pada mode demo; tambahkan keenam `--dart-define=FIREBASE_*` (bagian Konfigurasi Firebase di bawah) agar login memakai Firebase Authentication nyata. Dari HP pada WiFi yang sama, buka `http://<IPv4-PC>:8080` — alamat IPv4 terlihat pada `ipconfig`. Untuk Android, jalankan `flutter run` dengan perangkat/emulator tersambung atau `flutter build apk --release` (perlu Android SDK).
+
 ### Mode dokumentasi (screenshot)
 
 Build dengan `--dart-define=SCREENSHOT_MODE=true`, lalu buka `?page=N`:
@@ -247,7 +258,7 @@ Untuk web publik di GitHub Pages, workflow membaca nilai yang sama dari reposito
 
 **Sudah dilakukan (minggu 9):** project `bltdd-prioritas-6f007` dibuat pada paket Spark gratis, Authentication Email/Password diaktifkan, aplikasi dibangun dengan nilai `--dart-define` di atas, dan alur masuk/daftar/keluar/pemulihan sesi diuji nyata (tabel A2 di [docs/PENGUJIAN.md](docs/PENGUJIAN.md)). Nilai konfigurasi tidak disimpan di repo — disuntikkan saat build, sehingga tetap aman.
 
-**Yang belum dilakukan:** Firestore belum dibuat (data calon masih mode demo pada build Firebase), secrets Pages untuk demo publik belum diisi, akun petugas belum diberi role di `users/{uid}`, rules belum diuji di Emulator Suite, dan Hosting belum di-deploy.
+**Yang belum dilakukan:** Firestore belum dibuat (data calon masih simulasi pada mode Firebase — Beranda memuat berputar), akun petugas belum diberi role di `users/{uid}`, rules belum diuji di Emulator Suite, dan Hosting belum di-deploy.
 
 ## Keamanan dan privasi
 
